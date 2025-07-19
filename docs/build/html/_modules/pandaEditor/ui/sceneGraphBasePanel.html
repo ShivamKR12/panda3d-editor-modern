@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.ui.sceneGraphBasePanel &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.ui.sceneGraphBasePanel</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">wx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx.lib.agw.flatmenu</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx.lib.agw.fmresources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fmr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx.lib.agw.customtreectrl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">pub</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">p3d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor</span><span class="w"> </span><span class="kn">import</span> <span class="n">commands</span> <span class="k">as</span> <span class="n">cmds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wxExtra</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">wxUtils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wxExtra</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomTreeCtrl</span>
+
+
+<span class="n">DISPLAY_NODEPATHS</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">NewId</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SceneGraphBasePanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">PandaNode</span>
+
+        <span class="c1"># Build display filter menu.</span>
+        <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FlatMenu</span><span class="p">()</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FlatMenuItem</span><span class="p">(</span><span class="n">fileMenu</span><span class="p">,</span> <span class="n">DISPLAY_NODEPATHS</span><span class="p">,</span> <span class="s1">&#39;&amp;NodePaths Only&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">ITEM_CHECK</span><span class="p">)</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">Check</span><span class="p">()</span>
+        <span class="n">fileMenu</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fm</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FlatMenuBar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">fmr</span><span class="o">.</span><span class="n">FM_OPT_IS_LCD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fm</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">fileMenu</span><span class="p">,</span> <span class="s1">&#39;&amp;Display&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fm</span><span class="o">.</span><span class="n">GetRendererManager</span><span class="p">()</span><span class="o">.</span><span class="n">SetTheme</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">StyleVista</span><span class="p">)</span>
+
+        <span class="n">ln</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">StaticLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">LI_HORIZONTAL</span><span class="p">)</span>
+
+        <span class="c1"># Bind menu controls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">EVT_FLAT_MENU_SELECTED</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnFlatMenuSelected</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">DISPLAY_NODEPATHS</span><span class="p">)</span>
+
+        <span class="c1"># Build tree control</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">ct</span><span class="o">.</span><span class="n">TR_EDIT_LABELS</span> <span class="o">|</span>
+            <span class="n">ct</span><span class="o">.</span><span class="n">TR_HIDE_ROOT</span> <span class="o">|</span>
+            <span class="n">ct</span><span class="o">.</span><span class="n">TR_FULL_ROW_HIGHLIGHT</span> <span class="o">|</span>
+            <span class="n">ct</span><span class="o">.</span><span class="n">TR_HAS_BUTTONS</span> <span class="o">|</span>
+            <span class="n">ct</span><span class="o">.</span><span class="n">TR_MULTIPLE</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span> <span class="o">=</span> <span class="n">CustomTreeCtrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">agwStyle</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">AddRoot</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Bind tree control events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_TREE_BEGIN_LABEL_EDIT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnTreeBeginLabelEdit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_TREE_END_LABEL_EDIT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnTreeEndLabelEdit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_LEFT_DCLICK</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnLeftDClick</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_KEY_UP</span><span class="p">,</span> <span class="n">p3d</span><span class="o">.</span><span class="n">wxPanda</span><span class="o">.</span><span class="n">OnKeyUp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_KEY_DOWN</span><span class="p">,</span> <span class="n">p3d</span><span class="o">.</span><span class="n">wxPanda</span><span class="o">.</span><span class="n">OnKeyDown</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_LEFT_UP</span><span class="p">,</span> <span class="n">p3d</span><span class="o">.</span><span class="n">wxPanda</span><span class="o">.</span><span class="n">OnLeftUp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MIDDLE_DOWN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMiddleDown</span><span class="p">)</span>
+
+        <span class="c1"># Bind publisher events</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">,</span> <span class="s1">&#39;Update&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Build sizers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fm</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">ln</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetSizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SceneGraphBasePanel.OnFlatMenuSelected">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnFlatMenuSelected">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnFlatMenuSelected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="c1"># Set the filter based on the flat menu selection.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm</span><span class="o">.</span><span class="n">FindMenuItem</span><span class="p">(</span><span class="n">DISPLAY_NODEPATHS</span><span class="p">)</span><span class="o">.</span><span class="n">IsChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">PandaNode</span>
+
+        <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">on_refresh</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel.OnTreeBeginLabelEdit">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeBeginLabelEdit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnTreeBeginLabelEdit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">HighlightText</span><span class="p">(</span><span class="n">tc</span><span class="p">):</span>
+            <span class="n">ctrl</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">GetEditControl</span><span class="p">()</span>
+            <span class="n">ctrl</span><span class="o">.</span><span class="n">SetSelection</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">wx</span><span class="o">.</span><span class="n">CallAfter</span><span class="p">(</span><span class="n">HighlightText</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel.OnTreeEndLabelEdit">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeEndLabelEdit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnTreeEndLabelEdit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the component&#39;s name to that of the new item&#39;s name.&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">SetComponentName</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>
+                <span class="n">wx</span><span class="o">.</span><span class="n">CallAfter</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">,</span> <span class="p">[</span><span class="n">comp</span><span class="p">],</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetItem</span><span class="p">()</span><span class="o">.</span><span class="n">GetData</span><span class="p">()</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetLabel</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">CallAfter</span><span class="p">(</span><span class="n">SetComponentName</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel.OnLeftDClick">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnLeftDClick">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnLeftDClick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">wxUtils</span><span class="o">.</span><span class="n">get_clicked_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="p">,</span> <span class="n">evt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">EditLabel</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel.OnMiddleDown">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnMiddleDown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnMiddleDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="c1"># Get the item under the mouse - bail if the item is bad</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">wxUtils</span><span class="o">.</span><span class="n">get_clicked_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="p">,</span> <span class="n">evt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">item</span><span class="o">.</span><span class="n">IsOk</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="c1"># If the item under the middle mouse click is part of the selection</span>
+        <span class="c1"># then use the whole selection, otherwise just use the item.</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">GetData</span><span class="p">()</span> <span class="ow">in</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">comps</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">comps</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">comps</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">GetData</span><span class="p">()]</span>
+        <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">drag_drop_manager</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.GetDroppedObject">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetDroppedObject">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetDroppedObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">dropItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">HitTest</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dropItem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dropItem</span><span class="o">.</span><span class="n">GetData</span><span class="p">()</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.AddItem">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.AddItem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">AddItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">parent_item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Traverse the scene from the root node, creating tree items for each</span>
+<span class="sd">        component encountered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Bail if there is a filter set and the node is not derived from</span>
+        <span class="c1"># that type.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">comp</span><span class="o">.</span><span class="n">is_of_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="n">parent_item</span><span class="p">,</span> <span class="n">comp</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">comp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="SceneGraphBasePanel.RemoveItem">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RemoveItem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RemoveItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">delete</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">comp</span><span class="p">])</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+            
+        <span class="k">for</span> <span class="n">ccomp</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">RemoveItem</span><span class="p">(</span><span class="n">ccomp</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="SceneGraphBasePanel.RefreshItem">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RefreshItem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RefreshItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">:</span>
+            <span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">SetItemParent</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">comp</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">parent</span><span class="p">],</span>
+                <span class="n">comp</span><span class="o">.</span><span class="n">sibling_index</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">SetItemText</span><span class="p">(</span><span class="n">new_item</span><span class="p">,</span> <span class="n">comp</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">UpdateItemData</span><span class="p">(</span><span class="n">new_item</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="SceneGraphBasePanel.UpdateItemData">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.UpdateItemData">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">UpdateItemData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetItemData</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">data</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+            
+        <span class="k">for</span> <span class="n">cItem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetItemChildren</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">UpdateItemData</span><span class="p">(</span><span class="n">cItem</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.OnUpdate">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnUpdate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the contents of the TreeCtrl to reflect the contents of the </span>
+<span class="sd">        scene. If comps is not None, it will contain only the components</span>
+<span class="sd">        which have changed. This means we don&#39;t have to do a full rebuild of</span>
+<span class="sd">        the tree which can be time consuming.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># No need to refresh a panel if it is hidden.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">IsShownOnScreen</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="c1"># If no components were specified - do a full rebuild.</span>
+        <span class="k">if</span> <span class="n">comps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Rebuild</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">:</span>
+            <span class="n">pcomp</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span>
+            <span class="k">if</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">pcomp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">comp</span><span class="o">.</span><span class="n">data</span> <span class="o">!=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">scene</span><span class="p">:</span>
+
+                    <span class="c1"># Component has no parent - remove it.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">RemoveItem</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="c1"># Component found in the tree - refresh it.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">RefreshItem</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">pcomp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pcomp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">:</span>
+
+                <span class="c1"># Component not found in the tree - add it.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span><span class="p">[</span><span class="n">pcomp</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="SceneGraphBasePanel.Rebuild">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.Rebuild">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Rebuild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Do a complete rebuild of the scene graph.&quot;&quot;&quot;</span>
+        <span class="c1"># Get map of node paths to items before populating the tree control</span>
+        <span class="n">oldItems</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetItemsDictionary</span><span class="p">()</span>
+
+        <span class="c1"># Clear existing items and repopulate tree control</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">DeleteAllItems</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">root_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">AddRoot</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">scene</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">root_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">root_item</span><span class="p">)</span>
+            
+        <span class="c1"># Get map of node paths to items after populating the tree control</span>
+        <span class="n">newItems</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetItemsDictionary</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetExpandedState</span><span class="p">(</span><span class="n">oldItems</span><span class="p">,</span> <span class="n">newItems</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.GetItemsDictionary">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetItemsDictionary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetItemsDictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a dictionary mapping the scene&#39;s components to the item that</span>
+<span class="sd">        represents them in the tree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">expDict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetItemChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetRootItem</span><span class="p">()):</span>
+            <span class="n">expDict</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">GetData</span><span class="p">()]</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="n">expDict</span></div>
+
+    
+<div class="viewcode-block" id="SceneGraphBasePanel.SetExpandedState">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SetExpandedState">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetExpandedState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oldItems</span><span class="p">,</span> <span class="n">newItems</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set item expanded states back.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">comp</span><span class="p">,</span> <span class="n">oldItem</span> <span class="ow">in</span> <span class="n">oldItems</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">newItems</span> <span class="ow">and</span> <span class="n">oldItem</span><span class="o">.</span><span class="n">IsExpanded</span><span class="p">():</span>
+                <span class="n">newItem</span> <span class="o">=</span> <span class="n">newItems</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">newItem</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetRootItem</span><span class="p">():</span>
+                    <span class="k">continue</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">Expand</span><span class="p">(</span><span class="n">newItem</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.SelectItems">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SelectItems">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SelectItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iterate over list and hilight them. Make sure the TreeCtrl is open at </span>
+<span class="sd">        the last item the user selected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">UnselectAll</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">SetHilight</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="n">items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">CalculatePositions</span><span class="p">()</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">EnsureVisible</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+        
+<div class="viewcode-block" id="SceneGraphBasePanel.GetValidSelections">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetValidSelections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetValidSelections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of selected items, making sure that they are valid by</span>
+<span class="sd">        using IsOk() and are not the root item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetSelections</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">IsOk</span><span class="p">()</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tc</span><span class="o">.</span><span class="n">GetRootItem</span><span class="p">():</span>
+                <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                
+        <span class="k">return</span> <span class="n">items</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

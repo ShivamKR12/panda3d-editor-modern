@@ -4,7 +4,7 @@ import panda3d.core as pc
 from direct.task import Task
 from direct.interval.IntervalGlobal import Sequence
 
-from game.showbase import ShowBase
+from pandaEditor.game.showbase import ShowBase
  
  
 class MyApp(ShowBase):

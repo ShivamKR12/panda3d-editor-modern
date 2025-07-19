@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.sceneparser &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.sceneparser</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">et</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.commonUtils</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialise</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.sceneparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">SceneParser</span> <span class="k">as</span> <span class="n">GameSceneParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">indent</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SceneParser">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.sceneparser.SceneParser">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SceneParser</span><span class="p">(</span><span class="n">GameSceneParser</span><span class="p">):</span>
+    
+<div class="viewcode-block" id="SceneParser.save">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.sceneparser.SceneParser.save">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the scene out to an xml file.&quot;&quot;&quot;</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="n">relem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_component</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># Wrap with an element tree and write to file.</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">(</span><span class="n">relem</span><span class="p">)</span>
+        <span class="n">indent</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">())</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="SceneParser.save_component">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.sceneparser.SceneParser.save_component">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">pelem</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialise a component to an xml element.&quot;&quot;&quot;</span>
+        <span class="n">elem</span> <span class="o">=</span> <span class="n">pelem</span>
+        <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="n">savable</span><span class="p">:</span>
+            
+            <span class="c1"># Write out component header data, then properties and </span>
+            <span class="c1"># connections.</span>
+            <span class="n">elem</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pelem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">pelem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">get_attrib</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">elem</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_properties</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_connections</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span>
+        
+        <span class="c1"># Recurse through hierarchy.</span>
+        <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="n">serialise_descendants</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_component</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">elem</span></div>
+
+                
+<div class="viewcode-block" id="SceneParser.save_properties">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.sceneparser.SceneParser.save_properties">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a dictionary representing all the properties for the component</span>
+<span class="sd">        then serialise it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO: Move to attributes property on comp class like connections,</span>
+        <span class="c1"># below.</span>
+        <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">serialise</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Skipped serialising None value: </span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">item_elem</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="s1">&#39;Item&#39;</span><span class="p">)</span>
+            <span class="n">item_elem</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+            <span class="n">item_elem</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">serialise</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+                
+<div class="viewcode-block" id="SceneParser.save_connections">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.sceneparser.SceneParser.save_connections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
+
+        <span class="n">conns_elem</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;Connections&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">comp</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">conn_elem</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">conns_elem</span><span class="p">,</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span>
+                <span class="n">conn_elem</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="n">conn_elem</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                
+        <span class="c1"># Append the connections element only if it isn&#39;t empty.</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">conns_elem</span><span class="p">):</span>
+            <span class="n">elem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conns_elem</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

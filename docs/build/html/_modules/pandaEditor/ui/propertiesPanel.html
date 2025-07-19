@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.ui.propertiesPanel &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.ui.propertiesPanel</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx.propgrid</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wxpg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">pub</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pc</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.dragdroptarget</span><span class="w"> </span><span class="kn">import</span> <span class="n">DragDropTarget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor</span><span class="w"> </span><span class="kn">import</span> <span class="n">commands</span> <span class="k">as</span> <span class="n">cmds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.attributes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">Connection</span><span class="p">,</span> <span class="n">Connections</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.ui</span><span class="w"> </span><span class="kn">import</span> <span class="n">properties</span> <span class="k">as</span> <span class="n">custProps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">camel_case_to_label</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">ATTRIBUTE_TAG</span> <span class="o">=</span> <span class="s1">&#39;attr&#39;</span>
+
+
+<div class="viewcode-block" id="PropertyGrid">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertyGrid">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PropertyGrid</span><span class="p">(</span><span class="n">wxpg</span><span class="o">.</span><span class="n">PropertyGrid</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unfortunately I&#39;ve had to override some of the basic methods of the</span>
+<span class="sd">    property grid in order to overcome what seems like an odd limitation /</span>
+<span class="sd">    feature. When calling GetProperty() the grid sends back the base class</span>
+<span class="sd">    PGProperty, not the actual class that was used when we initially called</span>
+<span class="sd">    Append(). This seems odd to me as then none of the overridden methods used</span>
+<span class="sd">    in custom properties will work...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">RegisterEditor</span><span class="p">(</span><span class="n">custProps</span><span class="o">.</span><span class="n">ConnectionPropertyEditor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RegisterEditor</span><span class="p">(</span><span class="n">custProps</span><span class="o">.</span><span class="n">ConnectionsPropertyEditor</span><span class="p">)</span>
+        <span class="c1">#</span>
+        <span class="c1"># self._propsByName = {}</span>
+        <span class="c1"># self._propsByLabel = {}</span>
+        <span class="c1"># self._propsByLongLabel = {}</span>
+
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">DragDropTarget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drag_drop_validate</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_drop</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetDropTarget</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    
+    <span class="c1"># def Append(self, prop, *args, **kwargs):</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Do not allow properties with &#39;|&#39; in the label as we use this as a</span>
+    <span class="c1">#     # delimiter</span>
+    <span class="c1">#     if &#39;|&#39; in prop.GetLabel():</span>
+    <span class="c1">#         msg = (&#39;Cannot use property labels containing the pipe (\&#39;|\&#39;)&#39; +</span>
+    <span class="c1">#                 &#39;character&#39;)</span>
+    <span class="c1">#         raise AttributeError(msg)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Add the property</span>
+    <span class="c1">#     wxpg.PropertyGrid.Append(self, prop, *args, **kwargs)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Store the property again in our dicts by name and label</span>
+    <span class="c1">#     self._propsByName[prop.GetName()] = prop</span>
+    <span class="c1">#     self._propsByLabel[prop.GetLabel()] = prop</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Store the property plus all its children in the long label dict</span>
+    <span class="c1">#     allProps = self._propsByLongLabel</span>
+    <span class="c1">#     allChildren = self.GetAllChildren(prop)</span>
+    <span class="c1">#     #self._propsByLongLabel = dict(allProps.items() + allChildren.items())</span>
+    <span class="c1">#</span>
+    <span class="c1">#     def Rec(prop, res):</span>
+    <span class="c1">#         res.append(prop)</span>
+    <span class="c1">#         for cProp in prop.GetChildren():</span>
+    <span class="c1">#             Rec(cProp, res)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     cProps = []</span>
+    <span class="c1">#     Rec(prop, cProps)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     allProps = self._propsByLongLabel</span>
+    <span class="c1">#     allChildren = {}</span>
+    <span class="c1">#     for cProp in cProps:</span>
+    <span class="c1">#         allChildren[self.GetPropertyLongLabel(cProp)] = cProp</span>
+    <span class="c1">#     self._propsByLongLabel = {**allProps, **allChildren}</span>
+
+<div class="viewcode-block" id="PropertyGrid.drag_drop_validate">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertyGrid.drag_drop_validate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">drag_drop_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HitTest</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">prop</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="s1">&#39;drag_drop_validate&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">prop</span><span class="o">.</span><span class="n">drag_drop_validate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PropertyGrid.on_drop">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertyGrid.on_drop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HitTest</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">prop</span><span class="o">.</span><span class="n">on_drop</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+</div>
+
+        
+    <span class="c1"># def Clear(self):</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Empty property dicts before using default clear method</span>
+    <span class="c1">#     self._propsByName = {}</span>
+    <span class="c1">#     self._propsByLabel = {}</span>
+    <span class="c1">#     self._propsByLongLabel = {}</span>
+    <span class="c1">#</span>
+    <span class="c1">#     wxpg.PropertyGrid.Clear(self)</span>
+        
+    <span class="c1"># def GetPropertyByName(self, name):</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Return value from the property dict</span>
+    <span class="c1">#     if name in self._propsByName:</span>
+    <span class="c1">#         return self._propsByName[name]</span>
+    <span class="c1">#</span>
+    <span class="c1">#     return None</span>
+    <span class="c1">#</span>
+    <span class="c1"># def GetPropertyByLabel(self, label):</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Return value from the property dict</span>
+    <span class="c1">#     if label in self._propsByLabel:</span>
+    <span class="c1">#         return self._propsByLabel[label]</span>
+    <span class="c1">#</span>
+    <span class="c1">#     return None</span>
+    <span class="c1">#</span>
+    <span class="c1"># def GetPropertyByLongLabel(self, longLbl):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Return the property from the property dict matching the indicated</span>
+    <span class="c1">#     long label.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     if longLbl in self._propsByLongLabel:</span>
+    <span class="c1">#         return self._propsByLongLabel[longLbl]</span>
+    <span class="c1">#</span>
+    <span class="c1">#     return None</span>
+    
+    <span class="c1"># def GetPropertyLongLabel(self, prop):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Return the property&#39;s long label. Do this by iterating to the top of</span>
+    <span class="c1">#     the hierarchy and joining each parent&#39;s label with a pipe character</span>
+    <span class="c1">#     until there are no more parents.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     elem = []</span>
+    <span class="c1">#</span>
+    <span class="c1">#     while True:</span>
+    <span class="c1">#         if prop.GetParent() is None:</span>
+    <span class="c1">#             break</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             elem.insert(0, prop.GetLabel())</span>
+    <span class="c1">#             prop = prop.GetParent()</span>
+    <span class="c1">#</span>
+    <span class="c1">#     return &#39;|&#39;.join(elem)</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1"># def GetAllChildren(self, prop, parentLbl=None):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Return all decendant properties of the indicated property.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     result = {}</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Use property parent label if None is supplied</span>
+    <span class="c1">#     if parentLbl is None:</span>
+    <span class="c1">#         parentLbl = prop.GetParent().GetLabel()</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Get the long label for this property</span>
+    <span class="c1">#     lblElems = []</span>
+    <span class="c1">#     if parentLbl:</span>
+    <span class="c1">#         lblElems.append(parentLbl)</span>
+    <span class="c1">#     lblElems.append(prop.GetLabel())</span>
+    <span class="c1">#     longLbl = &#39;|&#39;.join(lblElems)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Add the property to the dictionary</span>
+    <span class="c1">#     result[longLbl] = prop</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Recurse down hierarchy</span>
+    <span class="c1">#     # for i in range(prop.GetCount()):</span>
+    <span class="c1">#     #     result = {**result, **self.GetAllChildren(prop.Item(i), longLbl)}</span>
+    <span class="c1">#     #</span>
+    <span class="c1">#     return result</span>
+
+    <span class="c1"># def GetProperties(self):</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Return values of the property dict</span>
+    <span class="c1">#     return self._propsByName.values()</span>
+    <span class="c1">#</span>
+    <span class="c1"># def GetPropertiesDictionary(self):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Return a flat dictionary containing all properties including all their</span>
+    <span class="c1">#     decendants.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     props = {}</span>
+    <span class="c1">#</span>
+    <span class="c1">#     for propLabel, prop in self._propsByLabel.items():</span>
+    <span class="c1">#         childs = self.GetAllChildren(prop)</span>
+    <span class="c1">#         props = {**props, **childs}</span>
+    <span class="c1">#</span>
+    <span class="c1">#     return props</span>
+    <span class="c1">#</span>
+    <span class="c1"># def Enable(self, value):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Overridden from wxpg.PropertyGrid. A disabled property grid doesn&#39;t</span>
+    <span class="c1">#     seem to change in its appearance. Grey out all properties to give a</span>
+    <span class="c1">#     nice visual indication of the state of the panel.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     wxpg.PropertyGrid.Enable(self, value)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Remove the selection if we are disabling the panel</span>
+    <span class="c1">#     if not value:</span>
+    <span class="c1">#         self.SetSelection([])</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Grey out all properties if we are disabling the panel</span>
+    <span class="c1">#     for property in self.GetProperties():</span>
+    <span class="c1">#         if value:</span>
+    <span class="c1">#             self.SetPropertyColourToDefault(property)</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             self.SetPropertyTextColour(property, wx.Colour(150, 150, 150))</span>
+                
+    <span class="c1"># def OnChildFocus(self, evt):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Overriden to stop the property grid scrolling to the child which just</span>
+    <span class="c1">#     received focus.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     pass</span>
+    
+
+<div class="viewcode-block" id="PropertiesPanel">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PropertiesPanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">propExps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refocus</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Define how each type of value should be edited</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">propMap</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># None: wxpg.PropertyCategory,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LVector2f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Vec2Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LVector3f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Vec3Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LVector4f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Vec4Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LVecBase4f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Vec4Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LPoint2f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Point2Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LPoint3f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Point3Property</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">LPoint4f</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">Point4Property</span><span class="p">,</span>
+            <span class="c1"># pm.NodePath: custProps.NodePathProperty,</span>
+            <span class="c1"># pm.LColor: custProps.Point4Property,</span>
+            <span class="nb">int</span><span class="p">:</span> <span class="n">wxpg</span><span class="o">.</span><span class="n">IntProperty</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">:</span> <span class="n">wxpg</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">,</span>
+            <span class="nb">bool</span><span class="p">:</span> <span class="n">wxpg</span><span class="o">.</span><span class="n">BoolProperty</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">:</span> <span class="n">wxpg</span><span class="o">.</span><span class="n">FloatProperty</span><span class="p">,</span>
+            <span class="n">pc</span><span class="o">.</span><span class="n">Filename</span><span class="p">:</span> <span class="n">custProps</span><span class="o">.</span><span class="n">FilenameProperty</span><span class="p">,</span>
+            <span class="c1"># dict: custProps.DictProperty</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Bind publisher events</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">,</span> <span class="s1">&#39;Update&#39;</span><span class="p">)</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">,</span> <span class="s1">&#39;UpdateSelection&#39;</span><span class="p">)</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnSelectionModified</span><span class="p">,</span> <span class="s1">&#39;SelectionModified&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Build property grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span> <span class="o">=</span> <span class="n">PropertyGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Bind property grid events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expands</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wxpg</span><span class="o">.</span><span class="n">EVT_PG_CHANGED</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnPgChanged</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wxpg</span><span class="o">.</span><span class="n">EVT_PG_ITEM_EXPANDED</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_item_expanded</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wxpg</span><span class="o">.</span><span class="n">EVT_PG_ITEM_COLLAPSED</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_item_collapsed</span><span class="p">)</span>
+
+
+        <span class="c1"># Build sizers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetSizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PropertiesPanel.BuildPropertyGrid">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.BuildPropertyGrid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BuildPropertyGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the properties for the grid based on the contents of nps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Clear</span><span class="p">()</span>
+        
+        <span class="c1"># # Bail if there are no selected NodePaths.</span>
+        <span class="c1"># if not wrprs:</span>
+        <span class="c1">#     return</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">propAttrMap</span> <span class="o">=</span> <span class="p">{}</span>
+                        
+        <span class="c1"># # Build all properties from attributes.</span>
+        <span class="c1"># comps = get_base().selection.comps</span>
+        <span class="c1"># wrprCls = base.node_manager.get_common_wrapper(comps)</span>
+        <span class="c1"># wrprs = [wrprCls(comp) for comp in comps]</span>
+        <span class="c1"># for i, attr in enumerate(wrprs[0].GetAttributes(addons=True)):</span>
+        <span class="c1">#</span>
+        <span class="c1">#     #print(&#39;here:&#39;, attr.srcComp)</span>
+        <span class="c1">#</span>
+        <span class="c1">#     # Find the correct property to display this attribute</span>
+        <span class="c1">#     if attr.type in self.propMap and attr.getFn is not None:</span>
+        <span class="c1">#         propCls = self.propMap[attr.type]</span>
+        <span class="c1">#         if attr.type is not None:</span>
+        <span class="c1">#             prop = propCls(attr_label, &#39;&#39;, attr.Get())</span>
+        <span class="c1">#             if attr.setFn is None:</span>
+        <span class="c1">#                 prop.Enable(False)</span>
+        <span class="c1">#         else:</span>
+        <span class="c1">#             prop = propCls(attr_label)</span>
+        <span class="c1">#     elif hasattr(attr, &#39;cnnctn&#39;):</span>
+        <span class="c1">#         val = attr.Get()</span>
+        <span class="c1">#         try:</span>
+        <span class="c1">#             objIter = iter(val)</span>
+        <span class="c1">#             prop = custProps.ConnectionListProperty(attr_label, &#39;&#39;, attr.Get())</span>
+        <span class="c1">#         except TypeError:</span>
+        <span class="c1">#             prop = custProps.ConnectionProperty(attr_label, &#39;&#39;, attr.Get())</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         continue</span>
+        <span class="c1">#</span>
+        <span class="c1">#     if hasattr(attr, &#39;parent&#39;) and attr.parent not in self.propAttrMap and attr.parent is not None:</span>
+        <span class="c1">#         pProp = wxpg.PropertyCategory(attr.parent)</span>
+        <span class="c1">#         self.propAttrMap[attr.parent] = pProp</span>
+        <span class="c1">#         self.pg.Append(pProp)</span>
+        <span class="c1">#</span>
+        <span class="c1">#     allAttrs = [wrpr.GetAttributes(addons=True)[i] for wrpr in wrprs]</span>
+        <span class="c1">#     prop.SetAttribute(ATTRIBUTE_TAG, allAttrs)</span>
+        <span class="c1">#     self.propAttrMap[attr_label] = prop</span>
+        <span class="c1">#</span>
+        <span class="c1">#     # Append to property grid or the last property if it is a</span>
+        <span class="c1">#     # child.</span>
+        <span class="c1">#     if hasattr(attr, &#39;parent&#39;) and attr.parent in self.propAttrMap:</span>
+        <span class="c1">#         self.propAttrMap[attr.parent].AddPrivateChild(prop)</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         self.pg.Append(prop)</span>
+        <span class="c1">#</span>
+        <span class="c1"># return</span>
+
+        <span class="c1"># for comp in wrprs:</span>
+        <span class="c1">#     print(&#39;comp:&#39;, comp, comp.data)</span>
+        <span class="c1">#     for name, attr in comp.attributes.items():</span>
+        <span class="c1">#         print(&#39;    &#39;, name, &#39;-&gt;&#39;, attr, &#39;:&#39;, attr.data, attr.value)</span>
+        <span class="c1"># self.propAttrMap = {}</span>
+
+        <span class="c1"># try:</span>
+        <span class="c1">#     print(wrprs[0].attributes[&#39;name&#39;].value)</span>
+        <span class="c1"># except Exception as e:</span>
+        <span class="c1">#     print(e)</span>
+
+        <span class="n">comps</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">comps</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">comps</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">comp_cls</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">get_common_wrapper</span><span class="p">(</span><span class="n">comps</span><span class="p">)</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp_cls</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">]</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># #fw</span>
+        <span class="c1"># #print(comp_cls.__dict__)</span>
+        <span class="c1"># for key, value in comp_cls.__dict__.items():</span>
+        <span class="c1">#     if isinstance(value, Base):</span>
+        <span class="c1">#         #print(comp_cls, key, type(value), value)</span>
+        <span class="c1">#         print(key, &#39;-&gt;&#39;, getattr(comps[0], key))</span>
+        <span class="c1">#</span>
+        <span class="c1"># import inspect</span>
+        <span class="c1">#</span>
+        <span class="c1"># def isprop(v):</span>
+        <span class="c1">#     return isinstance(v, Attribute)</span>
+        <span class="c1">#</span>
+        <span class="c1"># propnames = [name for (name, value) in</span>
+        <span class="c1">#              inspect.getmembers(comp_cls, isprop)]</span>
+        <span class="c1"># print(&#39;propnames:&#39;, propnames)</span>
+        <span class="c1"># #</span>
+        <span class="c1"># print(comp_cls, comp_cls.mro(), comp_cls.__dict__)</span>
+        <span class="c1">#object = comp_cls</span>
+
+        <span class="c1"># import types</span>
+        <span class="c1">#</span>
+        <span class="c1"># names = dir(object)</span>
+        <span class="c1"># # :dd any DynamicClassAttributes to the list of names if object is a class;</span>
+        <span class="c1"># # this may result in duplicate entries if, for example, a virtual</span>
+        <span class="c1"># # attribute with the same name as a DynamicClassAttribute exists</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     for base in object.__bases__:</span>
+        <span class="c1">#         for k, v in base.__dict__.items():</span>
+        <span class="c1">#             if isinstance(v, types.DynamicClassAttribute):</span>
+        <span class="c1">#                 names.append(k)</span>
+        <span class="c1"># except AttributeError:</span>
+        <span class="c1">#     pass</span>
+        <span class="c1">#</span>
+        <span class="c1"># processed = set()</span>
+        <span class="c1"># for key in names:</span>
+        <span class="c1">#     # First try to get the value via getattr.  Some descriptors don&#39;t</span>
+        <span class="c1">#     # like calling their __get__ (see bug #1785), so fall back to</span>
+        <span class="c1">#     # looking in the __dict__.</span>
+        <span class="c1">#     # try:</span>
+        <span class="c1">#     #     value = getattr(object, key)</span>
+        <span class="c1">#     #     # handle the duplicate key</span>
+        <span class="c1">#     #     if key in processed:</span>
+        <span class="c1">#     #         raise AttributeError</span>
+        <span class="c1">#     # except AttributeError:</span>
+        <span class="c1">#     for base in object.mro():</span>
+        <span class="c1">#         if key in base.__dict__:</span>
+        <span class="c1">#             value = base.__dict__[key]</span>
+        <span class="c1">#</span>
+        <span class="c1">#     if not isinstance(value, Base):</span>
+        <span class="c1">#         continue</span>
+
+            <span class="c1"># print(key, &#39;-&gt;&#39;, value, getattr(comps[0], key))</span>
+        <span class="c1">#print(comp_cls.properties)</span>
+
+        <span class="c1">#return</span>
+
+        <span class="c1">#for attr in comps[0].attributes.values():</span>
+
+        <span class="n">categories</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">comp_cls</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">categories</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="p">{})[</span><span class="n">attr_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span>
+
+<span class="c1"># &lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</span>
+<span class="c1">#             prop = None</span>
+<span class="c1">#             prop_type = None    # TODO: This doesn&#39;t feel very OO.</span>
+<span class="c1">#             if isinstance(attr, Connections):</span>
+<span class="c1">#                 prop = custProps.ConnectionListProperty(attr_label, attr_name, value)</span>
+<span class="c1">#                 prop_type = &#39;connections&#39;</span>
+<span class="c1">#             elif isinstance(attr, Connection):</span>
+<span class="c1">#                 prop = custProps.ConnectionProperty(attr_label, attr_name, value)</span>
+<span class="c1">#                 prop_type = &#39;connection&#39;</span>
+<span class="c1">#             elif isinstance(attr, Attribute):</span>
+<span class="c1">#                 if attr.type not in self.propMap:</span>
+<span class="c1">#                     logger.info(f&#39;Skipping unknown type prop: {attr_name} {attr.type}&#39;)</span>
+<span class="c1">#                     continue</span>
+<span class="c1">#</span>
+<span class="c1">#                 prop_type = &#39;attribute&#39;</span>
+<span class="c1">#                 prop_cls = self.propMap[attr.type]</span>
+<span class="c1">#                 prop = prop_cls(attr_label, attr_name, value)  # TODO: Do common value.</span>
+<span class="c1">#                 if attr.read_only:</span>
+<span class="c1">#                     prop.Enable(False)</span>
+<span class="c1"># =======</span>
+        <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">attrs</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">attr_label</span> <span class="o">=</span> <span class="n">camel_case_to_label</span><span class="p">(</span><span class="n">attr_name</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">comps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">attr_name</span><span class="p">)</span><span class="c1">#attr.get()</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;skipping no get fn prop:&#39;</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">prop</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">prop_type</span> <span class="o">=</span> <span class="kc">None</span>    <span class="c1"># TODO: This doesn&#39;t feel very OO.</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Connections</span><span class="p">):</span>
+                    <span class="n">prop</span> <span class="o">=</span> <span class="n">custProps</span><span class="o">.</span><span class="n">ConnectionsProperty</span><span class="p">(</span><span class="n">attr_label</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="n">prop_type</span> <span class="o">=</span> <span class="s1">&#39;connections&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">SetPropertyEditor</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="s1">&#39;ConnectionsPropertyEditor&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Connection</span><span class="p">):</span>
+                    <span class="n">prop</span> <span class="o">=</span> <span class="n">custProps</span><span class="o">.</span><span class="n">ConnectionProperty</span><span class="p">(</span><span class="n">attr_label</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">SetPropertyEditor</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="s1">&#39;ConnectionPropertyEditor&#39;</span><span class="p">)</span>
+                    <span class="n">prop_type</span> <span class="o">=</span> <span class="s1">&#39;connection&#39;</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">propMap</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Skipping unknown type prop: </span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">prop_type</span> <span class="o">=</span> <span class="s1">&#39;attribute&#39;</span>
+                    <span class="n">prop_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">propMap</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+                    <span class="n">prop_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">prop_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">prop</span> <span class="o">=</span> <span class="n">prop_cls</span><span class="p">(</span><span class="n">attr_label</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="o">**</span><span class="n">prop_kwargs</span><span class="p">)</span>  <span class="c1"># TODO: Do common value.</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">attr_label</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                        <span class="k">raise</span>
+                    <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">read_only</span><span class="p">:</span>
+                        <span class="n">prop</span><span class="o">.</span><span class="n">Enable</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">propAttrMap</span><span class="p">:</span>
+                    <span class="n">parent_prop</span> <span class="o">=</span> <span class="n">wxpg</span><span class="o">.</span><span class="n">PropertyCategory</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">propAttrMap</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_prop</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">parent_prop</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">prop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Couldn</span><span class="se">\&#39;</span><span class="s1">t resolve property: </span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># TODO: clean up these attributes.</span>
+                <span class="c1"># self.propAttrMap[attr.category].AddPrivateChild(prop)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+                <span class="n">prop</span><span class="o">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s1">&#39;prop_type&#39;</span><span class="p">,</span> <span class="n">prop_type</span><span class="p">)</span>
+                <span class="n">prop</span><span class="o">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s1">&#39;prop_value_type&#39;</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PropertiesPanel.OnPgChanged">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnPgChanged">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnPgChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the node path or node&#39;s property using the value the user entered</span>
+<span class="sd">        into the grid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Should probably never get here...</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">comps</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">comps</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">refocus</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="c1"># Get the node property from the property and set it.</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">GetName</span><span class="p">(),</span> <span class="n">prop</span><span class="o">.</span><span class="n">GetValue</span><span class="p">()</span>
+        <span class="c1"># print(&#39;old:&#39;, getattr(comps[0], name)[:])</span>
+        <span class="c1"># print(&#39;OnPgChanged:&#39;, name, value, type(value), value[:])</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     print(prop, prop.value_type, prop.components, prop.m_value)</span>
+        <span class="c1">#     raise</span>
+
+        <span class="c1"># TODO: Figure out if we need &quot;connect&quot; at all.</span>
+        <span class="n">type_</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s1">&#39;prop_type&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">type_</span> <span class="o">==</span> <span class="s1">&#39;connections&#39;</span><span class="p">:</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">set_connections</span><span class="p">(</span><span class="n">comps</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="c1"># elif type_ == &#39;connection&#39;:</span>
+        <span class="c1">#     cmds.set_attribute(comps, name, value)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">comps</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PropertiesPanel.on_item_expanded">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_expanded">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_item_expanded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expands</span><span class="p">[</span><span class="n">prop</span><span class="o">.</span><span class="n">GetName</span><span class="p">()]</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="PropertiesPanel.on_item_collapsed">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_collapsed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_item_collapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expands</span><span class="p">[</span><span class="n">prop</span><span class="o">.</span><span class="n">GetName</span><span class="p">()]</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="PropertiesPanel.OnUpdate">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnUpdate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Freeze</span><span class="p">()</span>
+        
+        <span class="c1"># Get the scroll position.</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetViewStart</span><span class="p">()</span>
+        <span class="c1">#</span>
+        <span class="c1"># # Get property expanded states and which property was focused.</span>
+        <span class="c1"># allProps = self.pg.GetPropertiesDictionary()</span>
+        <span class="c1"># for propLongLbl, prop in allProps.items():</span>
+        <span class="c1">#     self.propExps[propLongLbl] = prop.IsExpanded()</span>
+        <span class="c1">#</span>
+        <span class="c1"># focusProp = self.pg.GetFocusedProperty()</span>
+        <span class="c1"># if focusProp is not None:</span>
+        <span class="c1">#     focusPropLbl = self.pg.GetPropertyLongLabel(focusProp)</span>
+        <span class="c1">#     focusIndex = self.pg.GetFocusedPropertyControl()</span>
+
+        <span class="c1"># expands = {}</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetSelection</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span>
+        <span class="c1">#     prop.GetName(): prop</span>
+        <span class="c1">#     for prop in  or []</span>
+        <span class="c1"># }</span>
+        <span class="c1"># print(selects)</span>
+
+        <span class="c1"># pi = self.pg.GetIterator()</span>
+        <span class="c1"># while not pi.AtEnd():</span>
+        <span class="c1">#     p = pi.GetProperty()</span>
+        <span class="c1">#     expands[p.GetName()] = p.IsExpanded()</span>
+        <span class="c1">#     #selects[p.GetName()] = p.IsSelected()</span>
+        <span class="c1">#     pi.Next()</span>
+        
+        <span class="c1"># Clear and rebuild property grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BuildPropertyGrid</span><span class="p">()</span>
+
+
+        <span class="k">for</span> <span class="n">prop_name</span><span class="p">,</span> <span class="n">prop_expanded</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">(</span><span class="n">prop_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">prop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fouled up expanded:&#39;</span><span class="p">,</span> <span class="n">prop_name</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">prop</span><span class="o">.</span><span class="n">SetExpanded</span><span class="p">(</span><span class="n">prop_expanded</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">selection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">prop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fouled up selection&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">SelectProperty</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="n">ctrl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetEditorTextCtrl</span><span class="p">()</span>
+                <span class="c1"># print(ctrl)</span>
+            <span class="c1">#ctrl.SetFocus()</span>
+
+        
+        <span class="c1"># # Set all property expanded states back.</span>
+        <span class="c1"># for propLongLbl, expanded in self.propExps.items():</span>
+        <span class="c1">#     prop = self.pg.GetPropertyByLongLabel(propLongLbl)</span>
+        <span class="c1">#     if prop is not None:</span>
+        <span class="c1">#         prop.SetExpanded(expanded)</span>
+        <span class="c1">#</span>
+        <span class="c1"># # Set the focused property back.</span>
+        <span class="c1"># if self.refocus and focusProp is not None:</span>
+        <span class="c1">#     focusProp = self.pg.GetPropertyByLongLabel(focusPropLbl)</span>
+        <span class="c1">#     if focusProp is not None:</span>
+        <span class="c1">#         focusProp.SetFocus(focusIndex)</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         logger.info(&#39;Missed focus&#39;)</span>
+        <span class="c1">#</span>
+        <span class="c1"># Set the scroll position back.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Scroll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">Thaw</span><span class="p">()</span></div>
+
+        <span class="c1">#</span>
+        <span class="c1"># self.refocus = False</span>
+        
+<div class="viewcode-block" id="PropertiesPanel.OnSelectionModified">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnSelectionModified">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnSelectionModified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the position, rotation and scale properties during the </span>
+<span class="sd">        transform operation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">comps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">labelFnDict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_pos</span><span class="p">,</span>
+            <span class="s1">&#39;rotation&#39;</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_hpr</span><span class="p">,</span>
+            <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_scale</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Set the value of each property to the result returned from calling</span>
+        <span class="c1"># the function.</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">labelFnDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pg</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">prop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">prop</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">custProps</span><span class="o">.</span><span class="n">DataWrapper</span><span class="p">(</span><span class="n">fn</span><span class="p">()))</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

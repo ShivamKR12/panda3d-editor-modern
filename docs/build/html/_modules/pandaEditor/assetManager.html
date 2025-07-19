@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.assetManager &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.assetManager</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ReloaderBase">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ReloaderBase">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReloaderBase</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Filename</span><span class="o">.</span><span class="n">from_os_specific</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ReloaderBase.is_asset_used">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ReloaderBase.is_asset_used">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_asset_used</span><span class="p">(</span><span class="n">panda_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="ReloaderBase.get_instances">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ReloaderBase.get_instances">[docs]</a>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="ReloaderBase.reload_instance">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ReloaderBase.reload_instance">[docs]</a>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reload_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="ReloaderBase.run">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ReloaderBase.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cls_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cls_name</span><span class="si">}</span><span class="s1"> reloading asset: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_instances</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cls_name</span><span class="si">}</span><span class="s1"> reloading instance: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reload_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TextureReloader">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.TextureReloader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TextureReloader</span><span class="p">(</span><span class="n">ReloaderBase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TextureReloader.is_asset_used">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.TextureReloader.is_asset_used">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_asset_used</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="n">panda_path</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Filename</span><span class="o">.</span><span class="n">from_os_specific</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pm</span><span class="o">.</span><span class="n">TexturePool</span><span class="o">.</span><span class="n">has_texture</span><span class="p">(</span><span class="n">panda_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TextureReloader.get_instances">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.TextureReloader.get_instances">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">tex</span>
+            <span class="k">for</span> <span class="n">tex</span> <span class="ow">in</span> <span class="n">pm</span><span class="o">.</span><span class="n">TexturePool</span><span class="o">.</span><span class="n">find_all_textures</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tex</span><span class="o">.</span><span class="n">get_fullpath</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TextureReloader.reload_instance">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.TextureReloader.reload_instance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reload_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ModelReloader">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ModelReloader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelReloader</span><span class="p">(</span><span class="n">ReloaderBase</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Load the new model.</span>
+        <span class="n">comp_cls</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">get_component_by_name</span><span class="p">(</span><span class="s1">&#39;ModelRoot&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_np</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span><span class="p">,</span> <span class="n">noCache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_comp</span> <span class="o">=</span> <span class="n">comp_cls</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">new_np</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ModelReloader.is_asset_used">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ModelReloader.is_asset_used">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_asset_used</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="n">panda_path</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Filename</span><span class="o">.</span><span class="n">from_os_specific</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pm</span><span class="o">.</span><span class="n">ModelPool</span><span class="o">.</span><span class="n">has_model</span><span class="p">(</span><span class="n">panda_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ModelReloader.get_instances">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ModelReloader.get_instances">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">find_all_matches</span><span class="p">(</span><span class="s1">&#39;**/+ModelRoot&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">get_fullpath</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ModelReloader.reload_instance">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.ModelReloader.reload_instance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reload_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp</span><span class="p">):</span>
+
+        <span class="c1"># Replace the node in the hierarchy.</span>
+        <span class="c1"># TODO: Could move this to editor method insert_child.</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">sibling_index</span>
+        <span class="n">parent_np</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">parent_np</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">detach_node</span><span class="p">()</span>
+        <span class="n">children</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">copy_np</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_np</span><span class="p">)</span>
+        <span class="n">children</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">copy_np</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">reparent_to</span><span class="p">(</span><span class="n">parent_np</span><span class="p">)</span>
+
+        <span class="n">copy_comp</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">copy_np</span><span class="p">)</span>
+
+        <span class="c1"># Set properties on the new node to match the one it&#39;s replacing.</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">copy_comp</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Set attribute: </span><span class="si">{</span><span class="n">copy_comp</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> -&gt; </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Failed to set attribute on replaced component: &#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">copy_np</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Set connections on the new node to match the one it&#39;s replacing.</span>
+        <span class="c1"># TODO: Connections going the other way still broken.</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">copy_comp</span><span class="p">,</span> <span class="n">name</span><span class="p">)[:]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">copy_comp</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Set attribute: </span><span class="si">{</span><span class="n">copy_comp</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> -&gt; </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Failed to set connection on replaced component: &#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">copy_np</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Required since we loaded the model with no cache.</span>
+        <span class="n">copy_np</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">panda_path</span>
+
+
+        <span class="c1"># HAXXOR - do this after</span>
+        <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">on_modified</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="AssetManager">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.AssetManager">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AssetManager</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reloaders</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">TextureReloader</span><span class="p">,</span>
+            <span class="n">ModelReloader</span><span class="p">,</span>
+        <span class="p">]</span>
+        
+<div class="viewcode-block" id="AssetManager.on_asset_modified">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.assetManager.AssetManager.on_asset_modified">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_asset_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reload the indicated file paths as they have been marked as dirty in</span>
+<span class="sd">        the project directory.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">reloader_cls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reloaders</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">reloader_cls</span><span class="o">.</span><span class="n">is_asset_used</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">reloader</span> <span class="o">=</span> <span class="n">reloader_cls</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+                <span class="n">reloader</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

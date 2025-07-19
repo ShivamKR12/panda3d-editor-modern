@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.gizmos.base &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.gizmos.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point3</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">,</span> <span class="n">Plane</span><span class="p">,</span> <span class="n">NodePath</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">commonUtils</span> <span class="k">as</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.singleTask</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleTask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="Base">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">(</span><span class="n">NodePath</span><span class="p">,</span> <span class="n">SingleTask</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">NodePath</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">SingleTask</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">planar</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Set this node up to be drawn over everything else</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setBin</span><span class="p">(</span><span class="s1">&#39;fixed&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDepthTest</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDepthWrite</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="Base.OnUpdate">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnUpdate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update method called every frame. Run the transform method if the user</span>
+<span class="sd">        is dragging, and keep it the same size on the screen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Transform</span><span class="p">()</span>
+            
+        <span class="n">scale</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">getPos</span><span class="p">())</span><span class="o">.</span><span class="n">length</span><span class="p">()</span> <span class="o">/</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setScale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Base.OnStart">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnStart">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnStart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts the gizmo adding the task to the task manager, refreshing it</span>
+<span class="sd">        and deselecting all axes except the default one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Refresh</span><span class="p">()</span>
+        
+        <span class="c1"># Select the default axis, deselect all others</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">axis</span><span class="o">.</span><span class="n">default</span><span class="p">:</span>
+                <span class="n">axis</span><span class="o">.</span><span class="n">Select</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">axis</span><span class="o">.</span><span class="n">Deselect</span><span class="p">()</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">AcceptEvents</span><span class="p">()</span></div>
+
+        
+<div class="viewcode-block" id="Base.OnStop">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnStop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stops the gizmo by hiding it and removing it&#39;s update task from the</span>
+<span class="sd">        task manager.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Hide the gizmo and ignore all events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detachNode</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ignoreAll</span><span class="p">()</span></div>
+
+        
+<div class="viewcode-block" id="Base.AcceptEvents">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.AcceptEvents">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">AcceptEvents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bind all events for the gizmo.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;mouse1-up&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMouseUp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;mouse2-up&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMouseUp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;mouse2&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMouse2Down</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-mouse1&#39;</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnNodeMouse1Down</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-control-mouse1&#39;</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnNodeMouse1Down</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-mouse-over&#39;</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnNodeMouseOver</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-mouse-leave&#39;</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnNodeMouseLeave</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="Base.Transform">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.Transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Override this method to provide the gizmo with transform behavior.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+        
+<div class="viewcode-block" id="Base.AttachNodePaths">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.AttachNodePaths">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">AttachNodePaths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attach node paths to the gizmo. This won&#39;t affect the node&#39;s position</span>
+<span class="sd">        in the scene graph, but will transform the objects with the gizmo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span> <span class="o">=</span> <span class="n">nps</span></div>
+
+        
+<div class="viewcode-block" id="Base.SetSize">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.SetSize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Used to scale the gizmo by a factor, usually by 2 (scale up) and 0.5</span>
+<span class="sd">        (scale down). Set both the new size for the gizmo also call set size</span>
+<span class="sd">        on all axes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">*=</span> <span class="n">factor</span>
+        
+        <span class="c1"># Each axis may have different rules on how to appear when scaled, so</span>
+        <span class="c1"># call set size on each of them</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">SetSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Base.GetAxis">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.GetAxis">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetAxis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iterate over all axes of the gizmo, return the axis that owns the</span>
+<span class="sd">        solid responsible for the collision.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">collEntry</span><span class="o">.</span><span class="n">getIntoNode</span><span class="p">()</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">collNodes</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">axis</span>
+        
+        <span class="c1"># No match found, return None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="Base.GetSelectedAxis">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.GetSelectedAxis">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetSelectedAxis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the selected axis of the gizmo.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">axis</span><span class="o">.</span><span class="n">selected</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">axis</span></div>
+
+            
+<div class="viewcode-block" id="Base.ResetAxes">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.ResetAxes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ResetAxes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the default colours and flag as unselected for all axes in the </span>
+<span class="sd">        gizmo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">Deselect</span><span class="p">()</span></div>
+
+            
+<div class="viewcode-block" id="Base.Refresh">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.Refresh">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If the gizmo has node paths attached to it then move the gizmo into</span>
+<span class="sd">        position, set its orientation and show it. Otherwise hide the gizmo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">:</span>
+            
+            <span class="c1"># Show the gizmo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reparentTo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">)</span>
+            
+            <span class="c1"># Move the gizmo into position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getPos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">))</span>
+            
+            <span class="c1"># Only set the orientation of the gizmo if in local mode</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setHpr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getHpr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setHpr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getHpr</span><span class="p">())</span>
+                
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="c1"># Hide the gizmo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">detachNode</span><span class="p">()</span></div>
+
+            
+<div class="viewcode-block" id="Base.OnMouseUp">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnMouseUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnMouseUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the dragging flag to false and reset the size of the gizmo on the</span>
+<span class="sd">        mouse button is released.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Base.OnNodeMouseLeave">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnNodeMouseLeave">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnNodeMouseLeave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called when the mouse leaves the the collision object. Remove the</span>
+<span class="sd">        highlight from any axes which aren&#39;t selected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">axis</span><span class="o">.</span><span class="n">selected</span><span class="p">:</span>
+                <span class="n">axis</span><span class="o">.</span><span class="n">Unhighlight</span><span class="p">()</span></div>
+
+        
+<div class="viewcode-block" id="Base.OnNodeMouse1Down">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnNodeMouse1Down">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnNodeMouse1Down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">planar</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">planar</span> <span class="o">=</span> <span class="n">planar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="c1"># Store the attached node path&#39;s transforms.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initNpXforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">getTransform</span><span class="p">()</span> <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">]</span>
+        
+        <span class="c1"># Reset colours and deselect all axes, then get the one which the</span>
+        <span class="c1"># mouse is over</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ResetAxes</span><span class="p">()</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxis</span><span class="p">(</span><span class="n">collEntry</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            
+            <span class="c1"># Select it</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">Select</span><span class="p">()</span>
+            
+            <span class="c1"># Get the initial point where the mouse clicked the axis</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startAxisPoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxisPoint</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastAxisPoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxisPoint</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="Base.OnMouse2Down">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnMouse2Down">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnMouse2Down</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Continue transform operation if user is holding mouse2 but not over</span>
+<span class="sd">        the gizmo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetSelectedAxis</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mouseWatcherNode</span><span class="o">.</span><span class="n">hasMouse</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initNpXforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">getTransform</span><span class="p">()</span> <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startAxisPoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxisPoint</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastAxisPoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxisPoint</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Base.OnNodeMouseOver">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.OnNodeMouseOver">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnNodeMouseOver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlights the different axes as the mouse passes over them.&quot;&quot;&quot;</span>
+        <span class="c1"># Don&#39;t change highlighting if in dragging mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># Remove highlight from all unselected axes</span>
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">axis</span><span class="o">.</span><span class="n">selected</span><span class="p">:</span>
+                <span class="n">axis</span><span class="o">.</span><span class="n">Unhighlight</span><span class="p">()</span>
+        
+        <span class="c1"># Highlight the axis which the mouse is over</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxis</span><span class="p">(</span><span class="n">collEntry</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">Highlight</span><span class="p">()</span></div>
+
+            
+<div class="viewcode-block" id="Base.GetMousePlaneCollisionPoint">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.GetMousePlaneCollisionPoint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetMousePlaneCollisionPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">nrml</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the collision point of a ray fired through the mouse and a</span>
+<span class="sd">        plane with the specified normal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Fire a ray from the camera through the mouse </span>
+        <span class="n">mp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mouseWatcherNode</span><span class="o">.</span><span class="n">getMouse</span><span class="p">()</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">Point3</span><span class="p">()</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">Point3</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">getLens</span><span class="p">()</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativePoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativePoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        
+        <span class="c1"># Get the point of intersection with a plane with the normal</span>
+        <span class="c1"># specified</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Point3</span><span class="p">()</span>
+        <span class="n">Plane</span><span class="p">(</span><span class="n">nrml</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span><span class="o">.</span><span class="n">intersectsLine</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">p</span></div>
+
+    
+<div class="viewcode-block" id="Base.GetAxisPoint">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.base.Base.GetAxisPoint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetAxisPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the point of intersection for the mouse picker ray and the axis</span>
+<span class="sd">        in the gizmo root node space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get the axis vector - by default this is the selected axis&#39;</span>
+        <span class="c1"># vector unless we need to use the camera&#39;s look vector</span>
+        <span class="k">if</span> <span class="n">axis</span><span class="o">.</span><span class="n">vector</span> <span class="o">==</span> <span class="n">CAMERA_VECTOR</span><span class="p">:</span>
+            <span class="n">axisVector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativeVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">axisVector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativeVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+            
+        <span class="c1"># Get the transform plane&#39;s normal. If we&#39;re transforming in</span>
+        <span class="c1"># planar mode use the axis vector as the plane normal, otherwise</span>
+        <span class="c1"># get the normal of a plane along the selected axis</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">planar</span> <span class="ow">or</span> <span class="n">axis</span><span class="o">.</span><span class="n">planar</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMousePlaneCollisionPoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">(),</span> <span class="n">axisVector</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="c1"># Get the cross of the camera vector and the axis vector - a</span>
+            <span class="c1"># vector of 0, 1, 0 in camera space is coming out of the lens</span>
+            <span class="n">camVector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativeVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="n">camAxisCross</span> <span class="o">=</span> <span class="n">camVector</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">axisVector</span><span class="p">)</span>
+            
+            <span class="c1"># Cross this back with the axis to get a plane&#39;s normal</span>
+            <span class="n">planeNormal</span> <span class="o">=</span> <span class="n">camAxisCross</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">axisVector</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMousePlaneCollisionPoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">(),</span> <span class="n">planeNormal</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">ClosestPointToLine</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">()</span> <span class="o">+</span> 
+                                             <span class="n">axisVector</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

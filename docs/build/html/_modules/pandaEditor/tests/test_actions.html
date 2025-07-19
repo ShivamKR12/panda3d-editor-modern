@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.tests.test_actions &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.tests.test_actions</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pc</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.actions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Transform</span><span class="p">,</span> <span class="n">SetAttribute</span><span class="p">,</span> <span class="n">Parent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.lights</span><span class="w"> </span><span class="kn">import</span> <span class="n">AmbientLight</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.nodepath</span><span class="w"> </span><span class="kn">import</span> <span class="n">NodePath</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.showbasedefaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">Render</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.nodes.tests.testmixin</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestMixin</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TestActions">
+<a class="viewcode-back" href="../../../pandaEditor.tests.html#pandaEditor.tests.test_actions.TestActions">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestActions</span><span class="p">(</span><span class="n">TestMixin</span><span class="p">,</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestActions.test_parent">
+<a class="viewcode-back" href="../../../pandaEditor.tests.html#pandaEditor.tests.test_actions.TestActions.test_parent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">PandaNode</span><span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">))</span>
+        <span class="n">old_parent</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">PandaNode</span><span class="p">(</span><span class="s1">&#39;old_parent&#39;</span><span class="p">))</span>
+        <span class="n">child</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">PandaNode</span><span class="p">(</span><span class="s1">&#39;child&#39;</span><span class="p">))</span>
+        <span class="n">child</span><span class="o">.</span><span class="n">reparent_to</span><span class="p">(</span><span class="n">old_parent</span><span class="p">)</span>
+        <span class="n">parent_comp</span> <span class="o">=</span> <span class="n">NodePath</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">old_parent_comp</span> <span class="o">=</span> <span class="n">NodePath</span><span class="p">(</span><span class="n">old_parent</span><span class="p">)</span>
+        <span class="n">child_comp</span> <span class="o">=</span> <span class="n">NodePath</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">(</span><span class="n">child_comp</span><span class="p">,</span> <span class="n">parent_comp</span><span class="p">)</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">redo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">get_parent</span><span class="p">())</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">undo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">old_parent</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">get_parent</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="TestActions.test_add_remove">
+<a class="viewcode-back" href="../../../pandaEditor.tests.html#pandaEditor.tests.test_actions.TestActions.test_add_remove">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_add_remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">light</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">AmbientLight</span><span class="p">(</span><span class="s1">&#39;ambient_light&#39;</span><span class="p">))</span>
+        <span class="n">render</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">render</span>
+        <span class="n">light_comp</span><span class="p">,</span> <span class="n">render_comp</span> <span class="o">=</span> <span class="n">AmbientLight</span><span class="p">(</span><span class="n">light</span><span class="p">),</span> <span class="n">Render</span><span class="p">(</span><span class="n">render</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">light_comp</span><span class="p">)</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">pcomp</span> <span class="o">=</span> <span class="n">render_comp</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="p">[(</span><span class="n">render_comp</span><span class="p">,</span> <span class="s1">&#39;lights&#39;</span><span class="p">)]</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">redo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">light</span><span class="o">.</span><span class="n">get_parent</span><span class="p">())</span>
+        <span class="n">lights</span> <span class="o">=</span> <span class="n">render</span><span class="o">.</span><span class="n">get_attrib</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">LightAttrib</span><span class="p">)</span><span class="o">.</span><span class="n">get_on_lights</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">light</span><span class="o">.</span><span class="n">node</span><span class="p">(),</span> <span class="n">lights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">node</span><span class="p">())</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">undo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">light</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span><span class="o">.</span><span class="n">is_empty</span><span class="p">())</span>
+        <span class="n">lights</span> <span class="o">=</span> <span class="n">render</span><span class="o">.</span><span class="n">get_attrib</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">LightAttrib</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">lights</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestActions.test_transform">
+<a class="viewcode-back" href="../../../pandaEditor.tests.html#pandaEditor.tests.test_actions.TestActions.test_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">panda</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">PandaNode</span><span class="p">(</span><span class="s1">&#39;panda_node&#39;</span><span class="p">))</span>
+        <span class="n">panda_comp</span> <span class="o">=</span> <span class="n">NodePath</span><span class="p">(</span><span class="n">panda</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">old_pos</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">xform</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">TransformState</span><span class="o">.</span><span class="n">make_pos</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="n">old_xform</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">TransformState</span><span class="o">.</span><span class="n">make_pos</span><span class="p">(</span><span class="n">old_pos</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Transform</span><span class="p">(</span><span class="n">panda_comp</span><span class="p">,</span> <span class="n">xform</span><span class="p">,</span> <span class="n">old_xform</span><span class="p">)</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">redo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">panda</span><span class="o">.</span><span class="n">get_pos</span><span class="p">())</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">undo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">old_pos</span><span class="p">,</span> <span class="n">panda</span><span class="o">.</span><span class="n">get_pos</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="TestActions.test_set_attribute">
+<a class="viewcode-back" href="../../../pandaEditor.tests.html#pandaEditor.tests.test_actions.TestActions.test_set_attribute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">panda</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">PandaNode</span><span class="p">(</span><span class="s1">&#39;panda_node&#39;</span><span class="p">))</span>
+        <span class="n">panda_comp</span> <span class="o">=</span> <span class="n">NodePath</span><span class="p">(</span><span class="n">panda</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">SetAttribute</span><span class="p">(</span><span class="n">panda_comp</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;new_name&#39;</span><span class="p">)</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">redo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;new_name&#39;</span><span class="p">,</span> <span class="n">panda</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">undo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;panda_node&#39;</span><span class="p">,</span> <span class="n">panda</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

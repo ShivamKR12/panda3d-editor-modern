@@ -3,7 +3,7 @@ import unittest
 
 import panda3d.core as pc
 
-from actions import Add, Transform, SetAttribute, Parent
+from pandaEditor.actions import Add, Transform, SetAttribute, Parent
 from pandaEditor.game.nodes.lights import AmbientLight
 from pandaEditor.game.nodes.nodepath import NodePath
 from pandaEditor.game.nodes.showbasedefaults import Render

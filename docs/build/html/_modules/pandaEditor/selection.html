@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.selection &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.selection</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.object</span><span class="w"> </span><span class="kn">import</span> <span class="n">Object</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.marquee</span><span class="w"> </span><span class="kn">import</span> <span class="n">Marquee</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.mouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">MOUSE_CTRL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.mousePicker</span><span class="w"> </span><span class="kn">import</span> <span class="n">MousePicker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.nodes.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">TAG_IGNORE</span><span class="p">,</span> <span class="n">TAG_PICKABLE</span>
+
+
+<div class="viewcode-block" id="Selection">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Selection</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+
+    <span class="n">BBOX_TAG</span> <span class="o">=</span> <span class="s1">&#39;bbox&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Create a marquee.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marquee</span> <span class="o">=</span> <span class="n">Marquee</span><span class="p">(</span><span class="s1">&#39;marquee&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Create node picker - set its collision mask to hit both geom nodes</span>
+        <span class="c1"># and collision nodes.</span>
+        <span class="n">bitMask</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GeomNode</span><span class="o">.</span><span class="n">getDefaultCollideMask</span><span class="p">()</span> <span class="o">|</span> <span class="n">pm</span><span class="o">.</span><span class="n">CollisionNode</span><span class="o">.</span><span class="n">getDefaultCollideMask</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">picker</span> <span class="o">=</span> <span class="n">MousePicker</span><span class="p">(</span>
+            <span class="s1">&#39;picker&#39;</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+            <span class="n">fromCollideMask</span><span class="o">=</span><span class="n">bitMask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Selection.get">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the selected components.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">node_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">data</span>
+            <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">NodePath</span><span class="p">)</span>
+        <span class="p">]</span>
+
+<div class="viewcode-block" id="Selection.clear">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear the selection list and run deselect handlers.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">on_deselect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="Selection.add">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.add">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the indicated components to the selection and run select handlers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">:</span>
+
+            <span class="c1"># Skip components already selected.</span>
+            <span class="k">if</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">on_select</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Selection.remove">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.remove">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove those components that were in the selection and run deselect</span>
+<span class="sd">        handlers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">on_deselect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comps</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span> <span class="k">if</span> <span class="n">comp</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Selection.select_parent">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.select_parent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of parent components from the selection. Include the</span>
+<span class="sd">        original component if no suitable parent is found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">pcomp</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span>
+            <span class="k">if</span> <span class="n">pcomp</span><span class="o">.</span><span class="n">data</span> <span class="o">!=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">scene</span><span class="p">:</span>
+                <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pcomp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">comps</span></div>
+
+
+<div class="viewcode-block" id="Selection.select_child">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.select_child">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_child</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of child components from the selection. Include the</span>
+<span class="sd">        original component if no children are found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">comps</span></div>
+
+
+<div class="viewcode-block" id="Selection.select_prev">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.select_prev">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_prev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For each component in the selection, return the component that appears</span>
+<span class="sd">        one before in the parent&#39;s list of children.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">children</span>
+
+            <span class="c1"># Get the index of the child before this one - wrap around if the</span>
+            <span class="c1"># index has gone below zero.</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">children</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">children</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">comps</span></div>
+
+
+<div class="viewcode-block" id="Selection.select_next">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.select_next">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For each component in the selection, return the component that appears</span>
+<span class="sd">        one after in the parent&#39;s list of children.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">children</span>
+
+            <span class="c1"># Get the index of the child after this one - wrap around if the</span>
+            <span class="c1"># index has gone over the number of children.</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">children</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">children</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">comps</span></div>
+
+
+<div class="viewcode-block" id="Selection.StartDragSelect">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.StartDragSelect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">StartDragSelect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start the marquee and put the tool into append mode if specified.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">marquee</span><span class="o">.</span><span class="n">mouseWatcherNode</span><span class="o">.</span><span class="n">hasMouse</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span> <span class="o">=</span> <span class="n">append</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marquee</span><span class="o">.</span><span class="n">Start</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Selection.StopDragSelect">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.StopDragSelect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">StopDragSelect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the marquee and get all the node paths under it with the correct</span>
+<span class="sd">        tag. Also append any node which was under the mouse at the end of the</span>
+<span class="sd">        operation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marquee</span><span class="o">.</span><span class="n">Stop</span><span class="p">()</span>
+
+        <span class="c1"># Find all node paths below the root node which are inside the marquee</span>
+        <span class="c1"># AND have the TAG_PICKABLE tag.</span>
+        <span class="n">nps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">findAllMatches</span><span class="p">(</span><span class="s1">&#39;**&#39;</span><span class="p">):</span>
+            <span class="n">pick_np</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetPickableNodePath</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">pick_np</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">marquee</span><span class="o">.</span><span class="n">IsNodePathInside</span><span class="p">(</span><span class="n">pick_np</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">pick_np</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nps</span>
+            <span class="p">):</span>
+                <span class="n">nps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pick_np</span><span class="p">)</span>
+
+        <span class="c1"># Add any node path which was under the mouse to the selection.</span>
+        <span class="n">np</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetNodePathUnderMouse</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">np</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pick_np</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nps</span><span class="p">:</span>
+            <span class="n">nps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
+
+        <span class="c1"># In append mode add any NodePath which wasn&#39;t already in the selection</span>
+        <span class="c1"># and remove any NodePath which was already selected.</span>
+        <span class="c1"># TODO: This doesn&#39;t run deselect handlers.</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">np</span><span class="p">)</span> <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="n">nps</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">:</span>
+            <span class="n">old_comps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span>
+            <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+                    <span class="n">old_comps</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">old_comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+            <span class="n">comps</span> <span class="o">=</span> <span class="n">old_comps</span>
+        <span class="k">return</span> <span class="n">comps</span></div>
+
+
+<div class="viewcode-block" id="Selection.GetNodePathUnderMouse">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.GetNodePathUnderMouse">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetNodePathUnderMouse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the closest node under the mouse, or None if there isn&#39;t one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">picker</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">pickedNp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">picker</span><span class="o">.</span><span class="n">GetFirstNodePath</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pickedNp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetPickableNodePath</span><span class="p">(</span><span class="n">pickedNp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Selection.get_node_path_at_position">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.get_node_path_at_position">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_node_path_at_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">picker</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">pickedNp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">picker</span><span class="o">.</span><span class="n">GetFirstNodePath</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pickedNp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetPickableNodePath</span><span class="p">(</span><span class="n">pickedNp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Selection.GetPickableNodePath">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.GetPickableNodePath">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetPickableNodePath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">np</span><span class="p">):</span>
+        <span class="c1"># if MOUSE_CTRL not in get_base().edCamera.mouse.modifiers:</span>
+        <span class="c1">#     np = np.findNetPythonTag(TAG_PICKABLE)</span>
+        <span class="c1"># return None if np.isEmpty() else np</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">getPythonTag</span><span class="p">(</span><span class="n">TAG_IGNORE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">findNetPythonTag</span><span class="p">(</span><span class="n">TAG_PICKABLE</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">MOUSE_CTRL</span> <span class="ow">in</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">edCamera</span><span class="o">.</span><span class="n">modifiers</span><span class="p">:</span>
+           <span class="k">return</span> <span class="n">np</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">findNetPythonTag</span><span class="p">(</span><span class="n">TAG_PICKABLE</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Selection.update">
+<a class="viewcode-back" href="../../pandaEditor.html#pandaEditor.selection.Selection.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the selection by running deselect and select handlers.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comps</span><span class="p">:</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">on_deselect</span><span class="p">()</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">on_select</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

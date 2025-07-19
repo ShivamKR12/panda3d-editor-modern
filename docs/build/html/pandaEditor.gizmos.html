@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandaEditor.gizmos package &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pandaEditor.nodes package" href="pandaEditor.nodes.html" />
+    <link rel="prev" title="pandaEditor.game.plugins package" href="pandaEditor.game.plugins.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pandaeditor-gizmos-package">
+<h1>pandaEditor.gizmos package<a class="headerlink" href="#pandaeditor-gizmos-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.gizmos.axis">
+<span id="pandaeditor-gizmos-axis-module"></span><h2>pandaEditor.gizmos.axis module<a class="headerlink" href="#module-pandaEditor.gizmos.axis" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.axis.</span></span><span class="sig-name descname"><span class="pre">Axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NodePath</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.AddCollisionSolid">
+<span class="sig-name descname"><span class="pre">AddCollisionSolid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collSolid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizeStyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.AddCollisionSolid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.AddCollisionSolid" title="Link to this definition">¶</a></dt>
+<dd><p>Add a collision solid to the axis and move it into position.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.AddGeometry">
+<span class="sig-name descname"><span class="pre">AddGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highlight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizeStyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.AddGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.AddGeometry" title="Link to this definition">¶</a></dt>
+<dd><p>Add geometry to represent the axis and move it into position. If the
+geometry is a line make sure to call setLightOff or else it won’t
+look right.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.Deselect">
+<span class="sig-name descname"><span class="pre">Deselect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.Deselect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.Deselect" title="Link to this definition">¶</a></dt>
+<dd><p>Reset the colour of the axis to the original colour and flag as being
+unselected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.Highlight">
+<span class="sig-name descname"><span class="pre">Highlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.Highlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.Highlight" title="Link to this definition">¶</a></dt>
+<dd><p>Highlight the axis by changing it’s colour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.Select">
+<span class="sig-name descname"><span class="pre">Select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.Select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.Select" title="Link to this definition">¶</a></dt>
+<dd><p>Changed the colour of the axis to the highlight colour and flag as
+being selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.SetSize">
+<span class="sig-name descname"><span class="pre">SetSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.SetSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.SetSize" title="Link to this definition">¶</a></dt>
+<dd><p>Change the size of the gizmo. This isn’t just the same as scaling all
+the geometry and collision - sometimes this just means pushing the
+geometry along the axis instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.axis.Axis.Unhighlight">
+<span class="sig-name descname"><span class="pre">Unhighlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/axis.html#Axis.Unhighlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.axis.Axis.Unhighlight" title="Link to this definition">¶</a></dt>
+<dd><p>Remove the highlight by resetting to the axis colour.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos.base">
+<span id="pandaeditor-gizmos-base-module"></span><h2>pandaEditor.gizmos.base module<a class="headerlink" href="#module-pandaEditor.gizmos.base" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.base.</span></span><span class="sig-name descname"><span class="pre">Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NodePath</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">SingleTask</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.AcceptEvents">
+<span class="sig-name descname"><span class="pre">AcceptEvents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.AcceptEvents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.AcceptEvents" title="Link to this definition">¶</a></dt>
+<dd><p>Bind all events for the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.AttachNodePaths">
+<span class="sig-name descname"><span class="pre">AttachNodePaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.AttachNodePaths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.AttachNodePaths" title="Link to this definition">¶</a></dt>
+<dd><p>Attach node paths to the gizmo. This won’t affect the node’s position
+in the scene graph, but will transform the objects with the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.GetAxis">
+<span class="sig-name descname"><span class="pre">GetAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.GetAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.GetAxis" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over all axes of the gizmo, return the axis that owns the
+solid responsible for the collision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.GetAxisPoint">
+<span class="sig-name descname"><span class="pre">GetAxisPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.GetAxisPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.GetAxisPoint" title="Link to this definition">¶</a></dt>
+<dd><p>Return the point of intersection for the mouse picker ray and the axis
+in the gizmo root node space.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.GetMousePlaneCollisionPoint">
+<span class="sig-name descname"><span class="pre">GetMousePlaneCollisionPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.GetMousePlaneCollisionPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.GetMousePlaneCollisionPoint" title="Link to this definition">¶</a></dt>
+<dd><p>Return the collision point of a ray fired through the mouse and a
+plane with the specified normal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.GetSelectedAxis">
+<span class="sig-name descname"><span class="pre">GetSelectedAxis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.GetSelectedAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.GetSelectedAxis" title="Link to this definition">¶</a></dt>
+<dd><p>Return the selected axis of the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnMouse2Down">
+<span class="sig-name descname"><span class="pre">OnMouse2Down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnMouse2Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnMouse2Down" title="Link to this definition">¶</a></dt>
+<dd><p>Continue transform operation if user is holding mouse2 but not over
+the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnMouseUp">
+<span class="sig-name descname"><span class="pre">OnMouseUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnMouseUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnMouseUp" title="Link to this definition">¶</a></dt>
+<dd><p>Set the dragging flag to false and reset the size of the gizmo on the
+mouse button is released.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnNodeMouse1Down">
+<span class="sig-name descname"><span class="pre">OnNodeMouse1Down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnNodeMouse1Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnNodeMouse1Down" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnNodeMouseLeave">
+<span class="sig-name descname"><span class="pre">OnNodeMouseLeave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnNodeMouseLeave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnNodeMouseLeave" title="Link to this definition">¶</a></dt>
+<dd><p>Called when the mouse leaves the the collision object. Remove the
+highlight from any axes which aren’t selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnNodeMouseOver">
+<span class="sig-name descname"><span class="pre">OnNodeMouseOver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnNodeMouseOver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnNodeMouseOver" title="Link to this definition">¶</a></dt>
+<dd><p>Highlights the different axes as the mouse passes over them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnStart">
+<span class="sig-name descname"><span class="pre">OnStart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnStart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnStart" title="Link to this definition">¶</a></dt>
+<dd><p>Starts the gizmo adding the task to the task manager, refreshing it
+and deselecting all axes except the default one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnStop">
+<span class="sig-name descname"><span class="pre">OnStop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnStop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnStop" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the gizmo by hiding it and removing it’s update task from the
+task manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Update method called every frame. Run the transform method if the user
+is dragging, and keep it the same size on the screen.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.Refresh">
+<span class="sig-name descname"><span class="pre">Refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.Refresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.Refresh" title="Link to this definition">¶</a></dt>
+<dd><p>If the gizmo has node paths attached to it then move the gizmo into
+position, set its orientation and show it. Otherwise hide the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.ResetAxes">
+<span class="sig-name descname"><span class="pre">ResetAxes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.ResetAxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.ResetAxes" title="Link to this definition">¶</a></dt>
+<dd><p>Reset the default colours and flag as unselected for all axes in the
+gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.SetSize">
+<span class="sig-name descname"><span class="pre">SetSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.SetSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.SetSize" title="Link to this definition">¶</a></dt>
+<dd><p>Used to scale the gizmo by a factor, usually by 2 (scale up) and 0.5
+(scale down). Set both the new size for the gizmo also call set size
+on all axes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.base.Base.Transform">
+<span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/base.html#Base.Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.base.Base.Transform" title="Link to this definition">¶</a></dt>
+<dd><p>Override this method to provide the gizmo with transform behavior.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos.constants">
+<span id="pandaeditor-gizmos-constants-module"></span><h2>pandaEditor.gizmos.constants module<a class="headerlink" href="#module-pandaEditor.gizmos.constants" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.gizmos.manager">
+<span id="pandaeditor-gizmos-manager-module"></span><h2>pandaEditor.gizmos.manager module<a class="headerlink" href="#module-pandaEditor.gizmos.manager" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.manager.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.AddGizmo">
+<span class="sig-name descname"><span class="pre">AddGizmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gizmo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.AddGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.AddGizmo" title="Link to this definition">¶</a></dt>
+<dd><p>Add a gizmo to be managed by the gizmo manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.AttachNodePaths">
+<span class="sig-name descname"><span class="pre">AttachNodePaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.AttachNodePaths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.AttachNodePaths" title="Link to this definition">¶</a></dt>
+<dd><p>Attach node paths to be transformed by the gizmos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.GetActiveGizmo">
+<span class="sig-name descname"><span class="pre">GetActiveGizmo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.GetActiveGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.GetActiveGizmo" title="Link to this definition">¶</a></dt>
+<dd><p>Return the active gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.GetGizmo">
+<span class="sig-name descname"><span class="pre">GetGizmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.GetGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.GetGizmo" title="Link to this definition">¶</a></dt>
+<dd><p>Find and return a gizmo by name, return None if no gizmo with the
+specified name exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.GetGizmoLocal">
+<span class="sig-name descname"><span class="pre">GetGizmoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.GetGizmoLocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.GetGizmoLocal" title="Link to this definition">¶</a></dt>
+<dd><p>Return the gizmos local mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.IsDragging">
+<span class="sig-name descname"><span class="pre">IsDragging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.IsDragging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.IsDragging" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if the active gizmo is in the middle of a dragging
+operation, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.RefreshActiveGizmo">
+<span class="sig-name descname"><span class="pre">RefreshActiveGizmo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.RefreshActiveGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.RefreshActiveGizmo" title="Link to this definition">¶</a></dt>
+<dd><p>Refresh the active gizmo if there is one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.SetActiveGizmo">
+<span class="sig-name descname"><span class="pre">SetActiveGizmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.SetActiveGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.SetActiveGizmo" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the currently active gizmo then finds the specified gizmo by
+name and starts it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.SetGizmoLocal">
+<span class="sig-name descname"><span class="pre">SetGizmoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.SetGizmoLocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.SetGizmoLocal" title="Link to this definition">¶</a></dt>
+<dd><p>Set all gizmo local modes, then refresh the active one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.SetLocal">
+<span class="sig-name descname"><span class="pre">SetLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.SetLocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.SetLocal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.SetSize">
+<span class="sig-name descname"><span class="pre">SetSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.SetSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.SetSize" title="Link to this definition">¶</a></dt>
+<dd><p>Resize the gizmo by a factor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.manager.Manager.ToggleLocal">
+<span class="sig-name descname"><span class="pre">ToggleLocal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/manager.html#Manager.ToggleLocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.manager.Manager.ToggleLocal" title="Link to this definition">¶</a></dt>
+<dd><p>Toggle all gizmos local mode on or off.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos.rotation">
+<span id="pandaeditor-gizmos-rotation-module"></span><h2>pandaEditor.gizmos.rotation module<a class="headerlink" href="#module-pandaEditor.gizmos.rotation" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.rotation.</span></span><span class="sig-name descname"><span class="pre">Rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.gizmos.base.Base" title="pandaEditor.gizmos.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.CreateCamCircle">
+<span class="sig-name descname"><span class="pre">CreateCamCircle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.CreateCamCircle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.CreateCamCircle" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.CreateCircle">
+<span class="sig-name descname"><span class="pre">CreateCircle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.CreateCircle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.CreateCircle" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.CreateRing">
+<span class="sig-name descname"><span class="pre">CreateRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.CreateRing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.CreateRing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.GetAxis">
+<span class="sig-name descname"><span class="pre">GetAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.GetAxis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.GetAxis" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over all axes of the gizmo, return the axis that owns the
+solid responsible for the collision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.OnMouse2Down">
+<span class="sig-name descname"><span class="pre">OnMouse2Down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.OnMouse2Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.OnMouse2Down" title="Link to this definition">¶</a></dt>
+<dd><p>Continue transform operation if user is holding mouse2 but not over
+the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.OnNodeMouse1Down">
+<span class="sig-name descname"><span class="pre">OnNodeMouse1Down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.OnNodeMouse1Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.OnNodeMouse1Down" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.OnNodeMouseOver">
+<span class="sig-name descname"><span class="pre">OnNodeMouseOver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.OnNodeMouseOver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.OnNodeMouseOver" title="Link to this definition">¶</a></dt>
+<dd><p>Highlights the different axes as the mouse passes over them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.SetSize">
+<span class="sig-name descname"><span class="pre">SetSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.SetSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.SetSize" title="Link to this definition">¶</a></dt>
+<dd><p>Used to scale the gizmo by a factor, usually by 2 (scale up) and 0.5
+(scale down). Set both the new size for the gizmo also call set size
+on all axes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.Transform">
+<span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.Transform" title="Link to this definition">¶</a></dt>
+<dd><p>Override this method to provide the gizmo with transform behavior.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.rotation.Rotation.Update">
+<span class="sig-name descname"><span class="pre">Update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/rotation.html#Rotation.Update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.rotation.Rotation.Update" title="Link to this definition">¶</a></dt>
+<dd><p>Run OnUpdate method - return task.cont if there was no return value.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos.scale">
+<span id="pandaeditor-gizmos-scale-module"></span><h2>pandaEditor.gizmos.scale module<a class="headerlink" href="#module-pandaEditor.gizmos.scale" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.scale.Scale">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.scale.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/scale.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.scale.Scale" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.gizmos.base.Base" title="pandaEditor.gizmos.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.scale.Scale.CreateBox">
+<span class="sig-name descname"><span class="pre">CreateBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/scale.html#Scale.CreateBox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.scale.Scale.CreateBox" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.scale.Scale.CreateCenter">
+<span class="sig-name descname"><span class="pre">CreateCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/scale.html#Scale.CreateCenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.scale.Scale.CreateCenter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.scale.Scale.OnNodeMouse1Down">
+<span class="sig-name descname"><span class="pre">OnNodeMouse1Down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/scale.html#Scale.OnNodeMouse1Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.scale.Scale.OnNodeMouse1Down" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.scale.Scale.Transform">
+<span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/scale.html#Scale.Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.scale.Scale.Transform" title="Link to this definition">¶</a></dt>
+<dd><p>Override this method to provide the gizmo with transform behavior.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos.translation">
+<span id="pandaeditor-gizmos-translation-module"></span><h2>pandaEditor.gizmos.translation module<a class="headerlink" href="#module-pandaEditor.gizmos.translation" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.gizmos.translation.</span></span><span class="sig-name descname"><span class="pre">Translation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.gizmos.base.Base" title="pandaEditor.gizmos.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.AcceptEvents">
+<span class="sig-name descname"><span class="pre">AcceptEvents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.AcceptEvents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.AcceptEvents" title="Link to this definition">¶</a></dt>
+<dd><p>Bind all events for the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.CreateArrow">
+<span class="sig-name descname"><span class="pre">CreateArrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.CreateArrow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.CreateArrow" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.CreateSquare">
+<span class="sig-name descname"><span class="pre">CreateSquare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.CreateSquare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.CreateSquare" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.OnMouse2Down">
+<span class="sig-name descname"><span class="pre">OnMouse2Down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.OnMouse2Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.OnMouse2Down" title="Link to this definition">¶</a></dt>
+<dd><p>Continue transform operation if user is holding mouse2 but not over
+the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.OnNodeMouse1Down">
+<span class="sig-name descname"><span class="pre">OnNodeMouse1Down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.OnNodeMouse1Down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.OnNodeMouse1Down" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.SetSnap">
+<span class="sig-name descname"><span class="pre">SetSnap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.SetSnap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.SetSnap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.gizmos.translation.Translation.Transform">
+<span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/gizmos/translation.html#Translation.Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.gizmos.translation.Translation.Transform" title="Link to this definition">¶</a></dt>
+<dd><p>Override this method to provide the gizmo with transform behavior.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.gizmos">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pandaEditor.gizmos" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pandaEditor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pandaEditor.html">pandaEditor package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pandaEditor</a><ul>
+  <li><a href="pandaEditor.html">pandaEditor package</a><ul>
+      <li>Previous: <a href="pandaEditor.game.plugins.html" title="previous chapter">pandaEditor.game.plugins package</a></li>
+      <li>Next: <a href="pandaEditor.nodes.html" title="next chapter">pandaEditor.nodes package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/pandaEditor.gizmos.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

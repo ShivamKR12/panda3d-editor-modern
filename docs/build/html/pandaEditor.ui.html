@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandaEditor.ui package &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pandaEditor.tests package" href="pandaEditor.tests.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pandaeditor-ui-package">
+<h1>pandaEditor.ui package<a class="headerlink" href="#pandaeditor-ui-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.ui.createdialog">
+<span id="pandaeditor-ui-createdialog-module"></span><h2>pandaEditor.ui.createdialog module<a class="headerlink" href="#module-pandaEditor.ui.createdialog" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.BaseCtrl">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">BaseCtrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#BaseCtrl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.BaseCtrl" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Control</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.BaseCtrl.GetValue">
+<span class="sig-name descname"><span class="pre">GetValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#BaseCtrl.GetValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.BaseCtrl.GetValue" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.BaseCtrl.type_">
+<span class="sig-name descname"><span class="pre">type_</span></span><a class="headerlink" href="#pandaEditor.ui.createdialog.BaseCtrl.type_" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LVector3f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.BoolCtrl">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">BoolCtrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#BoolCtrl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.BoolCtrl" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CheckBox</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.CreateDialog">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">CreateDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_values</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#CreateDialog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.CreateDialog" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialog</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.CreateDialog.GetValues">
+<span class="sig-name descname"><span class="pre">GetValues</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#CreateDialog.GetValues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.CreateDialog.GetValues" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.CreateDialog.Validate">
+<span class="sig-name descname"><span class="pre">Validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#CreateDialog.Validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.CreateDialog.Validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.Point3Ctrl">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">Point3Ctrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#Point3Ctrl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.Point3Ctrl" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.createdialog.BaseCtrl" title="pandaEditor.ui.createdialog.BaseCtrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCtrl</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.Point3Ctrl.type_">
+<span class="sig-name descname"><span class="pre">type_</span></span><a class="headerlink" href="#pandaEditor.ui.createdialog.Point3Ctrl.type_" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LPoint3f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.PropFloatSpin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">PropFloatSpin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#PropFloatSpin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.PropFloatSpin" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FloatSpin</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.Vec3Ctrl">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.createdialog.</span></span><span class="sig-name descname"><span class="pre">Vec3Ctrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/createdialog.html#Vec3Ctrl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.createdialog.Vec3Ctrl" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.createdialog.BaseCtrl" title="pandaEditor.ui.createdialog.BaseCtrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCtrl</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.createdialog.Vec3Ctrl.type_">
+<span class="sig-name descname"><span class="pre">type_</span></span><a class="headerlink" href="#pandaEditor.ui.createdialog.Vec3Ctrl.type_" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LVector3f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.document">
+<span id="pandaeditor-ui-document-module"></span><h2>pandaEditor.ui.document module<a class="headerlink" href="#module-pandaEditor.ui.document" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.document.</span></span><span class="sig-name descname"><span class="pre">Document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contents</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document.load" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.on_modified">
+<span class="sig-name descname"><span class="pre">on_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document.on_modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document.on_modified" title="Link to this definition">¶</a></dt>
+<dd><p>Broadcast the update message and set the dirty flag. Methods
+subscribed to this message will rebuild ui widgets completely.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.on_refresh">
+<span class="sig-name descname"><span class="pre">on_refresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document.on_refresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document.on_refresh" title="Link to this definition">¶</a></dt>
+<dd><p>Broadcast the update message without setting the dirty flag. Methods
+subscribed to this message will rebuild ui widgets completely.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.on_selection_modified">
+<span class="sig-name descname"><span class="pre">on_selection_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document.on_selection_modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document.on_selection_modified" title="Link to this definition">¶</a></dt>
+<dd><p>Broadcast the update selection message. Methods subscribed to this
+message should be quick and not force full rebuilds of ui widgets
+considering how quickly the selection is likely to change.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/document.html#Document.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.document.Document.save" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.ui.document.Document.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#pandaEditor.ui.document.Document.title" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.lightLinkerPanel">
+<span id="pandaeditor-ui-lightlinkerpanel-module"></span><h2>pandaEditor.ui.lightLinkerPanel module<a class="headerlink" href="#module-pandaEditor.ui.lightLinkerPanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.lightLinkerPanel.LightLinkerPanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.lightLinkerPanel.</span></span><span class="sig-name descname"><span class="pre">LightLinkerPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/lightLinkerPanel.html#LightLinkerPanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.lightLinkerPanel.LightLinkerPanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.lightLinkerPanel.LightLinkerPanel.OnLeftTreeSelChanged">
+<span class="sig-name descname"><span class="pre">OnLeftTreeSelChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/lightLinkerPanel.html#LightLinkerPanel.OnLeftTreeSelChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.lightLinkerPanel.LightLinkerPanel.OnLeftTreeSelChanged" title="Link to this definition">¶</a></dt>
+<dd><p>Select those items in the right list to show the relationship with
+those the user has selected in the left list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.lightLinkerPanel.LightLinkerPanel.OnRightTreeSelChanged">
+<span class="sig-name descname"><span class="pre">OnRightTreeSelChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/lightLinkerPanel.html#LightLinkerPanel.OnRightTreeSelChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.lightLinkerPanel.LightLinkerPanel.OnRightTreeSelChanged" title="Link to this definition">¶</a></dt>
+<dd><p>Set relationship with those items selected in the left list with those
+the user has selected in the right list.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.mainFrame">
+<span id="pandaeditor-ui-mainframe-module"></span><h2>pandaEditor.ui.mainFrame module<a class="headerlink" href="#module-pandaEditor.ui.mainFrame" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.mainFrame.</span></span><span class="sig-name descname"><span class="pre">MainFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>Panda Editor user interface.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildAuiManager">
+<span class="sig-name descname"><span class="pre">BuildAuiManager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildAuiManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildAuiManager" title="Link to this definition">¶</a></dt>
+<dd><p>Define the behaviour for each aui manager panel, then add them to the
+manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildCreateMenu">
+<span class="sig-name descname"><span class="pre">BuildCreateMenu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildCreateMenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildCreateMenu" title="Link to this definition">¶</a></dt>
+<dd><p>Build the create menu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildEditActions">
+<span class="sig-name descname"><span class="pre">BuildEditActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildEditActions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildEditActions" title="Link to this definition">¶</a></dt>
+<dd><p>Add tools, set long help strings and bind toolbar events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildFileActions">
+<span class="sig-name descname"><span class="pre">BuildFileActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildFileActions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildFileActions" title="Link to this definition">¶</a></dt>
+<dd><p>Add tools, set long help strings and bind toolbar events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildLayoutActions">
+<span class="sig-name descname"><span class="pre">BuildLayoutActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildLayoutActions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildLayoutActions" title="Link to this definition">¶</a></dt>
+<dd><p>Add tools, set long help strings and bind toolbar events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildMenuBar">
+<span class="sig-name descname"><span class="pre">BuildMenuBar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildMenuBar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildMenuBar" title="Link to this definition">¶</a></dt>
+<dd><p>Build the menu bar and attach all menus to it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildModifyActions">
+<span class="sig-name descname"><span class="pre">BuildModifyActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildModifyActions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildModifyActions" title="Link to this definition">¶</a></dt>
+<dd><p>Add tools, set long help strings and bind toolbar events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildViewMenu">
+<span class="sig-name descname"><span class="pre">BuildViewMenu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildViewMenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildViewMenu" title="Link to this definition">¶</a></dt>
+<dd><p>Build the view menu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildWindowMenu">
+<span class="sig-name descname"><span class="pre">BuildWindowMenu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildWindowMenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildWindowMenu" title="Link to this definition">¶</a></dt>
+<dd><p>Build show / hide controls for panes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.BuildXformActions">
+<span class="sig-name descname"><span class="pre">BuildXformActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.BuildXformActions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.BuildXformActions" title="Link to this definition">¶</a></dt>
+<dd><p>Add tools, set long help strings and bind toolbar events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnClose">
+<span class="sig-name descname"><span class="pre">OnClose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnClose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnClose" title="Link to this definition">¶</a></dt>
+<dd><p>Save frame and aui preferences, hide the window and quit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnCreateActor">
+<span class="sig-name descname"><span class="pre">OnCreateActor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnCreateActor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnCreateActor" title="Link to this definition">¶</a></dt>
+<dd><p>Turn the selection into actors. This is still a massive hack - we need
+a more concise way of storing this information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnCreateCgShader">
+<span class="sig-name descname"><span class="pre">OnCreateCgShader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnCreateCgShader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnCreateCgShader" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnCreateGlslShader">
+<span class="sig-name descname"><span class="pre">OnCreateGlslShader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnCreateGlslShader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnCreateGlslShader" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnEngagePhysics">
+<span class="sig-name descname"><span class="pre">OnEngagePhysics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnEngagePhysics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnEngagePhysics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileBuildProject">
+<span class="sig-name descname"><span class="pre">OnFileBuildProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileBuildProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileBuildProject" title="Link to this definition">¶</a></dt>
+<dd><p>Build the current project to a p3d file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileImport">
+<span class="sig-name descname"><span class="pre">OnFileImport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileImport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileImport" title="Link to this definition">¶</a></dt>
+<dd><p>Import assets to project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileNew">
+<span class="sig-name descname"><span class="pre">OnFileNew</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileNew"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileNew" title="Link to this definition">¶</a></dt>
+<dd><p>Show project settings panel and create new scene.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileNewProject">
+<span class="sig-name descname"><span class="pre">OnFileNewProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileNewProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileNewProject" title="Link to this definition">¶</a></dt>
+<dd><p>Build project directory and set project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileOpen">
+<span class="sig-name descname"><span class="pre">OnFileOpen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileOpen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileOpen" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new document and load the scene.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileSave">
+<span class="sig-name descname"><span class="pre">OnFileSave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveAs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileSave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileSave" title="Link to this definition">¶</a></dt>
+<dd><p>Save the document.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileSaveAs">
+<span class="sig-name descname"><span class="pre">OnFileSaveAs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileSaveAs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileSaveAs" title="Link to this definition">¶</a></dt>
+<dd><p>Call save using the saveAs flag in order to bring up a new dialog box
+so the user may set an alternate save path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnFileSetProject">
+<span class="sig-name descname"><span class="pre">OnFileSetProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnFileSetProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnFileSetProject" title="Link to this definition">¶</a></dt>
+<dd><p>Set the active project directory path and rebuild the resources panel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnLayout">
+<span class="sig-name descname"><span class="pre">OnLayout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnLayout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnLayout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnMove">
+<span class="sig-name descname"><span class="pre">OnMove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnMove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnMove" title="Link to this definition">¶</a></dt>
+<dd><p>Keep the window’s position on hand before it gets maximized as this is
+the number we need to save to preferences.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnShowHidePane">
+<span class="sig-name descname"><span class="pre">OnShowHidePane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnShowHidePane"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnShowHidePane" title="Link to this definition">¶</a></dt>
+<dd><p>Show or hide the pane based on the menu item that was (un)checked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnShowPreferences">
+<span class="sig-name descname"><span class="pre">OnShowPreferences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnShowPreferences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnShowPreferences" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnSize">
+<span class="sig-name descname"><span class="pre">OnSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnSize" title="Link to this definition">¶</a></dt>
+<dd><p>Keep the window’s size on hand before it gets maximized as this is the
+number we need to save to preferences.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Change the appearance and states of buttons on the form based on the
+state of the loaded document.</p>
+<p>NOTE: Don’t use freeze / thaw as this will cause the 3D viewport to
+flicker.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateEdit">
+<span class="sig-name descname"><span class="pre">OnUpdateEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateEdit" title="Link to this definition">¶</a></dt>
+<dd><p>Update the edit menu. Disable undo or redo queus if they are empty
+and make sure to refresh the toolbar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateFile">
+<span class="sig-name descname"><span class="pre">OnUpdateFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateFile" title="Link to this definition">¶</a></dt>
+<dd><p>Update the file menu. Disable all menu and toolbar items then turn
+those back on depending on the document’s state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateModify">
+<span class="sig-name descname"><span class="pre">OnUpdateModify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateModify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateModify" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateProject">
+<span class="sig-name descname"><span class="pre">OnUpdateProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateProject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateView">
+<span class="sig-name descname"><span class="pre">OnUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateView" title="Link to this definition">¶</a></dt>
+<dd><p>Update the view menu. Ensure the grid menu item’s checked state
+matches the visibility of the grid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateWindowMenu">
+<span class="sig-name descname"><span class="pre">OnUpdateWindowMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateWindowMenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateWindowMenu" title="Link to this definition">¶</a></dt>
+<dd><p>Set the checks in the window menu to match the visibility of the
+panes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnUpdateXform">
+<span class="sig-name descname"><span class="pre">OnUpdateXform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnUpdateXform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnUpdateXform" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnViewCamera">
+<span class="sig-name descname"><span class="pre">OnViewCamera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw_pitch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnViewCamera"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnViewCamera" title="Link to this definition">¶</a></dt>
+<dd><p>Orbit camera top or bottom by manipulating delta values
+See p3d.camera.Orbit for more</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnViewGrid">
+<span class="sig-name descname"><span class="pre">OnViewGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnViewGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnViewGrid" title="Link to this definition">¶</a></dt>
+<dd><p>Show or hide the grid based on the checked value of the menu item.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.OnXformSetActiveGizmo">
+<span class="sig-name descname"><span class="pre">OnXformSetActiveGizmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.OnXformSetActiveGizmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.OnXformSetActiveGizmo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.RebuildPanelMenu">
+<span class="sig-name descname"><span class="pre">RebuildPanelMenu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.RebuildPanelMenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.RebuildPanelMenu" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.SetProjectPath">
+<span class="sig-name descname"><span class="pre">SetProjectPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirPath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.SetProjectPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.SetProjectPath" title="Link to this definition">¶</a></dt>
+<dd><p>Set the project path and rebuild the resources panel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.on_create">
+<span class="sig-name descname"><span class="pre">on_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.on_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.on_create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.on_create_prefab">
+<span class="sig-name descname"><span class="pre">on_create_prefab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.on_create_prefab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.on_create_prefab" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new prefab for the selected object in the prefab directory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.mainFrame.MainFrame.on_update_create">
+<span class="sig-name descname"><span class="pre">on_update_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/mainFrame.html#MainFrame.on_update_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.mainFrame.MainFrame.on_update_create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.preferenceseditor">
+<span id="pandaeditor-ui-preferenceseditor-module"></span><h2>pandaEditor.ui.preferenceseditor module<a class="headerlink" href="#module-pandaEditor.ui.preferenceseditor" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.preferenceseditor.GeneralPage">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.preferenceseditor.</span></span><span class="sig-name descname"><span class="pre">GeneralPage</span></span><a class="reference internal" href="_modules/pandaEditor/ui/preferenceseditor.html#GeneralPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.preferenceseditor.GeneralPage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StockPreferencesPage</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.preferenceseditor.GeneralPage.CreateWindow">
+<span class="sig-name descname"><span class="pre">CreateWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Window</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/preferenceseditor.html#GeneralPage.CreateWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.preferenceseditor.GeneralPage.CreateWindow" title="Link to this definition">¶</a></dt>
+<dd><p>Create a window for this page.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.preferenceseditor.PreferencesEditor">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.preferenceseditor.</span></span><span class="sig-name descname"><span class="pre">PreferencesEditor</span></span><a class="reference internal" href="_modules/pandaEditor/ui/preferenceseditor.html#PreferencesEditor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.preferenceseditor.PreferencesEditor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PreferencesEditor</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.projectSettingsPanel">
+<span id="pandaeditor-ui-projectsettingspanel-module"></span><h2>pandaEditor.ui.projectSettingsPanel module<a class="headerlink" href="#module-pandaEditor.ui.projectSettingsPanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.projectSettingsPanel.ProjectSettingsPanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.projectSettingsPanel.</span></span><span class="sig-name descname"><span class="pre">ProjectSettingsPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/projectSettingsPanel.html#ProjectSettingsPanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.projectSettingsPanel.ProjectSettingsPanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.properties">
+<span id="pandaeditor-ui-properties-module"></span><h2>pandaEditor.ui.properties module<a class="headerlink" href="#module-pandaEditor.ui.properties" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">BaseComponentProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#BaseComponentProperty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.DropItemMixin" title="pandaEditor.ui.properties.DropItemMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DropItemMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PGProperty</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty.ChildChanged">
+<span class="sig-name descname"><span class="pre">ChildChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thisValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">childIndex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">childValue</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGVariant</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#BaseComponentProperty.ChildChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty.ChildChanged" title="Link to this definition">¶</a></dt>
+<dd><p>Called after value of a child property has been altered.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty.GetValue">
+<span class="sig-name descname"><span class="pre">GetValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGVariant</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#BaseComponentProperty.GetValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty.GetValue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns property’s value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty.RefreshChildren">
+<span class="sig-name descname"><span class="pre">RefreshChildren</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#BaseComponentProperty.RefreshChildren"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty.RefreshChildren" title="Link to this definition">¶</a></dt>
+<dd><p>Refresh values of child properties.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.BaseComponentProperty.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandaEditor.ui.properties.BaseComponentProperty.value_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionProperty">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">ConnectionProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionProperty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionProperty" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.DropItemMixin" title="pandaEditor.ui.properties.DropItemMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DropItemMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">StringProperty</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionProperty.GetValue">
+<span class="sig-name descname"><span class="pre">GetValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGVariant</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionProperty.GetValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionProperty.GetValue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns property’s value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionProperty.ValueToString">
+<span class="sig-name descname"><span class="pre">ValueToString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionProperty.ValueToString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionProperty.ValueToString" title="Link to this definition">¶</a></dt>
+<dd><p>Converts property value into a text representation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionProperty.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionProperty.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionProperty.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionProperty.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionProperty.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionProperty.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionPropertyEditor">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">ConnectionPropertyEditor</span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionPropertyEditor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionPropertyEditor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PGEditor</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionPropertyEditor.CreateControls">
+<span class="sig-name descname"><span class="pre">CreateControls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">propgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGWindowList</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionPropertyEditor.CreateControls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionPropertyEditor.CreateControls" title="Link to this definition">¶</a></dt>
+<dd><p>Instantiates editor controls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionPropertyEditor.OnEvent">
+<span class="sig-name descname"><span class="pre">OnEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">propgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wnd_primary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionPropertyEditor.OnEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionPropertyEditor.OnEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Handles events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionPropertyEditor.UpdateControl">
+<span class="sig-name descname"><span class="pre">UpdateControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionPropertyEditor.UpdateControl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionPropertyEditor.UpdateControl" title="Link to this definition">¶</a></dt>
+<dd><p>Loads value from property to the control.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsProperty">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">ConnectionsProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsProperty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsProperty" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.DropItemMixin" title="pandaEditor.ui.properties.DropItemMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DropItemMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">StringProperty</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsProperty.GetValue">
+<span class="sig-name descname"><span class="pre">GetValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGVariant</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsProperty.GetValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsProperty.GetValue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns property’s value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsProperty.ValueToString">
+<span class="sig-name descname"><span class="pre">ValueToString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsProperty.ValueToString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsProperty.ValueToString" title="Link to this definition">¶</a></dt>
+<dd><p>Converts property value into a text representation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsProperty.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsProperty.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsProperty.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsProperty.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsProperty.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsProperty.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsPropertyEditor">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">ConnectionsPropertyEditor</span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsPropertyEditor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsPropertyEditor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PGEditor</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsPropertyEditor.CreateControls">
+<span class="sig-name descname"><span class="pre">CreateControls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">propgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PGWindowList</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsPropertyEditor.CreateControls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsPropertyEditor.CreateControls" title="Link to this definition">¶</a></dt>
+<dd><p>Instantiates editor controls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsPropertyEditor.OnEvent">
+<span class="sig-name descname"><span class="pre">OnEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">propgrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wnd_primary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsPropertyEditor.OnEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsPropertyEditor.OnEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Handles events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.ConnectionsPropertyEditor.UpdateControl">
+<span class="sig-name descname"><span class="pre">UpdateControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#ConnectionsPropertyEditor.UpdateControl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.ConnectionsPropertyEditor.UpdateControl" title="Link to this definition">¶</a></dt>
+<dd><p>Loads value from property to the control.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.DataWrapper">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">DataWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#DataWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.DataWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.DropItemMixin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">DropItemMixin</span></span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#DropItemMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.DropItemMixin" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.DropItemMixin.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#DropItemMixin.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.DropItemMixin.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.DropItemMixin.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#DropItemMixin.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.DropItemMixin.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.DropItemMixin.post_changed_event">
+<span class="sig-name descname"><span class="pre">post_changed_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#DropItemMixin.post_changed_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.DropItemMixin.post_changed_event" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.FilenameProperty">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">FilenameProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#FilenameProperty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.FilenameProperty" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StringProperty</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point2Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Point2Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Point2Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Point2Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point2Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Point2Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point2Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Point2Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LPoint2f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point3Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Point3Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Point3Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Point3Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point3Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y',</span> <span class="pre">'Z']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Point3Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point3Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Point3Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LPoint3f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point4Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Point4Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Point4Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Point4Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point4Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y',</span> <span class="pre">'Z',</span> <span class="pre">'W']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Point4Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Point4Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Point4Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LPoint4f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec2Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Vec2Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Vec2Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Vec2Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec2Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Vec2Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec2Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Vec2Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LVecBase2f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec3Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Vec3Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Vec3Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Vec3Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec3Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y',</span> <span class="pre">'Z']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Vec3Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec3Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Vec3Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LVecBase3f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec4Property">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.properties.</span></span><span class="sig-name descname"><span class="pre">Vec4Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/properties.html#Vec4Property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.properties.Vec4Property" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.properties.BaseComponentProperty" title="pandaEditor.ui.properties.BaseComponentProperty"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseComponentProperty</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec4Property.components">
+<span class="sig-name descname"><span class="pre">components</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X',</span> <span class="pre">'Y',</span> <span class="pre">'Z',</span> <span class="pre">'W']</span></em><a class="headerlink" href="#pandaEditor.ui.properties.Vec4Property.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.ui.properties.Vec4Property.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#pandaEditor.ui.properties.Vec4Property.value_type" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LVecBase4f</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.propertiesPanel">
+<span id="pandaeditor-ui-propertiespanel-module"></span><h2>pandaEditor.ui.propertiesPanel module<a class="headerlink" href="#module-pandaEditor.ui.propertiesPanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.propertiesPanel.</span></span><span class="sig-name descname"><span class="pre">PropertiesPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.BuildPropertyGrid">
+<span class="sig-name descname"><span class="pre">BuildPropertyGrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.BuildPropertyGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.BuildPropertyGrid" title="Link to this definition">¶</a></dt>
+<dd><p>Build the properties for the grid based on the contents of nps.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.OnPgChanged">
+<span class="sig-name descname"><span class="pre">OnPgChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.OnPgChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnPgChanged" title="Link to this definition">¶</a></dt>
+<dd><p>Set the node path or node’s property using the value the user entered
+into the grid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.OnSelectionModified">
+<span class="sig-name descname"><span class="pre">OnSelectionModified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.OnSelectionModified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnSelectionModified" title="Link to this definition">¶</a></dt>
+<dd><p>Update the position, rotation and scale properties during the
+transform operation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_collapsed">
+<span class="sig-name descname"><span class="pre">on_item_collapsed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.on_item_collapsed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_collapsed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_expanded">
+<span class="sig-name descname"><span class="pre">on_item_expanded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertiesPanel.on_item_expanded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertiesPanel.on_item_expanded" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertyGrid">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.propertiesPanel.</span></span><span class="sig-name descname"><span class="pre">PropertyGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertyGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertyGrid" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PropertyGrid</span></code></p>
+<p>Unfortunately I’ve had to override some of the basic methods of the
+property grid in order to overcome what seems like an odd limitation /
+feature. When calling GetProperty() the grid sends back the base class
+PGProperty, not the actual class that was used when we initially called
+Append(). This seems odd to me as then none of the overridden methods used
+in custom properties will work…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertyGrid.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertyGrid.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertyGrid.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.propertiesPanel.PropertyGrid.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/propertiesPanel.html#PropertyGrid.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.propertiesPanel.PropertyGrid.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.resourcesPanel">
+<span id="pandaeditor-ui-resourcespanel-module"></span><h2>pandaEditor.ui.resourcesPanel module<a class="headerlink" href="#module-pandaEditor.ui.resourcesPanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.resourcesPanel.</span></span><span class="sig-name descname"><span class="pre">ResourcesPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.Build">
+<span class="sig-name descname"><span class="pre">Build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projDirPath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.Build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.Build" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnDeleteFile">
+<span class="sig-name descname"><span class="pre">OnDeleteFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnDeleteFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnDeleteFile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnLeftDClick">
+<span class="sig-name descname"><span class="pre">OnLeftDClick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnLeftDClick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnLeftDClick" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnMiddleDown">
+<span class="sig-name descname"><span class="pre">OnMiddleDown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnMiddleDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnMiddleDown" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnOpenFile">
+<span class="sig-name descname"><span class="pre">OnOpenFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnOpenFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnOpenFile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightDown">
+<span class="sig-name descname"><span class="pre">OnRightDown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnRightDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightDown" title="Link to this definition">¶</a></dt>
+<dd><p>This method does nothing. Oddly enough, <em>not</em> binding RightDown seems
+to affect RightUp’s behaviour, and we only trap half the mouse up
+events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightUp">
+<span class="sig-name descname"><span class="pre">OnRightUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnRightUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightUp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnTreeEndLabelEdit">
+<span class="sig-name descname"><span class="pre">OnTreeEndLabelEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnTreeEndLabelEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnTreeEndLabelEdit" title="Link to this definition">¶</a></dt>
+<dd><p>Change the name of the asset in the system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_paths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Rebuild the directory tree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.resourcesPanel.ResourcesPanel.on_copy_path">
+<span class="sig-name descname"><span class="pre">on_copy_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/resourcesPanel.html#ResourcesPanel.on_copy_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.resourcesPanel.ResourcesPanel.on_copy_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.sceneGraphBasePanel">
+<span id="pandaeditor-ui-scenegraphbasepanel-module"></span><h2>pandaEditor.ui.sceneGraphBasePanel module<a class="headerlink" href="#module-pandaEditor.ui.sceneGraphBasePanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.sceneGraphBasePanel.</span></span><span class="sig-name descname"><span class="pre">SceneGraphBasePanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.AddItem">
+<span class="sig-name descname"><span class="pre">AddItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.AddItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.AddItem" title="Link to this definition">¶</a></dt>
+<dd><p>Traverse the scene from the root node, creating tree items for each
+component encountered.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetDroppedObject">
+<span class="sig-name descname"><span class="pre">GetDroppedObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.GetDroppedObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetDroppedObject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetItemsDictionary">
+<span class="sig-name descname"><span class="pre">GetItemsDictionary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.GetItemsDictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetItemsDictionary" title="Link to this definition">¶</a></dt>
+<dd><p>Return a dictionary mapping the scene’s components to the item that
+represents them in the tree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetValidSelections">
+<span class="sig-name descname"><span class="pre">GetValidSelections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.GetValidSelections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.GetValidSelections" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of selected items, making sure that they are valid by
+using IsOk() and are not the root item.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnFlatMenuSelected">
+<span class="sig-name descname"><span class="pre">OnFlatMenuSelected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnFlatMenuSelected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnFlatMenuSelected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnLeftDClick">
+<span class="sig-name descname"><span class="pre">OnLeftDClick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnLeftDClick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnLeftDClick" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnMiddleDown">
+<span class="sig-name descname"><span class="pre">OnMiddleDown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnMiddleDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnMiddleDown" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeBeginLabelEdit">
+<span class="sig-name descname"><span class="pre">OnTreeBeginLabelEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnTreeBeginLabelEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeBeginLabelEdit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeEndLabelEdit">
+<span class="sig-name descname"><span class="pre">OnTreeEndLabelEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnTreeEndLabelEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnTreeEndLabelEdit" title="Link to this definition">¶</a></dt>
+<dd><p>Change the component’s name to that of the new item’s name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Update the contents of the TreeCtrl to reflect the contents of the
+scene. If comps is not None, it will contain only the components
+which have changed. This means we don’t have to do a full rebuild of
+the tree which can be time consuming.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.Rebuild">
+<span class="sig-name descname"><span class="pre">Rebuild</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.Rebuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.Rebuild" title="Link to this definition">¶</a></dt>
+<dd><p>Do a complete rebuild of the scene graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RefreshItem">
+<span class="sig-name descname"><span class="pre">RefreshItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.RefreshItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RefreshItem" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RemoveItem">
+<span class="sig-name descname"><span class="pre">RemoveItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.RemoveItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.RemoveItem" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SelectItems">
+<span class="sig-name descname"><span class="pre">SelectItems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.SelectItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SelectItems" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over list and hilight them. Make sure the TreeCtrl is open at
+the last item the user selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SetExpandedState">
+<span class="sig-name descname"><span class="pre">SetExpandedState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldItems</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newItems</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.SetExpandedState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.SetExpandedState" title="Link to this definition">¶</a></dt>
+<dd><p>Set item expanded states back.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.UpdateItemData">
+<span class="sig-name descname"><span class="pre">UpdateItemData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphBasePanel.html#SceneGraphBasePanel.UpdateItemData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel.UpdateItemData" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.sceneGraphPanel">
+<span id="pandaeditor-ui-scenegraphpanel-module"></span><h2>pandaEditor.ui.sceneGraphPanel module<a class="headerlink" href="#module-pandaEditor.ui.sceneGraphPanel" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.sceneGraphPanel.</span></span><span class="sig-name descname"><span class="pre">SceneGraphPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel" title="pandaEditor.ui.sceneGraphBasePanel.SceneGraphBasePanel"><code class="xref py py-class docutils literal notranslate"><span class="pre">SceneGraphBasePanel</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.OnTreeSelChanged">
+<span class="sig-name descname"><span class="pre">OnTreeSelChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.OnTreeSelChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.OnTreeSelChanged" title="Link to this definition">¶</a></dt>
+<dd><p>Tree item selection handler. If the selection of the tree changes,
+tell the app to select those components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.OnUpdate">
+<span class="sig-name descname"><span class="pre">OnUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.OnUpdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.OnUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Update the TreeCtrl then hilight those items whose components are
+selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_right_up">
+<span class="sig-name descname"><span class="pre">on_right_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.on_right_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_right_up" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_sort_children">
+<span class="sig-name descname"><span class="pre">on_sort_children</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/sceneGraphPanel.html#SceneGraphPanel.on_sort_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.sceneGraphPanel.SceneGraphPanel.on_sort_children" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui.viewport">
+<span id="pandaeditor-ui-viewport-module"></span><h2>pandaEditor.ui.viewport module<a class="headerlink" href="#module-pandaEditor.ui.viewport" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.ui.viewport.</span></span><span class="sig-name descname"><span class="pre">Viewport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Viewport</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.add_model">
+<span class="sig-name descname"><span class="pre">add_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.add_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.add_model" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.add_particles">
+<span class="sig-name descname"><span class="pre">add_particles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.add_particles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.add_particles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.add_prefab">
+<span class="sig-name descname"><span class="pre">add_prefab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.add_prefab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.add_prefab" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.add_texture">
+<span class="sig-name descname"><span class="pre">add_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.add_texture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.add_texture" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.drag_drop_validate">
+<span class="sig-name descname"><span class="pre">drag_drop_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.drag_drop_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.drag_drop_validate" title="Link to this definition">¶</a></dt>
+<dd><p>Accept strings (assets from the resources panel) or components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.get_drop_component">
+<span class="sig-name descname"><span class="pre">get_drop_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.get_drop_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.get_drop_component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.on_connect">
+<span class="sig-name descname"><span class="pre">on_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.on_connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.on_connect" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.on_drop">
+<span class="sig-name descname"><span class="pre">on_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.on_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.on_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.ui.viewport.Viewport.screen_to_viewport">
+<span class="sig-name descname"><span class="pre">screen_to_viewport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/ui/viewport.html#Viewport.screen_to_viewport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.ui.viewport.Viewport.screen_to_viewport" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.ui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pandaEditor.ui" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pandaEditor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pandaEditor.html">pandaEditor package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pandaEditor</a><ul>
+  <li><a href="pandaEditor.html">pandaEditor package</a><ul>
+      <li>Previous: <a href="pandaEditor.tests.html" title="previous chapter">pandaEditor.tests package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/pandaEditor.ui.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.nodes.nodepath &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.nodes.nodepath</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.directtools.DirectSelection</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirectBoundingBox</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor</span><span class="w"> </span><span class="kn">import</span> <span class="n">commands</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.attributes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Attribute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.nodes.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">TAG_MODEL_ROOT_CHILD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.game.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_lower_camel_case</span><span class="p">,</span> <span class="n">get_unique_name</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandaEditor.nodes.constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TAG_BBOX</span><span class="p">,</span> <span class="n">TAG_IGNORE</span><span class="p">,</span> <span class="n">TAG_MODIFIED</span><span class="p">,</span> <span class="n">TAG_PICKABLE</span>
+<span class="p">)</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="NodePath">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NodePath</span><span class="p">:</span>
+    
+    <span class="n">geo</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">pickable</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">serialise_descendants</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">Attribute</span><span class="p">(</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">Vec3</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">get_pos</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">set_pos</span><span class="p">,</span>
+        <span class="n">serialise</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">rotation</span> <span class="o">=</span> <span class="n">Attribute</span><span class="p">(</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">Vec3</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">get_hpr</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">set_hpr</span><span class="p">,</span>
+        <span class="n">serialise</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">Attribute</span><span class="p">(</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">Vec3</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">get_scale</span><span class="p">,</span>
+        <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="o">.</span><span class="n">set_scale</span><span class="p">,</span>
+        <span class="n">serialise</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<div class="viewcode-block" id="NodePath.get_default_values">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.get_default_values">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_values</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">default_values</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_default_values</span><span class="p">()</span>
+        <span class="n">default_values</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">get_lower_camel_case</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="n">default_values</span></div>
+
+
+<div class="viewcode-block" id="NodePath.get_foo">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.get_foo">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_foo</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">foo</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_foo</span><span class="p">()</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">foo</span></div>
+
+
+<div class="viewcode-block" id="NodePath.create">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.create">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Commenting this out for the moment - the scene serialiser</span>
+        <span class="c1"># can just ignore nodes there so not sure why we need to go</span>
+        <span class="c1"># to the effort of tagging everything.</span>
+        <span class="c1"># Mark all nodes below this one so as to not serialise them.</span>
+        <span class="c1"># if not cls.serialise_descendants:</span>
+        <span class="c1">#     for child in comp.data.find_all_matches(&#39;**/*&#39;):</span>
+        <span class="c1">#         child.set_python_tag(TAG_MODEL_ROOT_CHILD, True)</span>
+
+        <span class="c1"># Copy any helper geo to the new instance.</span>
+        <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="n">geo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Mark as pickable unless this node is under a model root.</span>
+        <span class="k">if</span> <span class="n">comp</span><span class="o">.</span><span class="n">pickable</span> <span class="ow">and</span> <span class="s1">&#39;path&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_PICKABLE</span><span class="p">,</span> <span class="n">comp</span><span class="o">.</span><span class="n">pickable</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">comp</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">children</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of wrappers for the children of this NodePath, ignoring</span>
+<span class="sd">        those NodePaths tagged with TAG_IGNORE (like editor only geometry).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">comp</span>
+            <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">children</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">comp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_python_tag</span><span class="p">(</span><span class="n">TAG_IGNORE</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_python_tag</span><span class="p">(</span><span class="n">TAG_MODIFIED</span><span class="p">)</span>
+
+    <span class="nd">@modified</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_python_tag</span><span class="p">(</span><span class="n">TAG_MODEL_ROOT_CHILD</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_MODIFIED</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">savable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_python_tag</span><span class="p">(</span><span class="n">TAG_MODEL_ROOT_CHILD</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        
+<div class="viewcode-block" id="NodePath.set_editor_geometry">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.set_editor_geometry">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_editor_geometry</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">geo</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the indicated geometry to be used as a proxy for the NodePath. </span>
+<span class="sd">        Tag all descendant NodePaths with the ignore tag so they don&#39;t show up</span>
+<span class="sd">        in the scene graph and cannot be selected.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">geo</span><span class="o">.</span><span class="n">find_all_matches</span><span class="p">(</span><span class="s1">&#39;**&#39;</span><span class="p">):</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_IGNORE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">geo</span><span class="o">.</span><span class="n">set_light_off</span><span class="p">()</span>
+        <span class="n">geo</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">adjust_draw_mask</span><span class="p">(</span><span class="o">*</span><span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">GetEditorRenderMasks</span><span class="p">())</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">geo</span> <span class="o">=</span> <span class="n">geo</span></div>
+
+            
+<div class="viewcode-block" id="NodePath.on_select">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.on_select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a bounding box to the indicated node.&quot;&quot;&quot;</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">DirectBoundingBox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">bbox</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">bbox</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_IGNORE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">bbox</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">adjust_draw_mask</span><span class="p">(</span><span class="o">*</span><span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">GetEditorRenderMasks</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_BBOX</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bbox</span></div>
+
+    
+<div class="viewcode-block" id="NodePath.on_deselect">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.on_deselect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_deselect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove the bounding box from the indicated node.&quot;&quot;&quot;</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_python_tag</span><span class="p">(</span><span class="n">TAG_BBOX</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bbox</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">remove_node</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clear_python_tag</span><span class="p">(</span><span class="n">TAG_BBOX</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="NodePath.on_delete">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.on_delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">np</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+    
+<div class="viewcode-block" id="NodePath.get_path">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.get_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">model_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find_net_python_tag</span><span class="p">(</span><span class="n">TAG_PICKABLE</span><span class="p">)</span>
+        
+        <span class="k">def</span><span class="w"> </span><span class="nf">Rec</span><span class="p">(</span><span class="n">tgtNp</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">compare_to</span><span class="p">(</span><span class="n">tgtNp</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+                <span class="n">Rec</span><span class="p">(</span><span class="n">tgtNp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(),</span> <span class="n">path</span><span class="p">)</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">Rec</span><span class="p">(</span><span class="n">model_root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="NodePath.get_attrib">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.get_attrib">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_attrib</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If this node is a child of a model root, make sure to add its position</span>
+<span class="sd">        in the hierarchy to the attrib dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attrib</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_attrib</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified</span><span class="p">:</span>
+            <span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">attrib</span></div>
+
+    
+<div class="viewcode-block" id="NodePath.validate_drag_drop">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.validate_drag_drop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_drag_drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dragComps</span><span class="p">,</span> <span class="n">dropComp</span><span class="p">):</span>
+        <span class="n">dragNps</span> <span class="o">=</span> <span class="p">[</span><span class="n">dragComp</span> <span class="k">for</span> <span class="n">dragComp</span> <span class="ow">in</span> <span class="n">dragComps</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dragComp</span><span class="p">)</span> <span class="o">==</span> <span class="n">pc</span><span class="o">.</span><span class="n">NodePath</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dragNps</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># If the drop item is none then the drop item will default to the</span>
+        <span class="c1"># root node. No other checks necessary.</span>
+        <span class="k">if</span> <span class="n">dropComp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+            
+        <span class="c1"># Fail if the drop item is one of the items being dragged</span>
+        <span class="c1">#dropNp = dropItem.GetData()</span>
+        <span class="k">if</span> <span class="n">dropComp</span> <span class="ow">in</span> <span class="n">dragComps</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># Fail if the drag items are ancestors of the drop items</span>
+        <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="p">[</span><span class="n">comp</span><span class="o">.</span><span class="n">isAncestorOf</span><span class="p">(</span><span class="n">dropComp</span><span class="p">)</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="n">dragComps</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># Drop target item is ok, continue</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+            
+<div class="viewcode-block" id="NodePath.is_of_type">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.is_of_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_of_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="o">.</span><span class="n">is_of_type</span><span class="p">(</span><span class="n">cType</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="NodePath.find_child">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.find_child">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_child</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="c1"># TODO: This is pretty dirty. We need to tag a sub-model child</span>
+        <span class="c1"># on load or else we might lose an edit.</span>
+        <span class="n">np</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">NodePath</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">set_python_tag</span><span class="p">(</span><span class="n">TAG_MODIFIED</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NodePath.duplicate">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.duplicate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">duplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">dupe_np</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_parent</span><span class="p">())</span>
+
+        <span class="c1"># Make sure the duplicated NodePath has a unique name to all its</span>
+        <span class="c1"># siblings.</span>
+        <span class="k">if</span> <span class="n">make_unique</span><span class="p">:</span>
+            <span class="n">sibling_names</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">sib</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">sib</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">children</span>
+            <span class="p">]</span>
+            <span class="n">unique_name</span> <span class="o">=</span> <span class="n">get_unique_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span> <span class="n">sibling_names</span><span class="p">)</span>
+            <span class="n">dupe_np</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">unique_name</span><span class="p">)</span>
+        <span class="n">dupe</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dupe_np</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fix_up_duplicate_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dupe</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">node_manager</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dupe_np</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NodePath.fix_up_duplicate_hierarchy">
+<a class="viewcode-back" href="../../../pandaEditor.nodes.html#pandaEditor.nodes.nodepath.NodePath.fix_up_duplicate_hierarchy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fix_up_duplicate_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig</span><span class="p">,</span> <span class="n">dupe</span><span class="p">):</span>
+
+        <span class="c1"># Connect the duplicated node in a similar fashion to the original node.</span>
+        <span class="n">conns</span> <span class="o">=</span> <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_outgoing_connections</span><span class="p">(</span><span class="n">orig</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">conn_name</span> <span class="ow">in</span> <span class="n">conns</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">conn_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">):</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dupe</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;cant do that yet&#39;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fix_up_duplicate_hierarchy</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">dupe</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

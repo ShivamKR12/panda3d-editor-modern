@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.gizmos.translation &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.gizmos.translation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">panda3d.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.directtools.DirectUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROUND_TO</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">commonUtils</span> <span class="k">as</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">cone</span><span class="p">,</span> <span class="n">Square</span><span class="p">,</span> <span class="n">Line</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.axis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+
+<div class="viewcode-block" id="Translation">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Translation</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_snp</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_snpAmt</span> <span class="o">=</span> <span class="mf">0.5</span>
+        
+        <span class="c1"># Create x, y, z and camera normal axes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CreateArrow</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">RED</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CreateArrow</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">GREEN</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CreateArrow</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">BLUE</span><span class="p">))</span>
+        <span class="c1">#self.axes.append(self.CreateArrow(pm.Vec3(1, 1, 0), YELLOW))</span>
+        <span class="c1">#self.axes.append(self.CreateArrow(pm.Vec3(-2, 1, 0), TEAL))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CreateSquare</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">TEAL</span><span class="p">))</span>
+        
+<div class="viewcode-block" id="Translation.CreateArrow">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.CreateArrow">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CreateArrow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec</span><span class="p">,</span> <span class="n">colour</span><span class="p">):</span>
+        
+        <span class="c1"># Create the geometry and collision</span>
+        <span class="n">vec</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">Line</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">vec</span><span class="p">))</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">cone</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">vec</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="n">vec</span> <span class="o">*</span> <span class="mf">0.125</span><span class="p">))</span>
+        <span class="n">collTube</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">CollisionCapsule</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">pm</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+        
+        <span class="c1"># Create the axis, add the geometry and collision</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">Axis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">vec</span><span class="p">,</span> <span class="n">colour</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">AddGeometry</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">sizeStyle</span><span class="o">=</span><span class="n">SCALE</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">AddGeometry</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">vec</span><span class="p">,</span> <span class="n">colour</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">AddCollisionSolid</span><span class="p">(</span><span class="n">collTube</span><span class="p">,</span> <span class="n">sizeStyle</span><span class="o">=</span><span class="n">TRANSLATE_POINT_B</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">reparentTo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">axis</span></div>
+
+    
+<div class="viewcode-block" id="Translation.CreateSquare">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.CreateSquare">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CreateSquare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec</span><span class="p">,</span> <span class="n">colour</span><span class="p">):</span>
+        
+        <span class="c1"># Create the geometry and collision</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">square</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NodePath</span><span class="p">(</span><span class="n">Square</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="o">.</span><span class="n">setBillboardPointEye</span><span class="p">()</span>
+        <span class="n">collSphere</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">CollisionSphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">)</span>
+        
+        <span class="c1"># Create the axis, add the geometry and collision</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">Axis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">CAMERA_VECTOR</span><span class="p">,</span> <span class="n">colour</span><span class="p">,</span> <span class="n">planar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">AddGeometry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="p">,</span> <span class="n">sizeStyle</span><span class="o">=</span><span class="n">NONE</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">AddCollisionSolid</span><span class="p">(</span><span class="n">collSphere</span><span class="p">,</span> <span class="n">sizeStyle</span><span class="o">=</span><span class="n">NONE</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">reparentTo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">axis</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_Snap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vec</span><span class="o">.</span><span class="n">length</span><span class="p">():</span>
+            <span class="n">snpLen</span> <span class="o">=</span> <span class="n">ROUND_TO</span><span class="p">(</span><span class="n">vec</span><span class="o">.</span><span class="n">length</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snpAmt</span><span class="p">)</span>
+            <span class="n">snapVec</span> <span class="o">=</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">vec</span><span class="o">.</span><span class="n">length</span><span class="p">()</span> <span class="o">*</span> <span class="n">snpLen</span>
+            <span class="k">return</span> <span class="n">snapVec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Translation.Transform">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.Transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetSelectedAxis</span><span class="p">()</span>
+        <span class="n">axisPoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAxisPoint</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate delta and snapping.</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">axisPoint</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastAxisPoint</span>
+        <span class="n">lastSnap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Snap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_s</span> <span class="o">+=</span> <span class="n">d</span>
+        <span class="n">thisSnap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Snap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snp</span><span class="p">:</span>
+            
+            <span class="c1"># If snapping in planar mode or using the camera axis, snap to a</span>
+            <span class="c1"># point on the ground plane.</span>
+            <span class="k">if</span> <span class="n">axis</span><span class="o">.</span><span class="n">vector</span> <span class="o">==</span> <span class="n">CAMERA_VECTOR</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">planar</span><span class="p">:</span>
+                <span class="n">pnt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMousePlaneCollisionPoint</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
+                                                        <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">pnt</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">SnapPoint</span><span class="p">(</span><span class="n">pnt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snpAmt</span><span class="p">)</span>
+                
+                <span class="bp">self</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">pnt</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">:</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">pnt</span><span class="p">)</span>
+                    
+                <span class="k">return</span>
+                
+            <span class="c1"># If snapping in world space, construct a plane where the mouse</span>
+            <span class="c1"># clicked the axis and move all NodePaths so they intersect it.</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span><span class="p">:</span>
+                <span class="n">pnt</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">SnapPoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">startAxisPoint</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snpAmt</span><span class="p">)</span>
+                <span class="n">pl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Plane</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="n">pnt</span><span class="p">))</span>
+                
+                <span class="bp">self</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getPos</span><span class="p">(</span><span class="n">render</span><span class="p">)))</span>
+                <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">:</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">getPos</span><span class="p">(</span><span class="n">render</span><span class="p">)))</span>
+                    
+                <span class="k">return</span>
+            
+            <span class="c1"># Gone over the snap threshold - set the delta to the snap amount.</span>
+            <span class="k">elif</span> <span class="n">thisSnap</span><span class="o">.</span><span class="n">compareTo</span><span class="p">(</span><span class="n">lastSnap</span><span class="p">,</span> <span class="n">TOL</span><span class="p">):</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+                <span class="n">d</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_snpAmt</span>
+                
+                <span class="c1"># BUG - need to resize to compensate for cam dist?</span>
+                
+            <span class="c1"># In snapping mode but haven&#39;t gone past the snap threshold.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRelativeVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMat</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Mat4</span><span class="p">()</span><span class="o">.</span><span class="n">translateMat</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMat</span><span class="p">())</span>
+        
+        <span class="c1"># Adjust the size of delta by the gizmo size to get real world units.</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ScalePoint</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getScale</span><span class="p">())</span>
+        
+        <span class="c1"># Hack for fixing camera vector xforming in local mode.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">and</span> <span class="n">axis</span><span class="o">.</span><span class="n">vector</span> <span class="o">==</span> <span class="n">CAMERA_VECTOR</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="o">.</span><span class="n">getRelativeVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ScalePoint</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getScale</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Xform attached NodePaths.</span>
+        <span class="k">for</span> <span class="n">np</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attachedNps</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">and</span> <span class="n">axis</span><span class="o">.</span><span class="n">vector</span> <span class="o">!=</span> <span class="n">CAMERA_VECTOR</span><span class="p">:</span>
+                <span class="n">sclD</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ScalePoint</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">getScale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">setMat</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Mat4</span><span class="p">()</span><span class="o">.</span><span class="n">translateMat</span><span class="p">(</span><span class="n">sclD</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">getMat</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">setMat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">getMat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rootNp</span><span class="p">)</span> <span class="o">*</span> 
+                           <span class="n">pm</span><span class="o">.</span><span class="n">Mat4</span><span class="p">()</span><span class="o">.</span><span class="n">translateMat</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastAxisPoint</span> <span class="o">=</span> <span class="n">axisPoint</span></div>
+
+        
+<div class="viewcode-block" id="Translation.OnNodeMouse1Down">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.OnNodeMouse1Down">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnNodeMouse1Down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">planar</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">OnNodeMouse1Down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">planar</span><span class="p">,</span> <span class="n">collEntry</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1"># If in planar mode, clear the billboard effect on the center square</span>
+        <span class="c1"># and make it face the selected axis</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetSelectedAxis</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">planar</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">axis</span><span class="o">.</span><span class="n">planar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="o">.</span><span class="n">clearBillboard</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="o">.</span><span class="n">lookAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">Point3</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">vector</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="o">.</span><span class="n">setHpr</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">square</span><span class="o">.</span><span class="n">setBillboardPointEye</span><span class="p">()</span></div>
+
+            
+<div class="viewcode-block" id="Translation.OnMouse2Down">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.OnMouse2Down">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnMouse2Down</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">OnMouse2Down</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_s</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Translation.AcceptEvents">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.AcceptEvents">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">AcceptEvents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">AcceptEvents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetSnap</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="s1">&#39;x-up&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetSnap</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">])</span></div>
+
+        
+<div class="viewcode-block" id="Translation.SetSnap">
+<a class="viewcode-back" href="../../../pandaEditor.gizmos.html#pandaEditor.gizmos.translation.Translation.SetSnap">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetSnap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_snp</span> <span class="o">=</span> <span class="n">val</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

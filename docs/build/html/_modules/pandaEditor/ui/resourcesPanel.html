@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandaEditor.ui.resourcesPanel &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pandaEditor.ui.resourcesPanel</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyperclip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wx.lib.agw.customtreectrl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">p3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">wxPanda</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">pub</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">wxExtra</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirTreeCtrl</span><span class="p">,</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">wxutils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">direct.showbase.PythonUtil</span><span class="w"> </span><span class="kn">import</span> <span class="n">getBase</span> <span class="k">as</span> <span class="n">get_base</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ResourcesPanel">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResourcesPanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Bind project file events</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">,</span> <span class="s1">&#39;projectFilesAdded&#39;</span><span class="p">)</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnUpdate</span><span class="p">,</span> <span class="s1">&#39;projectFilesRemoved&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Build sizers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetSizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResourcesPanel.Build">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.Build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">projDirPath</span><span class="p">):</span>
+
+        <span class="c1"># Clear all widgets from the sizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Clear</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">projDirPath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">projDirPath</span><span class="p">):</span>
+
+            <span class="c1"># Build tree control and add it to the sizer</span>
+            <span class="n">style</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ct</span><span class="o">.</span><span class="n">TR_EDIT_LABELS</span> <span class="o">|</span>
+                <span class="n">ct</span><span class="o">.</span><span class="n">TR_FULL_ROW_HIGHLIGHT</span> <span class="o">|</span>
+                <span class="n">ct</span><span class="o">.</span><span class="n">TR_HAS_BUTTONS</span> <span class="o">|</span>
+                <span class="n">ct</span><span class="o">.</span><span class="n">TR_MULTIPLE</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span> <span class="o">=</span> <span class="n">DirTreeCtrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">agwStyle</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">SetRootDir</span><span class="p">(</span><span class="n">projDirPath</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Expand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetRootItem</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_KEY_UP</span><span class="p">,</span> <span class="n">wxPanda</span><span class="o">.</span><span class="n">OnKeyUp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_KEY_DOWN</span><span class="p">,</span> <span class="n">wxPanda</span><span class="o">.</span><span class="n">OnKeyDown</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_LEFT_UP</span><span class="p">,</span> <span class="n">wxPanda</span><span class="o">.</span><span class="n">OnLeftUp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_RIGHT_UP</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnRightUp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MIDDLE_DOWN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMiddleDown</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_LEFT_DCLICK</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnLeftDClick</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_TREE_END_LABEL_EDIT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnTreeEndLabelEdit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># Build and display &quot;project not set&quot; warning</span>
+            <span class="n">tc</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">StaticText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Project directory not set&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_CENTER</span><span class="p">)</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">GetFont</span><span class="p">()</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">SetWeight</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">FONTWEIGHT_BOLD</span><span class="p">)</span>
+            <span class="n">tc</span><span class="o">.</span><span class="n">SetFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">AddSpacer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs1</span><span class="o">.</span><span class="n">Layout</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnRightDown">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightDown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnRightDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method does nothing. Oddly enough, *not* binding RightDown seems</span>
+<span class="sd">        to affect RightUp&#39;s behaviour, and we only trap half the mouse up</span>
+<span class="sd">        events.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnRightUp">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnRightUp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnRightUp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="c1"># Get the item under the mouse - bail if the item is not ok</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">wxutils</span><span class="o">.</span><span class="n">get_clicked_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="p">,</span> <span class="n">evt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">item</span><span class="o">.</span><span class="n">IsOk</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="n">menu</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Menu</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="p">{</span>
+            <span class="s1">&#39;Copy Path&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_copy_path</span><span class="p">,</span>
+            <span class="s1">&#39;Open in Explorer&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnOpenFile</span><span class="p">,</span>
+            <span class="s1">&#39;Delete File&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnDeleteFile</span><span class="p">,</span>
+        <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">m_item</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span><span class="n">menu</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">NewId</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">m_item</span><span class="p">)</span>
+            <span class="n">wxutils</span><span class="o">.</span><span class="n">IdBind</span><span class="p">(</span><span class="n">menu</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="n">m_item</span><span class="o">.</span><span class="n">GetId</span><span class="p">(),</span> <span class="n">fn</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PopupMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">)</span>
+        <span class="n">menu</span><span class="o">.</span><span class="n">Destroy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnOpenFile">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnOpenFile">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnOpenFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;nt&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;explorer /select, </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;posix&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;xdg-open &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">),</span>
+            <span class="s1">&#39;os2&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;open &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">systems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">startfile</span><span class="p">)(</span><span class="n">file_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnDeleteFile">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnDeleteFile">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnDeleteFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Are you sure you want to delete the selected item(s)?&#39;</span>
+        <span class="k">if</span> <span class="n">wxutils</span><span class="o">.</span><span class="n">YesNoDialog</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s1">&#39;Delete File&#39;</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">ICON_WARNING</span><span class="p">)</span> <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_NO</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Deleted file: </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+        <span class="c1"># TODO: We know we altered the file system so force-refresh.</span>
+
+<div class="viewcode-block" id="ResourcesPanel.on_copy_path">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.on_copy_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_copy_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnMiddleDown">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnMiddleDown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnMiddleDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="c1"># Get the item under the mouse - bail if the item is not ok.</span>
+        <span class="n">item_id</span> <span class="o">=</span> <span class="n">wxutils</span><span class="o">.</span><span class="n">get_clicked_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="p">,</span> <span class="n">evt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">item_id</span><span class="o">.</span><span class="n">IsOk</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Select it and start drag and drop operations.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">SelectItem</span><span class="p">(</span><span class="n">item_id</span><span class="p">)</span>
+        <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">drag_drop_manager</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">item_id</span><span class="p">)]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ResourcesPanel.OnLeftDClick">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnLeftDClick">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnLeftDClick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+
+        <span class="c1"># Load items</span>
+        <span class="n">itemId</span> <span class="o">=</span> <span class="n">wxutils</span><span class="o">.</span><span class="n">get_clicked_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="p">,</span> <span class="n">evt</span><span class="p">)</span>
+        <span class="n">filePath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">itemId</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemText</span><span class="p">(</span><span class="n">itemId</span><span class="p">)))[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.xml&#39;</span><span class="p">:</span>
+            <span class="n">get_base</span><span class="p">()</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">OnFileOpen</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">filePath</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.py&#39;</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">startfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="ResourcesPanel.OnTreeEndLabelEdit">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnTreeEndLabelEdit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnTreeEndLabelEdit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the name of the asset in the system.&quot;&quot;&quot;</span>
+        <span class="c1"># Bail if no valid label is entered</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetLabel</span><span class="p">():</span>
+            <span class="n">evt</span><span class="o">.</span><span class="n">Veto</span><span class="p">()</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># Construct new file path and rename</span>
+        <span class="n">oldPath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemPath</span><span class="p">(</span><span class="n">evt</span><span class="o">.</span><span class="n">GetItem</span><span class="p">())</span>
+        <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">oldPath</span><span class="p">)</span>
+        <span class="n">newPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">evt</span><span class="o">.</span><span class="n">GetLabel</span><span class="p">())</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">oldPath</span><span class="p">,</span> <span class="n">newPath</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="ResourcesPanel.OnUpdate">
+<a class="viewcode-back" href="../../../pandaEditor.ui.html#pandaEditor.ui.resourcesPanel.ResourcesPanel.OnUpdate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OnUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rebuild the directory tree.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Freeze</span><span class="p">()</span>
+        
+        <span class="k">def</span><span class="w"> </span><span class="nf">GetExpandedDict</span><span class="p">():</span>
+            
+            <span class="c1"># Return a dictionary mapping each node path to its tree item.</span>
+            <span class="n">expDict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetAllItems</span><span class="p">():</span>
+                <span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemData</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">expDict</span><span class="p">[</span><span class="nb">dir</span><span class="o">.</span><span class="n">directory</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">IsExpanded</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">expDict</span>
+        
+        <span class="c1"># Get map of directory paths to items and expanded states before </span>
+        <span class="c1"># updating</span>
+        <span class="n">oldItems</span> <span class="o">=</span> <span class="n">GetExpandedDict</span><span class="p">()</span>
+        
+        <span class="c1"># Rebuild the tree control</span>
+        <span class="n">rootItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetRootItem</span><span class="p">()</span>
+        <span class="n">rootDirPath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">GetItemData</span><span class="p">(</span><span class="n">rootItem</span><span class="p">)</span><span class="o">.</span><span class="n">directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">_loadDir</span><span class="p">(</span><span class="n">rootItem</span><span class="p">,</span> <span class="n">rootDirPath</span><span class="p">)</span>
+        
+        <span class="c1"># Get map of directory paths to items and expanded states after </span>
+        <span class="c1"># updating</span>
+        <span class="n">newItems</span> <span class="o">=</span> <span class="n">GetExpandedDict</span><span class="p">()</span>
+        
+        <span class="c1"># Set the expanded states back</span>
+        <span class="k">for</span> <span class="n">dirPath</span><span class="p">,</span> <span class="n">grp</span> <span class="ow">in</span> <span class="n">oldItems</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">oldItem</span><span class="p">,</span> <span class="n">oldExp</span> <span class="o">=</span> <span class="n">grp</span>
+            <span class="k">if</span> <span class="n">dirPath</span> <span class="ow">in</span> <span class="n">newItems</span> <span class="ow">and</span> <span class="n">oldExp</span><span class="p">:</span>
+                <span class="n">newItem</span><span class="p">,</span> <span class="n">newExp</span> <span class="o">=</span> <span class="n">newItems</span><span class="p">[</span><span class="n">dirPath</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Expand</span><span class="p">(</span><span class="n">newItem</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtc</span><span class="o">.</span><span class="n">Thaw</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pandaEditor</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

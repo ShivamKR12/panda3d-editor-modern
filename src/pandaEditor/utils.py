@@ -34,7 +34,7 @@ def popen_and_call(OnExit, printStdout, *popenArgs, **popenKWArgs):
 
     Use it exactly the way you'd normally use subprocess.Popen, except include 
     q callable to execute as the first argument. onExit is a callable object, 
-    and *popenArgs and **popenKWArgs are simply passed up to subprocess.Popen.
+    and *popenArgs* and **popenKWArgs** are simply passed up to subprocess.Popen.
 
     """
     def run_in_thread(OnExit, printStdout, popenArgs, popenKWArgs):

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandaEditor.nodes package &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pandaEditor.nodes.tests package" href="pandaEditor.nodes.tests.html" />
+    <link rel="prev" title="pandaEditor.gizmos package" href="pandaEditor.gizmos.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pandaeditor-nodes-package">
+<h1>pandaEditor.nodes package<a class="headerlink" href="#pandaeditor-nodes-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pandaEditor.nodes.tests.html">pandaEditor.nodes.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.test_bullet">pandaEditor.nodes.tests.test_bullet module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletBoxShape"><code class="docutils literal notranslate"><span class="pre">TestBulletBoxShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletBoxShape.component"><code class="docutils literal notranslate"><span class="pre">TestBulletBoxShape.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletBoxShape.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestBulletBoxShape.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletCapsuleShape"><code class="docutils literal notranslate"><span class="pre">TestBulletCapsuleShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletCapsuleShape.component"><code class="docutils literal notranslate"><span class="pre">TestBulletCapsuleShape.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletCapsuleShape.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestBulletCapsuleShape.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletDebugNode"><code class="docutils literal notranslate"><span class="pre">TestBulletDebugNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletDebugNode.component"><code class="docutils literal notranslate"><span class="pre">TestBulletDebugNode.component</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletPlaneShape"><code class="docutils literal notranslate"><span class="pre">TestBulletPlaneShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletPlaneShape.component"><code class="docutils literal notranslate"><span class="pre">TestBulletPlaneShape.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletPlaneShape.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestBulletPlaneShape.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletRigidBodyNode"><code class="docutils literal notranslate"><span class="pre">TestBulletRigidBodyNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletRigidBodyNode.component"><code class="docutils literal notranslate"><span class="pre">TestBulletRigidBodyNode.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletRigidBodyNode.test_append_shape"><code class="docutils literal notranslate"><span class="pre">TestBulletRigidBodyNode.test_append_shape()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletRigidBodyNode.test_remove_solid"><code class="docutils literal notranslate"><span class="pre">TestBulletRigidBodyNode.test_remove_solid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletSphereShape"><code class="docutils literal notranslate"><span class="pre">TestBulletSphereShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletSphereShape.component"><code class="docutils literal notranslate"><span class="pre">TestBulletSphereShape.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletSphereShape.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestBulletSphereShape.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld.component"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld.test_append_rigid_body"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld.test_append_rigid_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld.test_create"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld.test_create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld.test_remove_rigid_body"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld.test_remove_rigid_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_bullet.TestBulletWorld.test_set_debug_node"><code class="docutils literal notranslate"><span class="pre">TestBulletWorld.test_set_debug_node()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.test_collision">pandaEditor.nodes.tests.test_collision module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionBox"><code class="docutils literal notranslate"><span class="pre">TestCollisionBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionBox.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionBox.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionBox.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestCollisionBox.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionCapsule"><code class="docutils literal notranslate"><span class="pre">TestCollisionCapsule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionCapsule.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionCapsule.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionCapsule.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestCollisionCapsule.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionInvSphere"><code class="docutils literal notranslate"><span class="pre">TestCollisionInvSphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionInvSphere.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionInvSphere.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionInvSphere.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestCollisionInvSphere.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionNode"><code class="docutils literal notranslate"><span class="pre">TestCollisionNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionNode.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionNode.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionNode.test_append_solid"><code class="docutils literal notranslate"><span class="pre">TestCollisionNode.test_append_solid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionNode.test_remove_solid"><code class="docutils literal notranslate"><span class="pre">TestCollisionNode.test_remove_solid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionRay"><code class="docutils literal notranslate"><span class="pre">TestCollisionRay</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionRay.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionRay.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionRay.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestCollisionRay.create_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionSphere"><code class="docutils literal notranslate"><span class="pre">TestCollisionSphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionSphere.component"><code class="docutils literal notranslate"><span class="pre">TestCollisionSphere.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_collision.TestCollisionSphere.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestCollisionSphere.create_kwargs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.test_lights">pandaEditor.nodes.tests.test_lights module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestAmbientLight"><code class="docutils literal notranslate"><span class="pre">TestAmbientLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestAmbientLight.component"><code class="docutils literal notranslate"><span class="pre">TestAmbientLight.component</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestDirectionalLight"><code class="docutils literal notranslate"><span class="pre">TestDirectionalLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestDirectionalLight.component"><code class="docutils literal notranslate"><span class="pre">TestDirectionalLight.component</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestLightMixin"><code class="docutils literal notranslate"><span class="pre">TestLightMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestLightMixin.component"><code class="docutils literal notranslate"><span class="pre">TestLightMixin.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestLightMixin.test_create"><code class="docutils literal notranslate"><span class="pre">TestLightMixin.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestPointLight"><code class="docutils literal notranslate"><span class="pre">TestPointLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestPointLight.component"><code class="docutils literal notranslate"><span class="pre">TestPointLight.component</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestSpotlight"><code class="docutils literal notranslate"><span class="pre">TestSpotlight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_lights.TestSpotlight.component"><code class="docutils literal notranslate"><span class="pre">TestSpotlight.component</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.test_nodepath">pandaEditor.nodes.tests.test_nodepath module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.create_kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_append_light"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_append_light()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_clear_fog"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_clear_fog()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_create"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_remove_light"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_remove_light()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_set_fog"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_set_fog()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_nodepath.TestNodePathMixin.test_set_name"><code class="docutils literal notranslate"><span class="pre">TestNodePathMixin.test_set_name()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.test_showbasedefaults">pandaEditor.nodes.tests.test_showbasedefaults module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestAspect2d"><code class="docutils literal notranslate"><span class="pre">TestAspect2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestAspect2d.component"><code class="docutils literal notranslate"><span class="pre">TestAspect2d.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestAspect2d.test_create"><code class="docutils literal notranslate"><span class="pre">TestAspect2d.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCam"><code class="docutils literal notranslate"><span class="pre">TestBaseCam</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCam.component"><code class="docutils literal notranslate"><span class="pre">TestBaseCam.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCam.test_create"><code class="docutils literal notranslate"><span class="pre">TestBaseCam.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCamera"><code class="docutils literal notranslate"><span class="pre">TestBaseCamera</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCamera.component"><code class="docutils literal notranslate"><span class="pre">TestBaseCamera.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestBaseCamera.test_create"><code class="docutils literal notranslate"><span class="pre">TestBaseCamera.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCam2d"><code class="docutils literal notranslate"><span class="pre">TestCam2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCam2d.component"><code class="docutils literal notranslate"><span class="pre">TestCam2d.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCam2d.test_create"><code class="docutils literal notranslate"><span class="pre">TestCam2d.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCamera2d"><code class="docutils literal notranslate"><span class="pre">TestCamera2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCamera2d.component"><code class="docutils literal notranslate"><span class="pre">TestCamera2d.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestCamera2d.test_create"><code class="docutils literal notranslate"><span class="pre">TestCamera2d.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestPixel2d"><code class="docutils literal notranslate"><span class="pre">TestPixel2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestPixel2d.component"><code class="docutils literal notranslate"><span class="pre">TestPixel2d.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestPixel2d.test_create"><code class="docutils literal notranslate"><span class="pre">TestPixel2d.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender"><code class="docutils literal notranslate"><span class="pre">TestRender</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender.component"><code class="docutils literal notranslate"><span class="pre">TestRender.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender.test_create"><code class="docutils literal notranslate"><span class="pre">TestRender.test_create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender2d"><code class="docutils literal notranslate"><span class="pre">TestRender2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender2d.component"><code class="docutils literal notranslate"><span class="pre">TestRender2d.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.test_showbasedefaults.TestRender2d.test_create"><code class="docutils literal notranslate"><span class="pre">TestRender2d.test_create()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.testbasemixin">pandaEditor.nodes.tests.testbasemixin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testbasemixin.TestBaseMixin"><code class="docutils literal notranslate"><span class="pre">TestBaseMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testbasemixin.TestBaseMixin.component"><code class="docutils literal notranslate"><span class="pre">TestBaseMixin.component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testbasemixin.TestBaseMixin.create_kwargs"><code class="docutils literal notranslate"><span class="pre">TestBaseMixin.create_kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testbasemixin.TestBaseMixin.test_create"><code class="docutils literal notranslate"><span class="pre">TestBaseMixin.test_create()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests.testmixin">pandaEditor.nodes.tests.testmixin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testmixin.TestMixin"><code class="docutils literal notranslate"><span class="pre">TestMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testmixin.TestMixin.setUp"><code class="docutils literal notranslate"><span class="pre">TestMixin.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.nodes.tests.html#pandaEditor.nodes.tests.testmixin.TestMixin.tearDown"><code class="docutils literal notranslate"><span class="pre">TestMixin.tearDown()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.nodes.tests.html#module-pandaEditor.nodes.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.nodes.actor">
+<span id="pandaeditor-nodes-actor-module"></span><h2>pandaEditor.nodes.actor module<a class="headerlink" href="#module-pandaEditor.nodes.actor" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.actor.Actor">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.actor.</span></span><span class="sig-name descname"><span class="pre">Actor</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/actor.html#Actor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.actor.Actor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.actor.Actor.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/actor.html#Actor.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.actor.Actor.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.actor.Actor.duplicate">
+<span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/actor.html#Actor.duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.actor.Actor.duplicate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.attributes">
+<span id="pandaeditor-nodes-attributes-module"></span><h2>pandaEditor.nodes.attributes module<a class="headerlink" href="#module-pandaEditor.nodes.attributes" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.attributes.Connection">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.attributes.</span></span><span class="sig-name descname"><span class="pre">Connection</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/attributes.html#Connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.attributes.Connection" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.attributes.Connection.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/attributes.html#Connection.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.attributes.Connection.clear" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.base">
+<span id="pandaeditor-nodes-base-module"></span><h2>pandaEditor.nodes.base module<a class="headerlink" href="#module-pandaEditor.nodes.base" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.base.</span></span><span class="sig-name descname"><span class="pre">Base</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.attributes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.connections">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connections</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.connections" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.default_parent">
+<em class="property"><span class="k"><span class="pre">abstract</span></span><span class="w"> </span><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_parent</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.default_parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#pandaEditor.nodes.base.Base.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.duplicate">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.duplicate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.fix_up_duplicate_hierarchy">
+<span class="sig-name descname"><span class="pre">fix_up_duplicate_hierarchy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dupe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.fix_up_duplicate_hierarchy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.fix_up_duplicate_hierarchy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.get_attrib">
+<span class="sig-name descname"><span class="pre">get_attrib</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.get_attrib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.get_attrib" title="Link to this definition">¶</a></dt>
+<dd><p>Return a dictionary with bare minimum data for a component - its type
+and id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.get_default_values">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.get_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.get_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.get_foo">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_foo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.get_foo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.get_foo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.get_possible_connections">
+<span class="sig-name descname"><span class="pre">get_possible_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.get_possible_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.get_possible_connections" title="Link to this definition">¶</a></dt>
+<dd><p>Return a dict of connections that can be made with the given
+components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.is_of_type">
+<span class="sig-name descname"><span class="pre">is_of_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.is_of_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.is_of_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.label">
+<em class="property"><span class="k"><span class="pre">abstract</span></span><span class="w"> </span><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.label" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.modified">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.modified" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.on_deselect">
+<span class="sig-name descname"><span class="pre">on_deselect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.on_deselect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.on_deselect" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.on_select">
+<span class="sig-name descname"><span class="pre">on_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.on_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.on_select" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.savable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">savable</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.savable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.set_default_values">
+<span class="sig-name descname"><span class="pre">set_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.set_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.set_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.sibling_index">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sibling_index</span></span><a class="headerlink" href="#pandaEditor.nodes.base.Base.sibling_index" title="Link to this definition">¶</a></dt>
+<dd><p>Return the position of of this wrapper’s component amongst its sibling
+components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.base.Base.validate_drag_drop">
+<span class="sig-name descname"><span class="pre">validate_drag_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dragComp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropComp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/base.html#Base.validate_drag_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.base.Base.validate_drag_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.bullet">
+<span id="pandaeditor-nodes-bullet-module"></span><h2>pandaEditor.nodes.bullet module<a class="headerlink" href="#module-pandaEditor.nodes.bullet" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletBoxShape">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletBoxShape</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletBoxShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletBoxShape" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletBoxShape.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'halfExtents':</span> <span class="pre">LVector3f(0.5,</span> <span class="pre">0.5,</span> <span class="pre">0.5)}</span></em><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletBoxShape.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletCapsuleShape">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletCapsuleShape</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletCapsuleShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletCapsuleShape" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletCapsuleShape.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletCapsuleShape.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletCapsuleShape.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletCapsuleShape.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'height':</span> <span class="pre">1,</span> <span class="pre">'radius':</span> <span class="pre">0.5,</span> <span class="pre">'up':</span> <span class="pre">2}</span></em><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletCapsuleShape.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletDebugNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletDebugNode</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletDebugNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletDebugNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletDebugNode.set_default_values">
+<span class="sig-name descname"><span class="pre">set_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletDebugNode.set_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletDebugNode.set_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletDebugNode.show_wireframe">
+<span class="sig-name descname"><span class="pre">show_wireframe</span></span><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletDebugNode.show_wireframe" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletPlaneShape">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletPlaneShape</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletPlaneShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletPlaneShape" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletPlaneShape.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletPlaneShape.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletPlaneShape.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletPlaneShape.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'normal':</span> <span class="pre">LVector3f(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">'point':</span> <span class="pre">LVector3f(0,</span> <span class="pre">0,</span> <span class="pre">0)}</span></em><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletPlaneShape.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletRigidBodyNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletRigidBodyNode</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletRigidBodyNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletRigidBodyNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletRigidBodyNode.debug_enabled">
+<span class="sig-name descname"><span class="pre">debug_enabled</span></span><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletRigidBodyNode.debug_enabled" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletRigidBodyNode.num_shapes">
+<span class="sig-name descname"><span class="pre">num_shapes</span></span><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletRigidBodyNode.num_shapes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletRigidBodyNode.set_default_values">
+<span class="sig-name descname"><span class="pre">set_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletRigidBodyNode.set_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletRigidBodyNode.set_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletSphereShape">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletSphereShape</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletSphereShape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletSphereShape" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletSphereShape.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'radius':</span> <span class="pre">0.5}</span></em><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletSphereShape.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletWorld">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">BulletWorld</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletWorld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletWorld" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletWorld.num_rigid_bodies">
+<span class="sig-name descname"><span class="pre">num_rigid_bodies</span></span><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletWorld.num_rigid_bodies" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.BulletWorld.set_default_values">
+<span class="sig-name descname"><span class="pre">set_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#BulletWorld.set_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.BulletWorld.set_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.get_wireframe">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">get_wireframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#get_wireframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.get_wireframe" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.nodes.bullet.set_wireframe">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.bullet.</span></span><span class="sig-name descname"><span class="pre">set_wireframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/bullet.html#set_wireframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.bullet.set_wireframe" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.collision">
+<span id="pandaeditor-nodes-collision-module"></span><h2>pandaEditor.nodes.collision module<a class="headerlink" href="#module-pandaEditor.nodes.collision" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionBox">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionBox</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionBox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionBox" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionBox.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'max':</span> <span class="pre">LPoint3f(0.5,</span> <span class="pre">0.5,</span> <span class="pre">0.5),</span> <span class="pre">'min':</span> <span class="pre">LPoint3f(-0.5,</span> <span class="pre">-0.5,</span> <span class="pre">-0.5)}</span></em><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionBox.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionCapsule">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionCapsule</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionCapsule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionCapsule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionCapsule.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'a':</span> <span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">'db':</span> <span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">'radius':</span> <span class="pre">0.5}</span></em><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionCapsule.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionInvSphere">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionInvSphere</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionInvSphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionInvSphere" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionInvSphere.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'center':</span> <span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">'radius':</span> <span class="pre">0.5}</span></em><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionInvSphere.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionNode</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionNode.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionNode.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionNode.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionNode.num_solids">
+<span class="sig-name descname"><span class="pre">num_solids</span></span><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionNode.num_solids" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionRay">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionRay</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionRay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionRay" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionRay.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'direction':</span> <span class="pre">LVector3f(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">'origin':</span> <span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0)}</span></em><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionRay.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionSphere">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.collision.</span></span><span class="sig-name descname"><span class="pre">CollisionSphere</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/collision.html#CollisionSphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionSphere" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.collision.CollisionSphere.default_values">
+<span class="sig-name descname"><span class="pre">default_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'center':</span> <span class="pre">LPoint3f(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">'radius':</span> <span class="pre">0.5}</span></em><a class="headerlink" href="#pandaEditor.nodes.collision.CollisionSphere.default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.constants">
+<span id="pandaeditor-nodes-constants-module"></span><h2>pandaEditor.nodes.constants module<a class="headerlink" href="#module-pandaEditor.nodes.constants" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.nodes.lensnode">
+<span id="pandaeditor-nodes-lensnode-module"></span><h2>pandaEditor.nodes.lensnode module<a class="headerlink" href="#module-pandaEditor.nodes.lensnode" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lensnode.LensNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.lensnode.</span></span><span class="sig-name descname"><span class="pre">LensNode</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/lensnode.html#LensNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lensnode.LensNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lensnode.LensNode.on_select">
+<span class="sig-name descname"><span class="pre">on_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/lensnode.html#LensNode.on_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lensnode.LensNode.on_select" title="Link to this definition">¶</a></dt>
+<dd><p>Selection handler. Make sure to disable the frustum if it was shown
+before running the select handler as the frustum will change the size
+of the bounding box.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lensnode.LensNode.show_frustrum">
+<span class="sig-name descname"><span class="pre">show_frustrum</span></span><a class="headerlink" href="#pandaEditor.nodes.lensnode.LensNode.show_frustrum" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lensnode.get_frustrum">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.lensnode.</span></span><span class="sig-name descname"><span class="pre">get_frustrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/lensnode.html#get_frustrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lensnode.get_frustrum" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if the lens node’s frustum is visible, False otherwise.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lensnode.set_frustrum">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.lensnode.</span></span><span class="sig-name descname"><span class="pre">set_frustrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/lensnode.html#set_frustrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lensnode.set_frustrum" title="Link to this definition">¶</a></dt>
+<dd><p>Set the camera’s frustum to be visible. Ensure it is tagged for removal
+and also so it doesn’t appear in any of the scene graph panels.</p>
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.lights">
+<span id="pandaeditor-nodes-lights-module"></span><h2>pandaEditor.nodes.lights module<a class="headerlink" href="#module-pandaEditor.nodes.lights" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lights.Light">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.lights.</span></span><span class="sig-name descname"><span class="pre">Light</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/lights.html#Light"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lights.Light" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.lights.Light.set_default_values">
+<span class="sig-name descname"><span class="pre">set_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/lights.html#Light.set_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.lights.Light.set_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.manager">
+<span id="pandaeditor-nodes-manager-module"></span><h2>pandaEditor.nodes.manager module<a class="headerlink" href="#module-pandaEditor.nodes.manager" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.manager.Manager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.manager.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/manager.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.manager.Manager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager" title="pandaEditor.game.nodes.manager.Manager"><code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.manager.Manager.get_common_wrapper">
+<span class="sig-name descname"><span class="pre">get_common_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/manager.html#Manager.get_common_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.manager.Manager.get_common_wrapper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.manager.Manager.get_default_wrapper">
+<span class="sig-name descname"><span class="pre">get_default_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/manager.html#Manager.get_default_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.manager.Manager.get_default_wrapper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.modelroot">
+<span id="pandaeditor-nodes-modelroot-module"></span><h2>pandaEditor.nodes.modelroot module<a class="headerlink" href="#module-pandaEditor.nodes.modelroot" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.modelroot.ModelRoot">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.modelroot.</span></span><span class="sig-name descname"><span class="pre">ModelRoot</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/modelroot.html#ModelRoot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.modelroot.ModelRoot" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.modelroot.ModelRoot.fullpath">
+<span class="sig-name descname"><span class="pre">fullpath</span></span><a class="headerlink" href="#pandaEditor.nodes.modelroot.ModelRoot.fullpath" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.modelroot.ModelRoot.serialise_descendants">
+<span class="sig-name descname"><span class="pre">serialise_descendants</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandaEditor.nodes.modelroot.ModelRoot.serialise_descendants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.nodepath">
+<span id="pandaeditor-nodes-nodepath-module"></span><h2>pandaEditor.nodes.nodepath module<a class="headerlink" href="#module-pandaEditor.nodes.nodepath" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.nodepath.</span></span><span class="sig-name descname"><span class="pre">NodePath</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.children">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.children" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of wrappers for the children of this NodePath, ignoring
+those NodePaths tagged with TAG_IGNORE (like editor only geometry).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.default_parent">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_parent</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.default_parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.duplicate">
+<span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">make_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.duplicate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.find_child">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_child</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.find_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.find_child" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.fix_up_duplicate_hierarchy">
+<span class="sig-name descname"><span class="pre">fix_up_duplicate_hierarchy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dupe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.fix_up_duplicate_hierarchy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.fix_up_duplicate_hierarchy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.geo">
+<span class="sig-name descname"><span class="pre">geo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.geo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.get_attrib">
+<span class="sig-name descname"><span class="pre">get_attrib</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.get_attrib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.get_attrib" title="Link to this definition">¶</a></dt>
+<dd><p>If this node is a child of a model root, make sure to add its position
+in the hierarchy to the attrib dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.get_default_values">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.get_default_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.get_default_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.get_foo">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_foo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.get_foo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.get_foo" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.get_path">
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.get_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.is_of_type">
+<span class="sig-name descname"><span class="pre">is_of_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.is_of_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.is_of_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.label">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.label" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.modified">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.modified" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.on_delete">
+<span class="sig-name descname"><span class="pre">on_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.on_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.on_delete" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.on_deselect">
+<span class="sig-name descname"><span class="pre">on_deselect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.on_deselect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.on_deselect" title="Link to this definition">¶</a></dt>
+<dd><p>Remove the bounding box from the indicated node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.on_select">
+<span class="sig-name descname"><span class="pre">on_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.on_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.on_select" title="Link to this definition">¶</a></dt>
+<dd><p>Add a bounding box to the indicated node.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.pickable">
+<span class="sig-name descname"><span class="pre">pickable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.pickable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.position">
+<span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.position" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.rotation">
+<span class="sig-name descname"><span class="pre">rotation</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.rotation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.savable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">savable</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.savable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.scale">
+<span class="sig-name descname"><span class="pre">scale</span></span><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.scale" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.serialise_descendants">
+<span class="sig-name descname"><span class="pre">serialise_descendants</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.serialise_descendants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.set_editor_geometry">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_editor_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.set_editor_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.set_editor_geometry" title="Link to this definition">¶</a></dt>
+<dd><p>Set the indicated geometry to be used as a proxy for the NodePath.
+Tag all descendant NodePaths with the ignore tag so they don’t show up
+in the scene graph and cannot be selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nodepath.NodePath.validate_drag_drop">
+<span class="sig-name descname"><span class="pre">validate_drag_drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dragComps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropComp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nodepath.html#NodePath.validate_drag_drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nodepath.NodePath.validate_drag_drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.nongraphobject">
+<span id="pandaeditor-nodes-nongraphobject-module"></span><h2>pandaEditor.nodes.nongraphobject module<a class="headerlink" href="#module-pandaEditor.nodes.nongraphobject" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nongraphobject.NonGraphObject">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.nongraphobject.</span></span><span class="sig-name descname"><span class="pre">NonGraphObject</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/nongraphobject.html#NonGraphObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nongraphobject.NonGraphObject" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nongraphobject.NonGraphObject.default_parent">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_parent</span></span><a class="headerlink" href="#pandaEditor.nodes.nongraphobject.NonGraphObject.default_parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nongraphobject.NonGraphObject.duplicate">
+<span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/nongraphobject.html#NonGraphObject.duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.nongraphobject.NonGraphObject.duplicate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.nongraphobject.NonGraphObject.label">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#pandaEditor.nodes.nongraphobject.NonGraphObject.label" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.particleeffect">
+<span id="pandaeditor-nodes-particleeffect-module"></span><h2>pandaEditor.nodes.particleeffect module<a class="headerlink" href="#module-pandaEditor.nodes.particleeffect" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.particleeffect.ParticleEffect">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.particleeffect.</span></span><span class="sig-name descname"><span class="pre">ParticleEffect</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/particleeffect.html#ParticleEffect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.particleeffect.ParticleEffect" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.particleeffect.ParticleEffect.config_path">
+<span class="sig-name descname"><span class="pre">config_path</span></span><a class="headerlink" href="#pandaEditor.nodes.particleeffect.ParticleEffect.config_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.particleeffect.ParticleEffect.serialise_descendants">
+<span class="sig-name descname"><span class="pre">serialise_descendants</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandaEditor.nodes.particleeffect.ParticleEffect.serialise_descendants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.sceneroot">
+<span id="pandaeditor-nodes-sceneroot-module"></span><h2>pandaEditor.nodes.sceneroot module<a class="headerlink" href="#module-pandaEditor.nodes.sceneroot" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.sceneroot.SceneRoot">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.sceneroot.</span></span><span class="sig-name descname"><span class="pre">SceneRoot</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/sceneroot.html#SceneRoot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.sceneroot.SceneRoot" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.sceneroot.SceneRoot.children">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#pandaEditor.nodes.sceneroot.SceneRoot.children" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.sceneroot.SceneRoot.serialise_descendants">
+<span class="sig-name descname"><span class="pre">serialise_descendants</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandaEditor.nodes.sceneroot.SceneRoot.serialise_descendants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.showbasedefaults">
+<span id="pandaeditor-nodes-showbasedefaults-module"></span><h2>pandaEditor.nodes.showbasedefaults module<a class="headerlink" href="#module-pandaEditor.nodes.showbasedefaults" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.showbasedefaults.Aspect2d">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.showbasedefaults.</span></span><span class="sig-name descname"><span class="pre">Aspect2d</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/showbasedefaults.html#Aspect2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.showbasedefaults.Aspect2d" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.nodes.showbasedefaults.Aspect2d.create">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/nodes/showbasedefaults.html#Aspect2d.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.showbasedefaults.Aspect2d.create" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes.texture">
+<span id="pandaeditor-nodes-texture-module"></span><h2>pandaEditor.nodes.texture module<a class="headerlink" href="#module-pandaEditor.nodes.texture" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.nodes.texture.Texture">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.nodes.texture.</span></span><span class="sig-name descname"><span class="pre">Texture</span></span><a class="reference internal" href="_modules/pandaEditor/nodes/texture.html#Texture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.nodes.texture.Texture" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.nodes.texture.Texture.fullpath">
+<span class="sig-name descname"><span class="pre">fullpath</span></span><a class="headerlink" href="#pandaEditor.nodes.texture.Texture.fullpath" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandaEditor.nodes.texture.Texture.label">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#pandaEditor.nodes.texture.Texture.label" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.nodes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pandaEditor.nodes" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pandaEditor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pandaEditor.html">pandaEditor package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pandaEditor</a><ul>
+  <li><a href="pandaEditor.html">pandaEditor package</a><ul>
+      <li>Previous: <a href="pandaEditor.gizmos.html" title="previous chapter">pandaEditor.gizmos package</a></li>
+      <li>Next: <a href="pandaEditor.nodes.tests.html" title="next chapter">pandaEditor.nodes.tests package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/pandaEditor.nodes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

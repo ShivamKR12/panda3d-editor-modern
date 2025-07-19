@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandaEditor.game package &#8212; Pand3D Editor Modern 0.1.0-dev documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=ee2d09ae"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pandaEditor.game.nodes package" href="pandaEditor.game.nodes.html" />
+    <link rel="prev" title="pandaEditor package" href="pandaEditor.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pandaeditor-game-package">
+<h1>pandaEditor.game package<a class="headerlink" href="#pandaeditor-game-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pandaEditor.game.nodes.html">pandaEditor.game.nodes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.actor">pandaEditor.game.nodes.actor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor"><code class="docutils literal notranslate"><span class="pre">Actor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor.GetAnimDict"><code class="docutils literal notranslate"><span class="pre">Actor.GetAnimDict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor.SetAnimDict"><code class="docutils literal notranslate"><span class="pre">Actor.SetAnimDict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor.create"><code class="docutils literal notranslate"><span class="pre">Actor.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor.duplicate"><code class="docutils literal notranslate"><span class="pre">Actor.duplicate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.actor.Actor.properties"><code class="docutils literal notranslate"><span class="pre">Actor.properties</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.attributes">pandaEditor.game.nodes.attributes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Attribute"><code class="docutils literal notranslate"><span class="pre">Attribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Base.change_mro"><code class="docutils literal notranslate"><span class="pre">Base.change_mro</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Base.read_only"><code class="docutils literal notranslate"><span class="pre">Base.read_only</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Connection"><code class="docutils literal notranslate"><span class="pre">Connection</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Connection.many"><code class="docutils literal notranslate"><span class="pre">Connection.many</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.ConnectionTargets"><code class="docutils literal notranslate"><span class="pre">ConnectionTargets</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.ConnectionTargets.insert"><code class="docutils literal notranslate"><span class="pre">ConnectionTargets.insert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.ConnectionTargets.update"><code class="docutils literal notranslate"><span class="pre">ConnectionTargets.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Connections"><code class="docutils literal notranslate"><span class="pre">Connections</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Connections.clear"><code class="docutils literal notranslate"><span class="pre">Connections.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.Connections.many"><code class="docutils literal notranslate"><span class="pre">Connections.many</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.MetaobjectTagAttribute"><code class="docutils literal notranslate"><span class="pre">MetaobjectTagAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.ProjectAssetAttribute"><code class="docutils literal notranslate"><span class="pre">ProjectAssetAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.ProjectAssetPythonTagAttribute"><code class="docutils literal notranslate"><span class="pre">ProjectAssetPythonTagAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.PythonTagAttribute"><code class="docutils literal notranslate"><span class="pre">PythonTagAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.TagAttribute"><code class="docutils literal notranslate"><span class="pre">TagAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.TagAttributeBase"><code class="docutils literal notranslate"><span class="pre">TagAttributeBase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.get_metaobject_tag"><code class="docutils literal notranslate"><span class="pre">get_metaobject_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.get_python_tag"><code class="docutils literal notranslate"><span class="pre">get_python_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.get_tag"><code class="docutils literal notranslate"><span class="pre">get_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.set_metaobject_tag"><code class="docutils literal notranslate"><span class="pre">set_metaobject_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.set_python_tag"><code class="docutils literal notranslate"><span class="pre">set_python_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.attributes.set_tag"><code class="docutils literal notranslate"><span class="pre">set_tag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.base">pandaEditor.game.nodes.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.add_child"><code class="docutils literal notranslate"><span class="pre">Base.add_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.change_mro"><code class="docutils literal notranslate"><span class="pre">Base.change_mro</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.children"><code class="docutils literal notranslate"><span class="pre">Base.children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.create"><code class="docutils literal notranslate"><span class="pre">Base.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.destroy"><code class="docutils literal notranslate"><span class="pre">Base.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.detach"><code class="docutils literal notranslate"><span class="pre">Base.detach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.id"><code class="docutils literal notranslate"><span class="pre">Base.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.parent"><code class="docutils literal notranslate"><span class="pre">Base.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.properties"><code class="docutils literal notranslate"><span class="pre">Base.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.base.Base.type"><code class="docutils literal notranslate"><span class="pre">Base.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.basemetaclass">pandaEditor.game.nodes.basemetaclass module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.basemetaclass.BaseMetaClass"><code class="docutils literal notranslate"><span class="pre">BaseMetaClass</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.basemetaclass.BaseMetaClass.get_mro"><code class="docutils literal notranslate"><span class="pre">BaseMetaClass.get_mro()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.basemetaclass.BaseMetaClass.mro"><code class="docutils literal notranslate"><span class="pre">BaseMetaClass.mro()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.bullet">pandaEditor.game.nodes.bullet module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletBoxShape"><code class="docutils literal notranslate"><span class="pre">BulletBoxShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletBoxShape.halfExtents"><code class="docutils literal notranslate"><span class="pre">BulletBoxShape.halfExtents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletBoxShape.properties"><code class="docutils literal notranslate"><span class="pre">BulletBoxShape.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletBoxShape.type_"><code class="docutils literal notranslate"><span class="pre">BulletBoxShape.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape.height"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape.properties"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape.radius"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape.radius</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape.type_"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape.type_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletCapsuleShape.up"><code class="docutils literal notranslate"><span class="pre">BulletCapsuleShape.up</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletDebugNode"><code class="docutils literal notranslate"><span class="pre">BulletDebugNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletDebugNode.properties"><code class="docutils literal notranslate"><span class="pre">BulletDebugNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletDebugNode.type_"><code class="docutils literal notranslate"><span class="pre">BulletDebugNode.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape.create"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape.normal"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape.normal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape.point"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape.point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape.properties"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletPlaneShape.type_"><code class="docutils literal notranslate"><span class="pre">BulletPlaneShape.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.angular_dampening"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.angular_dampening</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.gravity"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.gravity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.mass"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.mass</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.properties"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.shapes"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.shapes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletRigidBodyNode.type_"><code class="docutils literal notranslate"><span class="pre">BulletRigidBodyNode.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletSphereShape"><code class="docutils literal notranslate"><span class="pre">BulletSphereShape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletSphereShape.properties"><code class="docutils literal notranslate"><span class="pre">BulletSphereShape.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletSphereShape.radius"><code class="docutils literal notranslate"><span class="pre">BulletSphereShape.radius</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletSphereShape.type_"><code class="docutils literal notranslate"><span class="pre">BulletSphereShape.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld"><code class="docutils literal notranslate"><span class="pre">BulletWorld</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.debug_node"><code class="docutils literal notranslate"><span class="pre">BulletWorld.debug_node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.destroy"><code class="docutils literal notranslate"><span class="pre">BulletWorld.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.disable_physics"><code class="docutils literal notranslate"><span class="pre">BulletWorld.disable_physics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.enable_physics"><code class="docutils literal notranslate"><span class="pre">BulletWorld.enable_physics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.gravity"><code class="docutils literal notranslate"><span class="pre">BulletWorld.gravity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.properties"><code class="docutils literal notranslate"><span class="pre">BulletWorld.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.rigid_bodies"><code class="docutils literal notranslate"><span class="pre">BulletWorld.rigid_bodies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.BulletWorld.type_"><code class="docutils literal notranslate"><span class="pre">BulletWorld.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.clear_rigid_bodies"><code class="docutils literal notranslate"><span class="pre">clear_rigid_bodies()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.bullet.clear_shapes"><code class="docutils literal notranslate"><span class="pre">clear_shapes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.camera">pandaEditor.game.nodes.camera module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.camera.Camera"><code class="docutils literal notranslate"><span class="pre">Camera</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.camera.Camera.properties"><code class="docutils literal notranslate"><span class="pre">Camera.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.camera.Camera.type_"><code class="docutils literal notranslate"><span class="pre">Camera.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.collision">pandaEditor.game.nodes.collision module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionBox"><code class="docutils literal notranslate"><span class="pre">CollisionBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionBox.max"><code class="docutils literal notranslate"><span class="pre">CollisionBox.max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionBox.min"><code class="docutils literal notranslate"><span class="pre">CollisionBox.min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionBox.properties"><code class="docutils literal notranslate"><span class="pre">CollisionBox.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionBox.type_"><code class="docutils literal notranslate"><span class="pre">CollisionBox.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule.a"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule.a</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule.db"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule.db</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule.properties"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule.radius"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule.radius</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionCapsule.type_"><code class="docutils literal notranslate"><span class="pre">CollisionCapsule.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionInvSphere"><code class="docutils literal notranslate"><span class="pre">CollisionInvSphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionInvSphere.properties"><code class="docutils literal notranslate"><span class="pre">CollisionInvSphere.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionInvSphere.type_"><code class="docutils literal notranslate"><span class="pre">CollisionInvSphere.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionNode"><code class="docutils literal notranslate"><span class="pre">CollisionNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionNode.properties"><code class="docutils literal notranslate"><span class="pre">CollisionNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionNode.solids"><code class="docutils literal notranslate"><span class="pre">CollisionNode.solids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionNode.type_"><code class="docutils literal notranslate"><span class="pre">CollisionNode.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionRay"><code class="docutils literal notranslate"><span class="pre">CollisionRay</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionRay.direction"><code class="docutils literal notranslate"><span class="pre">CollisionRay.direction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionRay.origin"><code class="docutils literal notranslate"><span class="pre">CollisionRay.origin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionRay.properties"><code class="docutils literal notranslate"><span class="pre">CollisionRay.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionRay.type_"><code class="docutils literal notranslate"><span class="pre">CollisionRay.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionSphere"><code class="docutils literal notranslate"><span class="pre">CollisionSphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionSphere.center"><code class="docutils literal notranslate"><span class="pre">CollisionSphere.center</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionSphere.properties"><code class="docutils literal notranslate"><span class="pre">CollisionSphere.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionSphere.radius"><code class="docutils literal notranslate"><span class="pre">CollisionSphere.radius</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.collision.CollisionSphere.type_"><code class="docutils literal notranslate"><span class="pre">CollisionSphere.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.componentmetaclass">pandaEditor.game.nodes.componentmetaclass module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.componentmetaclass.ComponentMetaClass"><code class="docutils literal notranslate"><span class="pre">ComponentMetaClass</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.componentmetaclass.ComponentMetaClass.attributes"><code class="docutils literal notranslate"><span class="pre">ComponentMetaClass.attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.componentmetaclass.ComponentMetaClass.connections"><code class="docutils literal notranslate"><span class="pre">ComponentMetaClass.connections</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.componentmetaclass.ComponentMetaClass.create_attributes"><code class="docutils literal notranslate"><span class="pre">ComponentMetaClass.create_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.componentmetaclass.ComponentMetaClass.get_properties"><code class="docutils literal notranslate"><span class="pre">ComponentMetaClass.get_properties()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.constants">pandaEditor.game.nodes.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.fog">pandaEditor.game.nodes.fog module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog"><code class="docutils literal notranslate"><span class="pre">Fog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.color"><code class="docutils literal notranslate"><span class="pre">Fog.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.exponential_density"><code class="docutils literal notranslate"><span class="pre">Fog.exponential_density</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.linear_onset_point"><code class="docutils literal notranslate"><span class="pre">Fog.linear_onset_point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.linear_opaque_point"><code class="docutils literal notranslate"><span class="pre">Fog.linear_opaque_point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.properties"><code class="docutils literal notranslate"><span class="pre">Fog.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.fog.Fog.type_"><code class="docutils literal notranslate"><span class="pre">Fog.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.lensnode">pandaEditor.game.nodes.lensnode module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode"><code class="docutils literal notranslate"><span class="pre">LensNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode.far"><code class="docutils literal notranslate"><span class="pre">LensNode.far</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode.fov"><code class="docutils literal notranslate"><span class="pre">LensNode.fov</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode.near"><code class="docutils literal notranslate"><span class="pre">LensNode.near</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode.properties"><code class="docutils literal notranslate"><span class="pre">LensNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNode.type_"><code class="docutils literal notranslate"><span class="pre">LensNode.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lensnode.LensNodeAttribute"><code class="docutils literal notranslate"><span class="pre">LensNodeAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.lights">pandaEditor.game.nodes.lights module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.AmbientLight"><code class="docutils literal notranslate"><span class="pre">AmbientLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.AmbientLight.properties"><code class="docutils literal notranslate"><span class="pre">AmbientLight.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.AmbientLight.type_"><code class="docutils literal notranslate"><span class="pre">AmbientLight.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight"><code class="docutils literal notranslate"><span class="pre">DirectionalLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.direction"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.direction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.point"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.properties"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.shadow_caster"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.shadow_caster</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.specular_colour"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.specular_colour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.DirectionalLight.type_"><code class="docutils literal notranslate"><span class="pre">DirectionalLight.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Light"><code class="docutils literal notranslate"><span class="pre">Light</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Light.color"><code class="docutils literal notranslate"><span class="pre">Light.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Light.properties"><code class="docutils literal notranslate"><span class="pre">Light.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Light.type_"><code class="docutils literal notranslate"><span class="pre">Light.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight"><code class="docutils literal notranslate"><span class="pre">PointLight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight.attenuation"><code class="docutils literal notranslate"><span class="pre">PointLight.attenuation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight.point"><code class="docutils literal notranslate"><span class="pre">PointLight.point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight.properties"><code class="docutils literal notranslate"><span class="pre">PointLight.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight.specular_color"><code class="docutils literal notranslate"><span class="pre">PointLight.specular_color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.PointLight.type_"><code class="docutils literal notranslate"><span class="pre">PointLight.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight"><code class="docutils literal notranslate"><span class="pre">Spotlight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.attenuation"><code class="docutils literal notranslate"><span class="pre">Spotlight.attenuation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.exponent"><code class="docutils literal notranslate"><span class="pre">Spotlight.exponent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.properties"><code class="docutils literal notranslate"><span class="pre">Spotlight.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.show_caster"><code class="docutils literal notranslate"><span class="pre">Spotlight.show_caster</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.specular_color"><code class="docutils literal notranslate"><span class="pre">Spotlight.specular_color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.lights.Spotlight.type_"><code class="docutils literal notranslate"><span class="pre">Spotlight.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.manager">pandaEditor.game.nodes.manager module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager.get_component_by_name"><code class="docutils literal notranslate"><span class="pre">Manager.get_component_by_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager.get_type_string"><code class="docutils literal notranslate"><span class="pre">Manager.get_type_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager.get_wrapper"><code class="docutils literal notranslate"><span class="pre">Manager.get_wrapper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager.wrap"><code class="docutils literal notranslate"><span class="pre">Manager.wrap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.modelnode">pandaEditor.game.nodes.modelnode module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelnode.ModelNode"><code class="docutils literal notranslate"><span class="pre">ModelNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelnode.ModelNode.properties"><code class="docutils literal notranslate"><span class="pre">ModelNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelnode.ModelNode.type_"><code class="docutils literal notranslate"><span class="pre">ModelNode.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.modelroot">pandaEditor.game.nodes.modelroot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot"><code class="docutils literal notranslate"><span class="pre">ModelRoot</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot.add_child"><code class="docutils literal notranslate"><span class="pre">ModelRoot.add_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot.create"><code class="docutils literal notranslate"><span class="pre">ModelRoot.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot.fullpath"><code class="docutils literal notranslate"><span class="pre">ModelRoot.fullpath</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot.properties"><code class="docutils literal notranslate"><span class="pre">ModelRoot.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.modelroot.ModelRoot.type_"><code class="docutils literal notranslate"><span class="pre">ModelRoot.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.nodepath">pandaEditor.game.nodes.nodepath module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath"><code class="docutils literal notranslate"><span class="pre">NodePath</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.GetActor"><code class="docutils literal notranslate"><span class="pre">NodePath.GetActor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.add_child"><code class="docutils literal notranslate"><span class="pre">NodePath.add_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.children"><code class="docutils literal notranslate"><span class="pre">NodePath.children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.color"><code class="docutils literal notranslate"><span class="pre">NodePath.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.color_scale"><code class="docutils literal notranslate"><span class="pre">NodePath.color_scale</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.create"><code class="docutils literal notranslate"><span class="pre">NodePath.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.destroy"><code class="docutils literal notranslate"><span class="pre">NodePath.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.detach"><code class="docutils literal notranslate"><span class="pre">NodePath.detach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.find_child"><code class="docutils literal notranslate"><span class="pre">NodePath.find_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.fog"><code class="docutils literal notranslate"><span class="pre">NodePath.fog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.id"><code class="docutils literal notranslate"><span class="pre">NodePath.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.lights"><code class="docutils literal notranslate"><span class="pre">NodePath.lights</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.matrix"><code class="docutils literal notranslate"><span class="pre">NodePath.matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.name"><code class="docutils literal notranslate"><span class="pre">NodePath.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.parent"><code class="docutils literal notranslate"><span class="pre">NodePath.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.properties"><code class="docutils literal notranslate"><span class="pre">NodePath.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.tags"><code class="docutils literal notranslate"><span class="pre">NodePath.tags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.texture"><code class="docutils literal notranslate"><span class="pre">NodePath.texture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.NodePath.type_"><code class="docutils literal notranslate"><span class="pre">NodePath.type_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.get_lights"><code class="docutils literal notranslate"><span class="pre">get_lights()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nodepath.set_texture"><code class="docutils literal notranslate"><span class="pre">set_texture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.nongraphobject">pandaEditor.game.nodes.nongraphobject module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.Metaobject"><code class="docutils literal notranslate"><span class="pre">Metaobject</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject"><code class="docutils literal notranslate"><span class="pre">NonGraphObject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.add_child"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.add_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.create"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.destroy"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.detach"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.detach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.metaobject"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.metaobject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.nongraphobject.NonGraphObject.properties"><code class="docutils literal notranslate"><span class="pre">NonGraphObject.properties</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.pandanode">pandaEditor.game.nodes.pandanode module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.pandanode.PandaNode"><code class="docutils literal notranslate"><span class="pre">PandaNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.pandanode.PandaNode.properties"><code class="docutils literal notranslate"><span class="pre">PandaNode.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.pandanode.PandaNode.type_"><code class="docutils literal notranslate"><span class="pre">PandaNode.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.particleeffect">pandaEditor.game.nodes.particleeffect module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.particleeffect.ParticleEffect"><code class="docutils literal notranslate"><span class="pre">ParticleEffect</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.particleeffect.ParticleEffect.config_path"><code class="docutils literal notranslate"><span class="pre">ParticleEffect.config_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.particleeffect.ParticleEffect.create"><code class="docutils literal notranslate"><span class="pre">ParticleEffect.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.particleeffect.ParticleEffect.properties"><code class="docutils literal notranslate"><span class="pre">ParticleEffect.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.particleeffect.ParticleEffect.type_"><code class="docutils literal notranslate"><span class="pre">ParticleEffect.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.sceneroot">pandaEditor.game.nodes.sceneroot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot"><code class="docutils literal notranslate"><span class="pre">SceneRoot</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.add_child"><code class="docutils literal notranslate"><span class="pre">SceneRoot.add_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.create"><code class="docutils literal notranslate"><span class="pre">SceneRoot.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.id"><code class="docutils literal notranslate"><span class="pre">SceneRoot.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.parent"><code class="docutils literal notranslate"><span class="pre">SceneRoot.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.physics_world"><code class="docutils literal notranslate"><span class="pre">SceneRoot.physics_world</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.SceneRoot.properties"><code class="docutils literal notranslate"><span class="pre">SceneRoot.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.get_physics_world"><code class="docutils literal notranslate"><span class="pre">get_physics_world()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.sceneroot.set_physics_world"><code class="docutils literal notranslate"><span class="pre">set_physics_world()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.showbasedefaults">pandaEditor.game.nodes.showbasedefaults module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Aspect2d"><code class="docutils literal notranslate"><span class="pre">Aspect2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Aspect2d.create"><code class="docutils literal notranslate"><span class="pre">Aspect2d.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Aspect2d.properties"><code class="docutils literal notranslate"><span class="pre">Aspect2d.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCam"><code class="docutils literal notranslate"><span class="pre">BaseCam</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCam.create"><code class="docutils literal notranslate"><span class="pre">BaseCam.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCam.properties"><code class="docutils literal notranslate"><span class="pre">BaseCam.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCamera"><code class="docutils literal notranslate"><span class="pre">BaseCamera</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCamera.create"><code class="docutils literal notranslate"><span class="pre">BaseCamera.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.BaseCamera.properties"><code class="docutils literal notranslate"><span class="pre">BaseCamera.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Cam2d"><code class="docutils literal notranslate"><span class="pre">Cam2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Cam2d.create"><code class="docutils literal notranslate"><span class="pre">Cam2d.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Cam2d.properties"><code class="docutils literal notranslate"><span class="pre">Cam2d.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Camera2d"><code class="docutils literal notranslate"><span class="pre">Camera2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Camera2d.create"><code class="docutils literal notranslate"><span class="pre">Camera2d.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Camera2d.properties"><code class="docutils literal notranslate"><span class="pre">Camera2d.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Pixel2d"><code class="docutils literal notranslate"><span class="pre">Pixel2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Pixel2d.create"><code class="docutils literal notranslate"><span class="pre">Pixel2d.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Pixel2d.properties"><code class="docutils literal notranslate"><span class="pre">Pixel2d.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render"><code class="docutils literal notranslate"><span class="pre">Render</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render.create"><code class="docutils literal notranslate"><span class="pre">Render.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render.parent"><code class="docutils literal notranslate"><span class="pre">Render.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render.properties"><code class="docutils literal notranslate"><span class="pre">Render.properties</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render2d"><code class="docutils literal notranslate"><span class="pre">Render2d</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render2d.create"><code class="docutils literal notranslate"><span class="pre">Render2d.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render2d.parent"><code class="docutils literal notranslate"><span class="pre">Render2d.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.showbasedefaults.Render2d.properties"><code class="docutils literal notranslate"><span class="pre">Render2d.properties</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes.texture">pandaEditor.game.nodes.texture module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.texture.Texture"><code class="docutils literal notranslate"><span class="pre">Texture</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.texture.Texture.create"><code class="docutils literal notranslate"><span class="pre">Texture.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.texture.Texture.fullpath"><code class="docutils literal notranslate"><span class="pre">Texture.fullpath</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.texture.Texture.properties"><code class="docutils literal notranslate"><span class="pre">Texture.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.texture.Texture.type_"><code class="docutils literal notranslate"><span class="pre">Texture.type_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.nodes.html#module-pandaEditor.game.nodes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pandaEditor.game.plugins.html">pandaEditor.game.plugins package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.plugins.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.plugins.html#module-pandaEditor.game.plugins.base">pandaEditor.game.plugins.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.base.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.plugins.html#module-pandaEditor.game.plugins.ibase">pandaEditor.game.plugins.ibase module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.ibase.IBase"><code class="docutils literal notranslate"><span class="pre">IBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.ibase.IBase.on_init"><code class="docutils literal notranslate"><span class="pre">IBase.on_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.ibase.IBase.register_node_wrapper"><code class="docutils literal notranslate"><span class="pre">IBase.register_node_wrapper()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.plugins.html#module-pandaEditor.game.plugins.manager">pandaEditor.game.plugins.manager module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.manager.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.manager.Manager.on_init"><code class="docutils literal notranslate"><span class="pre">Manager.on_init()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pandaEditor.game.plugins.html#module-pandaEditor.game.plugins">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pandaEditor.game.scene">
+<span id="pandaeditor-game-scene-module"></span><h2>pandaEditor.game.scene module<a class="headerlink" href="#module-pandaEditor.game.scene" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.game.scene.Scene">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.game.scene.</span></span><span class="sig-name descname"><span class="pre">Scene</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/scene.html#Scene"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.scene.Scene" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.game.scene.Scene.cType">
+<span class="sig-name descname"><span class="pre">cType</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SceneRoot'</span></em><a class="headerlink" href="#pandaEditor.game.scene.Scene.cType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.scene.Scene.deregister_component">
+<span class="sig-name descname"><span class="pre">deregister_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/scene.html#Scene.deregister_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.scene.Scene.deregister_component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.scene.Scene.register_component">
+<span class="sig-name descname"><span class="pre">register_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/scene.html#Scene.register_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.scene.Scene.register_component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.game.sceneparser">
+<span id="pandaeditor-game-sceneparser-module"></span><h2>pandaEditor.game.sceneparser module<a class="headerlink" href="#module-pandaEditor.game.sceneparser" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.game.sceneparser.SceneParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.game.sceneparser.</span></span><span class="sig-name descname"><span class="pre">SceneParser</span></span><a class="reference internal" href="_modules/pandaEditor/game/sceneparser.html#SceneParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.sceneparser.SceneParser" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to load map files into Panda3D.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.sceneparser.SceneParser.get_attributes">
+<span class="sig-name descname"><span class="pre">get_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pelem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp_cls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/sceneparser.html#SceneParser.get_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.sceneparser.SceneParser.get_attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.sceneparser.SceneParser.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcomp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/sceneparser.html#SceneParser.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.sceneparser.SceneParser.load" title="Link to this definition">¶</a></dt>
+<dd><p>Load the scene from an xml file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.sceneparser.SceneParser.load_component">
+<span class="sig-name descname"><span class="pre">load_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcomp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/sceneparser.html#SceneParser.load_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.sceneparser.SceneParser.load_component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.sceneparser.SceneParser.load_connections">
+<span class="sig-name descname"><span class="pre">load_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/sceneparser.html#SceneParser.load_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.sceneparser.SceneParser.load_connections" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.game.showbase">
+<span id="pandaeditor-game-showbase-module"></span><h2>pandaEditor.game.showbase module<a class="headerlink" href="#module-pandaEditor.game.showbase" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandaEditor.game.showbase.</span></span><span class="sig-name descname"><span class="pre">ShowBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/showbase.html#ShowBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ShowBase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase.load_plugins">
+<span class="sig-name descname"><span class="pre">load_plugins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/showbase.html#ShowBase.load_plugins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase.load_plugins" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase.load_scene">
+<span class="sig-name descname"><span class="pre">load_scene</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/showbase.html#ShowBase.load_scene"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase.load_scene" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase.node_manager_cls">
+<span class="sig-name descname"><span class="pre">node_manager_cls</span></span><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase.node_manager_cls" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="pandaEditor.game.nodes.html#pandaEditor.game.nodes.manager.Manager" title="pandaEditor.game.nodes.manager.Manager"><code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase.plug_manager_cls">
+<span class="sig-name descname"><span class="pre">plug_manager_cls</span></span><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase.plug_manager_cls" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="pandaEditor.game.plugins.html#pandaEditor.game.plugins.manager.Manager" title="pandaEditor.game.plugins.manager.Manager"><code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandaEditor.game.showbase.ShowBase.scene_parser_cls">
+<span class="sig-name descname"><span class="pre">scene_parser_cls</span></span><a class="headerlink" href="#pandaEditor.game.showbase.ShowBase.scene_parser_cls" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pandaEditor.game.sceneparser.SceneParser" title="pandaEditor.game.sceneparser.SceneParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">SceneParser</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.game.utils">
+<span id="pandaeditor-game-utils-module"></span><h2>pandaEditor.game.utils module<a class="headerlink" href="#module-pandaEditor.game.utils" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.game.utils.get_lower_camel_case">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.game.utils.</span></span><span class="sig-name descname"><span class="pre">get_lower_camel_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/utils.html#get_lower_camel_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.utils.get_lower_camel_case" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pandaEditor.game.utils.get_unique_name">
+<span class="sig-prename descclassname"><span class="pre">pandaEditor.game.utils.</span></span><span class="sig-name descname"><span class="pre">get_unique_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elems</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pandaEditor/game/utils.html#get_unique_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandaEditor.game.utils.get_unique_name" title="Link to this definition">¶</a></dt>
+<dd><p>Return a unique version of the name indicated by incrementing a numeral
+at the end. Stop when the name no longer appears in the indicated list of
+elements.</p>
+</dd></dl>
+
+</section>
+<section id="module-pandaEditor.game">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pandaEditor.game" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Pand3D Editor Modern</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pandaEditor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pandaEditor.html">pandaEditor package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">pandaEditor</a><ul>
+  <li><a href="pandaEditor.html">pandaEditor package</a><ul>
+      <li>Previous: <a href="pandaEditor.html" title="previous chapter">pandaEditor package</a></li>
+      <li>Next: <a href="pandaEditor.game.nodes.html" title="next chapter">pandaEditor.game.nodes package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Shivam Kumar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/pandaEditor.game.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
