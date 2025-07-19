@@ -154,7 +154,7 @@ def group(comps):
     Create the group action, execute it and push it onto the undo queue.
 
     """
-    from game.nodes.pandanode import PandaNode
+    from pandaEditor.game.nodes.pandanode import PandaNode
 
     # Find the lowest common ancestor for all NodePaths - this will be the
     # parent for the group NodePath.

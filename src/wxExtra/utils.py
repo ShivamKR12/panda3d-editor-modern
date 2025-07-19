@@ -83,7 +83,17 @@ def YesNoCancelDialog(message, caption, style=wx.ICON_QUESTION):
 
 def ImgToBmp(filePath, size):
     """Return a wx bitmap from a filepath, scaled to the toolbar size."""
+    # If path is not absolute, resolve it relative to project root
+    if not os.path.isabs(filePath):
+        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        filePath = os.path.normpath(os.path.join(base_path, filePath))
+    if not os.path.exists(filePath):
+        print(f"[ERROR] Icon file does not exist: {filePath}")
+        return wx.NullBitmap
     img = wx.Image(filePath)
+    if not img.IsOk():
+        print(f"[ERROR] Failed to load image: {filePath}")
+        return wx.NullBitmap
     img.Rescale(size[0], size[1])
     bmp = wx.Bitmap(img)
     return bmp

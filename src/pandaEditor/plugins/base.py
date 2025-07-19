@@ -1,4 +1,4 @@
-from game.plugins.ibase import IBase
+from pandaEditor.game.plugins.ibase import IBase
 
 
 class Base(IBase):

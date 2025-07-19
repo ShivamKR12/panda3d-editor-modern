@@ -3,7 +3,7 @@ import unittest
 from pandaEditor.nodes.tests.test_nodepath import (
     TestNodePathMixin,
 )
-from game.nodes.lights import (
+from pandaEditor.game.nodes.lights import (
     Light,
     AmbientLight,
     DirectionalLight,

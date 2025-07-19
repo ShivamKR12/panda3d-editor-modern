@@ -1,9 +1,9 @@
 import panda3d.core as pm
 from panda3d.core import Lens
 
-from game.nodes.attributes import Attribute
-from game.nodes.nodepath import NodePath
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 class LensNodeAttribute(Attribute):

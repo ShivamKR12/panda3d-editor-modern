@@ -5,7 +5,7 @@ import uuid
 
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 logger = logging.getLogger(__name__)

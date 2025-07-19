@@ -4,9 +4,9 @@ import unittest
 import panda3d.core as pc
 
 from actions import Add, Transform, SetAttribute, Parent
-from game.nodes.lights import AmbientLight
-from game.nodes.nodepath import NodePath
-from game.nodes.showbasedefaults import Render
+from pandaEditor.game.nodes.lights import AmbientLight
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.showbasedefaults import Render
 from pandaEditor.nodes.tests.testmixin import TestMixin
 
 

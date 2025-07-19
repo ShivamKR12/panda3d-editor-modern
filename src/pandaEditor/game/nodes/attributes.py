@@ -1,11 +1,11 @@
 import uuid
 from functools import partial
-from collections import MutableSequence
+from collections.abc import MutableSequence
 
 import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.basemetaclass import BaseMetaClass
+from pandaEditor.game.nodes.basemetaclass import BaseMetaClass
 
 
 class ConnectionTargets(MutableSequence):

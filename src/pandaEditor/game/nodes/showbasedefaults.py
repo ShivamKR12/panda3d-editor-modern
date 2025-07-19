@@ -1,9 +1,9 @@
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.camera import Camera
-from game.nodes.modelnode import ModelNode
-from game.nodes.nodepath import NodePath
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.camera import Camera
+from pandaEditor.game.nodes.modelnode import ModelNode
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 class Render(NodePath, metaclass=ComponentMetaClass):

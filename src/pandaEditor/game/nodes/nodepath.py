@@ -1,18 +1,18 @@
 import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.attributes import (
+from pandaEditor.game.nodes.attributes import (
     Attribute,
     Connection,
     Connections,
 )
-from game.nodes.constants import (
+from pandaEditor.game.nodes.constants import (
     TAG_ACTOR,
     TAG_NODE_UUID,
     TAG_PYTHON_TAGS
 )
-from game.nodes.base import Base
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.base import Base
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 def get_lights(data):

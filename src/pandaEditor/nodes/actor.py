@@ -1,6 +1,6 @@
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.constants import TAG_MODEL_PATH
+from pandaEditor.game.nodes.constants import TAG_MODEL_PATH
 from pandaEditor.nodes.constants import TAG_PICKABLE
 
 

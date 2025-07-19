@@ -2,7 +2,7 @@ import copy
 
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.utils import get_lower_camel_case
+from pandaEditor.game.utils import get_lower_camel_case
 
 
 class NonGraphObject:

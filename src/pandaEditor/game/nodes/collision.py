@@ -1,8 +1,8 @@
 import panda3d.core as pc
 
-from game.nodes.attributes import Attribute, Connections
-from game.nodes.nodepath import NodePath
-from game.nodes.nongraphobject import NonGraphObject
+from pandaEditor.game.nodes.attributes import Attribute, Connections
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.nongraphobject import NonGraphObject
 
 
 class CollisionBox(NonGraphObject):

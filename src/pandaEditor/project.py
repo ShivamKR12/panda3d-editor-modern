@@ -9,11 +9,11 @@ import panda3d.core as pm
 from pubsub import pub
 
 import p3d
-import game
-import utils
+import pandaEditor.game
+import pandaEditor.utils
 from pandaEditor.constants import MODEL_EXTENSIONS
-from directorywatcher import DirectoryWatcher
-from utils import popen_and_call
+from pandaEditor.directorywatcher import DirectoryWatcher
+from pandaEditor.utils import popen_and_call
 
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,7 @@ class Project:
         return os.path.join(self.path, PROJECT_DEF_NAME)
     
     def GetMainScript(self):
-        return """from game.showbase import ShowBase
+        return """from pandaEditor.game.showbase import ShowBase
 
 
 # Create game base and load level

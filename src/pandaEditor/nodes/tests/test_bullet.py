@@ -3,7 +3,7 @@ import unittest
 import panda3d.bullet as pb
 import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
-from game.nodes.bullet import (
+from pandaEditor.game.nodes.bullet import (
     BulletBoxShape,
     BulletCapsuleShape,
     BulletDebugNode,
@@ -12,7 +12,7 @@ from game.nodes.bullet import (
     BulletSphereShape,
     BulletWorld,
 )
-from game.nodes.nongraphobject import Metaobject
+from pandaEditor.game.nodes.nongraphobject import Metaobject
 from pandaEditor.nodes.tests.testbasemixin import TestBaseMixin
 from pandaEditor.nodes.tests.test_nodepath import TestNodePathMixin
 

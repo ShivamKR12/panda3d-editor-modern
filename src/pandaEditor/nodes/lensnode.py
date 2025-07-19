@@ -1,4 +1,4 @@
-from game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.attributes import Attribute
 from pandaEditor.nodes.constants import TAG_IGNORE
 
 

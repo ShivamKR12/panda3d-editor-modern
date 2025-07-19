@@ -3,9 +3,9 @@ import panda3d.core as pc
 from pandaEditor.nodes.tests.testbasemixin import (
     TestBaseMixin,
 )
-from game.nodes.fog import Fog
-from game.nodes.lights import AmbientLight
-from game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.fog import Fog
+from pandaEditor.game.nodes.lights import AmbientLight
+from pandaEditor.game.nodes.nodepath import NodePath
 
 
 class TestNodePathMixin(TestBaseMixin):

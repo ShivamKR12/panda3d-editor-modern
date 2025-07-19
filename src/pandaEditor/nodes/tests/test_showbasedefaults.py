@@ -3,7 +3,7 @@ import unittest
 from pandaEditor.nodes.tests.test_nodepath import (
     TestNodePathMixin,
 )
-from game.nodes.showbasedefaults import (
+from pandaEditor.game.nodes.showbasedefaults import (
     Aspect2d,
     BaseCam,
     BaseCamera,

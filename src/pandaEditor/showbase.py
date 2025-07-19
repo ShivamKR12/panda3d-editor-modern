@@ -21,7 +21,7 @@ from pandaEditor.ui.mainFrame import MainFrame
 from pandaEditor import actions, commands, gizmos
 from pandaEditor.assetManager import AssetManager
 from pandaEditor.dragdropmanager import DragDropManager
-from scene import Scene
+from pandaEditor.scene import Scene
 from pandaEditor.project import Project
 from pandaEditor.selection import Selection
 from pandaEditor.ui.document import Document

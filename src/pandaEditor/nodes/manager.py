@@ -2,7 +2,7 @@ import logging
 
 import panda3d.core as pc
 
-from game.nodes.manager import Manager as GameManager
+from pandaEditor.game.nodes.manager import Manager as GameManager
 
 
 logger = logging.getLogger(__name__)

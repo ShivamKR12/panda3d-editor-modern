@@ -1,6 +1,6 @@
-from game.nodes.actor import Actor
-from game.nodes.base import Base
-from game.nodes.bullet import (
+from pandaEditor.game.nodes.actor import Actor
+from pandaEditor.game.nodes.base import Base
+from pandaEditor.game.nodes.bullet import (
     BulletBoxShape,
     BulletCapsuleShape,
     BulletDebugNode,
@@ -9,8 +9,8 @@ from game.nodes.bullet import (
     BulletSphereShape,
     BulletWorld,
 )
-from game.nodes.camera import Camera
-from game.nodes.collision import (
+from pandaEditor.game.nodes.camera import Camera
+from pandaEditor.game.nodes.collision import (
     CollisionBox,
     CollisionCapsule,
     CollisionInvSphere,
@@ -18,23 +18,23 @@ from game.nodes.collision import (
     CollisionRay,
     CollisionSphere,
 )
-from game.nodes.constants import TAG_NODE_TYPE
-from game.nodes.fog import Fog
-from game.nodes.lensnode import LensNode
-from game.nodes.lights import (
+from pandaEditor.game.nodes.constants import TAG_NODE_TYPE
+from pandaEditor.game.nodes.fog import Fog
+from pandaEditor.game.nodes.lensnode import LensNode
+from pandaEditor.game.nodes.lights import (
     AmbientLight,
     DirectionalLight,
     PointLight,
     Spotlight
 )
-from game.nodes.modelnode import ModelNode
-from game.nodes.modelroot import ModelRoot
-from game.nodes.nodepath import NodePath
-from game.nodes.nongraphobject import NonGraphObject
-from game.nodes.pandanode import PandaNode
-from game.nodes.particleeffect import ParticleEffect
-from game.nodes.sceneroot import SceneRoot
-from game.nodes.showbasedefaults import (
+from pandaEditor.game.nodes.modelnode import ModelNode
+from pandaEditor.game.nodes.modelroot import ModelRoot
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.nongraphobject import NonGraphObject
+from pandaEditor.game.nodes.pandanode import PandaNode
+from pandaEditor.game.nodes.particleeffect import ParticleEffect
+from pandaEditor.game.nodes.sceneroot import SceneRoot
+from pandaEditor.game.nodes.showbasedefaults import (
     Aspect2d,
     BaseCam,
     BaseCamera,
@@ -44,7 +44,7 @@ from game.nodes.showbasedefaults import (
     Render,
     Render2d,
 )
-from game.nodes.texture import Texture
+from pandaEditor.game.nodes.texture import Texture
 
 
 class Manager:

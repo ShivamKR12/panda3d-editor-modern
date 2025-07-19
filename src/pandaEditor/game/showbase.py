@@ -1,9 +1,9 @@
 from direct.showbase.ShowBase import ShowBase as DirectShowBase
 
-from game.nodes.manager import Manager as NodeManager
-from game.plugins.manager import Manager as PluginManager
-from game.sceneparser import SceneParser
-from game.scene import Scene
+from pandaEditor.game.nodes.manager import Manager as NodeManager
+from pandaEditor.game.plugins.manager import Manager as PluginManager
+from pandaEditor.game.sceneparser import SceneParser
+from pandaEditor.game.scene import Scene
 
 
 class ShowBase(DirectShowBase):

@@ -1,8 +1,8 @@
 import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.attributes import Attribute
-from game.nodes.nongraphobject import NonGraphObject
+from pandaEditor.game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.nongraphobject import NonGraphObject
 
 
 class Texture(NonGraphObject):

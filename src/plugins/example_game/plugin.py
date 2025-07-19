@@ -1,6 +1,6 @@
 import logging
 
-from game.plugins import base
+from pandaEditor.game.plugins import base
 
 
 logger = logging.getLogger(__name__)

@@ -1,4 +1,4 @@
-from game.nodes.base import Base
+from pandaEditor.game.nodes.base import Base
 from direct.showbase.PythonUtil import getBase as get_base
 
 

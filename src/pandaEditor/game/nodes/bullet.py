@@ -2,7 +2,7 @@ import panda3d.core as pc
 import panda3d.bullet as pb
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.attributes import (
+from pandaEditor.game.nodes.attributes import (
     Attribute,
     Connection,
     Connections,
@@ -10,8 +10,8 @@ from game.nodes.attributes import (
     TagAttribute,
     MetaobjectTagAttribute,
 )
-from game.nodes.nodepath import NodePath
-from game.nodes.nongraphobject import NonGraphObject
+from pandaEditor.game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.nongraphobject import NonGraphObject
 
 
 class BulletBoxShape(NonGraphObject):

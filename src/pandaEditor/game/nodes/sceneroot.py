@@ -1,9 +1,9 @@
 import panda3d.bullet as pb
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.attributes import Connection
-from game.nodes.nongraphobject import NonGraphObject
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.attributes import Connection
+from pandaEditor.game.nodes.nongraphobject import NonGraphObject
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 def get_physics_world(scene):

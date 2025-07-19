@@ -5,7 +5,7 @@ import panda3d.core as pm
 from panda3d.core import NodePath as NP
 
 from pandaEditor import commands as cmds
-from game.nodes.attributes import Attribute as Attr
+from pandaEditor.game.nodes.attributes import Attribute as Attr
 from .sceneGraphBasePanel import SceneGraphBasePanel
 
 

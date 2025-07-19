@@ -1,6 +1,6 @@
 import panda3d.core as pc
 
-from game.nodes.attributes import ProjectAssetAttribute
+from pandaEditor.game.nodes.attributes import ProjectAssetAttribute
 
 
 class ModelRoot:

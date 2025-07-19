@@ -5,7 +5,7 @@ from p3d.object import Object
 from p3d.marquee import Marquee
 from p3d.mouse import MOUSE_CTRL
 from p3d.mousePicker import MousePicker
-from nodes.constants import TAG_IGNORE, TAG_PICKABLE
+from pandaEditor.nodes.constants import TAG_IGNORE, TAG_PICKABLE
 
 
 class Selection(Object):

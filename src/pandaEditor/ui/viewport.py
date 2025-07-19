@@ -5,7 +5,7 @@ from direct.showbase.PythonUtil import getBase as get_base
 
 import pandaEditor.commands as cmds
 from pandaEditor.dragdroptarget import DragDropTarget
-from game.nodes.base import Base
+from pandaEditor.game.nodes.base import Base
 from p3d.wxPanda import Viewport as WxViewport
 from wxExtra import CustomMenu, ActionItem
 

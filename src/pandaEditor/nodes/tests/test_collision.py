@@ -1,7 +1,7 @@
 import unittest
 
 import panda3d.core as pc
-from game.nodes.collision import (
+from pandaEditor.game.nodes.collision import (
     CollisionBox,
     CollisionCapsule,
     CollisionInvSphere,
@@ -9,7 +9,7 @@ from game.nodes.collision import (
     CollisionRay,
     CollisionSphere,
 )
-from game.nodes.nongraphobject import Metaobject
+from pandaEditor.game.nodes.nongraphobject import Metaobject
 from pandaEditor.nodes.tests.test_nodepath import (
     TestNodePathMixin,
 )

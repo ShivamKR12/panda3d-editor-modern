@@ -8,7 +8,7 @@ import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
 from pandaEditor.dragdroptarget import DragDropTarget
 from pandaEditor import commands as cmds
-from game.nodes.attributes import Attribute, Connection, Connections
+from pandaEditor.game.nodes.attributes import Attribute, Connection, Connections
 from pandaEditor.ui import properties as custProps
 from pandaEditor.utils import camel_case_to_label
 

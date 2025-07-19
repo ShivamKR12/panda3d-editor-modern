@@ -1,7 +1,7 @@
 import panda3d.core as pm
 
-from game.nodes.lensnode import LensNode
-from game.nodes.componentmetaclass import ComponentMetaClass
+from pandaEditor.game.nodes.lensnode import LensNode
+from pandaEditor.game.nodes.componentmetaclass import ComponentMetaClass
 
 
 class Camera(LensNode, metaclass=ComponentMetaClass):

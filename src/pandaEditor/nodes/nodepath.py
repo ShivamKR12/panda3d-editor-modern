@@ -6,9 +6,9 @@ from direct.showbase.PythonUtil import getBase as get_base
 from direct.directtools.DirectSelection import DirectBoundingBox
 
 from pandaEditor import commands
-from game.nodes.attributes import Attribute
-from game.nodes.constants import TAG_MODEL_ROOT_CHILD
-from game.utils import get_lower_camel_case, get_unique_name
+from pandaEditor.game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.constants import TAG_MODEL_ROOT_CHILD
+from pandaEditor.game.utils import get_lower_camel_case, get_unique_name
 from pandaEditor.nodes.constants import (
     TAG_BBOX, TAG_IGNORE, TAG_MODIFIED, TAG_PICKABLE
 )

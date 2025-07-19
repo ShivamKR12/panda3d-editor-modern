@@ -4,7 +4,7 @@ import wx
 import panda3d.core as pc
 
 import wx.propgrid as wxpg
-from game.nodes.base import Base
+from pandaEditor.game.nodes.base import Base
 from wxExtra.propertyGrid import PropertyGridEvent
 
 

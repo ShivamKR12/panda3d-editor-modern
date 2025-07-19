@@ -1,7 +1,7 @@
 import logging
 
-from game.plugins.base import Base as GamePluginBase
-from game.plugins.manager import Manager as GameManager
+from pandaEditor.game.plugins.base import Base as GamePluginBase
+from pandaEditor.game.plugins.manager import Manager as GameManager
 from pandaEditor.plugins.base import Base as EditorPluginBase
 
 

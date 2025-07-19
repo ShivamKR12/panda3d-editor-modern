@@ -62,6 +62,9 @@ class Marquee(NodePath, SingleTask):
     
     def IsNodePathInside(self, np):
         """Test if the specified node path lies within the marquee area."""
+        if np.isEmpty():
+            return False
+        
         npWorldPos = np.getPos(self.rootNp)
         p3 = self.camera.getRelativePoint(self.rootNp, npWorldPos)
 

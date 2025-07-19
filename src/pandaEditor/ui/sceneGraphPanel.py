@@ -2,8 +2,8 @@ import wx
 
 from direct.showbase.PythonUtil import getBase as get_base
 
-from dragdroptarget import DragDropTarget
-from game.nodes.nodepath import NodePath
+from pandaEditor.dragdroptarget import DragDropTarget
+from pandaEditor.game.nodes.nodepath import NodePath
 from pandaEditor import commands as cmds
 from pandaEditor.ui.sceneGraphBasePanel import SceneGraphBasePanel
 from wxExtra import utils as wxutils

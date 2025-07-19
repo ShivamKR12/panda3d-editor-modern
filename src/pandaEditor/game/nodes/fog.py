@@ -1,7 +1,7 @@
 import panda3d.core as pc
 
-from game.nodes.attributes import Attribute
-from game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.nodepath import NodePath
 
 
 class Fog(NodePath):

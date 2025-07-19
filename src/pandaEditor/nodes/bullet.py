@@ -4,7 +4,7 @@ from panda3d import bullet
 import panda3d.bullet as pb
 import panda3d.core as pc
 
-from game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.attributes import Attribute
 
 
 TAG_BULLET_DEBUG_WIREFRAME = 'P3D_BulletDebugWireframe'

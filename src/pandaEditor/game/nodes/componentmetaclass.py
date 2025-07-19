@@ -1,7 +1,7 @@
 import abc
 
-from game.nodes.attributes import Base, Attribute, Connection
-from game.nodes.basemetaclass import BaseMetaClass
+from pandaEditor.game.nodes.attributes import Base, Attribute, Connection
+from pandaEditor.game.nodes.basemetaclass import BaseMetaClass
 
 
 class ComponentMetaClass(abc.ABCMeta, BaseMetaClass):

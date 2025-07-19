@@ -1,9 +1,9 @@
 import panda3d.core as pc
 from direct.showbase.PythonUtil import getBase as get_base
 
-from game.nodes.attributes import Attribute
-from game.nodes.constants import TAG_MODEL_ROOT_CHILD
-from game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.attributes import Attribute
+from pandaEditor.game.nodes.constants import TAG_MODEL_ROOT_CHILD
+from pandaEditor.game.nodes.nodepath import NodePath
 
 
 class ModelRoot(NodePath):

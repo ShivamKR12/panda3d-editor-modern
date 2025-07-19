@@ -5,8 +5,8 @@ import xml.etree.ElementTree as et
 from direct.showbase.PythonUtil import getBase as get_base
 
 from p3d.commonUtils import serialise
-from game.sceneparser import SceneParser as GameSceneParser
-from utils import indent
+from pandaEditor.game.sceneparser import SceneParser as GameSceneParser
+from pandaEditor.utils import indent
 
 
 logger = logging.getLogger(__name__)

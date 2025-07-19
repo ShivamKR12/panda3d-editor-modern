@@ -4,9 +4,9 @@ from direct.particles.ParticleEffect import ParticleEffect as DirectParticleEffe
 from direct.showbase.PythonUtil import getBase as get_base
 import panda3d.core as pc
 
-from game.nodes.attributes import PythonTagAttribute
-from game.nodes.constants import TAG_NODE_TYPE
-from game.nodes.nodepath import NodePath
+from pandaEditor.game.nodes.attributes import PythonTagAttribute
+from pandaEditor.game.nodes.constants import TAG_NODE_TYPE
+from pandaEditor.game.nodes.nodepath import NodePath
 
 
 class ParticleEffect(NodePath):
